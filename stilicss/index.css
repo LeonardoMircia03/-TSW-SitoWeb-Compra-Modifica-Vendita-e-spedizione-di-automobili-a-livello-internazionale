@@ -160,7 +160,7 @@ body {
     top: 0;
     width: 2rem;
     height: 2rem;
-    background-color: #ff6f61;
+    background-color: #333;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -185,6 +185,6 @@ body {
 }
 
 .vantaggi a:hover {
-    color: #e55d51;
+    color: #ff6f61;
     text-decoration: underline;
 }
