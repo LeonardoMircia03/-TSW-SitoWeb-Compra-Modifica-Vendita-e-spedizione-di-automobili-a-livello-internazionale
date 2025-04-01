@@ -1,0 +1,109 @@
+/*Sto giocando con css per imparare 
+se hai qualche modifica falla pure*/
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+body {
+    font-family: arial,sans-serif;
+    line-height: 1.6;
+    color:#333;
+    background-color: #f9f9f9;
+}
+.header{
+    background-color: #333;
+    color: #fff;
+    padding:1rem ;
+}
+/*--------titolo sito*---------*/
+
+.logo{
+    text-align: center;
+    font-family:'Times New Roman', Times, serif;
+    font-size: 300%;
+    
+}
+/* invito acquisto prova*/
+.cliente {
+    background:linear-gradient(
+        rgba(0, 0, 0, 0.60), /*Ho trovato un modo per sfumare*/
+        rgba(0, 0, 0, 0.60)
+    ), url(https://images.unsplash.com/photo-1503376780353-7e6692767b70?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80) no-repeat center center/cover;
+    color: #fff;
+    text-align: center;
+    padding: 100px 0;
+    font-weight: bold;
+}
+
+/* --------------Barra di navigazione -------------*/
+.navbar ul {
+    list-style: none;
+}
+
+.navbar ul li {
+    display: inline-block;
+    margin-left: 20px;
+}
+
+.navbar ul li a {
+    color: #fff;
+    font-size: 1rem;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer{
+    background-color: #000000;
+    color: #fff;
+    text-align: center;
+}
+/*vedi se posso fare così senno cancella e mendi il design semplice sotto*/
+
+.btn {
+    display: inline-block;
+    padding: 0.9rem 1.8rem;
+    font-size: 16px;
+    font-weight: 700;
+    color: white;
+    border: 3px solid #333;
+    cursor: pointer;
+    position: relative;
+    background-color: transparent;
+    text-decoration: none;
+    overflow: hidden;
+    z-index: 1;
+    font-family: inherit;
+   }
+   
+   .btn::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #333;
+    transform: translateX(-100%);
+    transition: all .3s;
+    z-index: -1;
+   }
+   
+   .btn:hover::before {
+    transform: translateX(0);
+   }
+/*
+.bottone{
+    background-color: #252222;
+    color: #fff;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 1rem;
+
+  }
+*/
