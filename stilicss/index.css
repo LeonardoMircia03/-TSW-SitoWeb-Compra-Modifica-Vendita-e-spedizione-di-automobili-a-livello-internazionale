@@ -35,7 +35,16 @@ body {
     padding: 100px 0;
     font-weight: bold;
 }
-
+.venditore{
+    background:linear-gradient(
+        rgba(0, 0, 0, 0.60), /*Ho trovato un modo per sfumare*/
+        rgba(0, 0, 0, 0.60)
+    ), url(https://plus.unsplash.com/premium_photo-1678917827802-721b5f5b4bf0?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D) no-repeat center center/cover;
+    color: #fff;
+    text-align: center;
+    padding: 100px 0;
+    font-weight: bold;
+}
 /* --------------Barra di navigazione -------------*/
 .navbar ul {
     list-style: none;
