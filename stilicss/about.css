@@ -1,0 +1,178 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+body {
+    font-family: arial,sans-serif;
+    line-height: 1.6;
+    color:#333;
+    background-color: #f9f9f9;
+}
+/* ------ Header ------ */
+.header{
+    background-color: #333;
+    color: #fff;
+    padding:1rem ;
+}
+
+
+.logo{
+    text-align: center;
+    font-family:'Times New Roman', Times, serif;
+    font-size: 300%;
+}
+
+
+/* --------------Barra di navigazione -------------*/
+.navbar{
+    text-align : center;
+
+}
+.navbar ul {
+    list-style: none;
+}
+
+.navbar ul li {
+    display: inline-block;
+    margin-left: 20px;
+}
+
+.navbar ul li a {
+    color: #fff;
+    font-size: 1rem;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+
+/*------- Missione ------*/
+.missione {
+    padding: 50px 0;
+    text-align: center;
+}
+
+.missione-cards {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 20px;
+    width: calc(33.33% - 20px);
+    transition: transform 0.3s ease-in-out; /*Questa parte fa l'effetto*/
+}
+
+.card:hover {
+    transform: scale(1.5);
+}
+
+/* Team Section */
+.team {
+    padding: 50px 0;
+    text-align: center;
+}
+
+.team-members {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.member {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 20px;
+    width: calc(33.33% - 20px);
+    transition: transform 0.3s ease;
+}
+
+.member:hover {
+    transform: scale(1.05);
+}
+
+.member img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+.member h3 {
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+}
+
+.member p {
+    font-size: 1rem;
+    color: #666;
+}
+
+/* ---------- Valori  ----------*/
+.valori {
+    padding: 50px 0;
+    text-align: center;
+}
+
+.valori ul {
+    list-style: none;
+    padding: 0;
+}
+
+.valori ul li {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+}
+
+/* Contatti Section */
+.contatti {
+    padding: 50px 0;
+    text-align: center;
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    max-width: 500px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.contact-form button {
+    background-color: #ff6f61;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.contact-form button:hover {
+    background-color: #e55d51;
+}
+
+/* Footer */
+.footer{
+    background-color: #000000;
+    color: #fff;
+    text-align: center;
+}
