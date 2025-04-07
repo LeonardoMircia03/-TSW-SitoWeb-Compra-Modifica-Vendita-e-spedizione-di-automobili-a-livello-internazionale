@@ -167,13 +167,6 @@ body {
     font-weight: bold;
 }
 
-.vantaggi li i {
-    position: absolute;
-    left: 1rem;
-    top: 0.3rem;
-    color: #fff;
-    font-size: 1.2rem;
-}
 
 .vantaggi a {
     color: #ff6f61;
