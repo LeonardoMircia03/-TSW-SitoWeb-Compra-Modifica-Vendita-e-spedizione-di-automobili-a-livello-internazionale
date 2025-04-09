@@ -2,19 +2,92 @@
 <html lang="ita">
     <head>
         <title> FAQ - AutoMarket</title>
-        <link rel="stylesheet" href="stilicss/SellCars.css">
+        
+        <link rel="stylesheet" href="stilicss/faq.css">
+        
     </head>
+    
     <body>
-        <header class="header">
-            <div>
-                <h1 class="logo">AutoMarket</h1>
-                <nav class="navbar">
-                    <ul>
-                        <li><a href="index.html">Home</a></li>
-                    </ul>
-                </nav>
-            </div>
-        </header>
+    <!--Inserire header-->
+    <h1>FAQ - Domande Frequenti : </h1>
+   <!-- Contenitore FAQ -->
+<div class="faq-container">
+    <div class="faq-item">
+        <div class="faq-question" onclick="toggleAnswer(this)">
+            Come posso contattarvi?
+            <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+            Puoi contattarci tramite il form nella sezione "Contatti" o inviando una mail a <a href="mailto:info@automarket.com">info@automarket.com</a>.
+        </div>
+    </div>
 
+    <div class="faq-item">
+        <div class="faq-question" onclick="toggleAnswer(this)">
+            Quali metodi di pagamento accettate?
+            <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+            Accettiamo pagamenti con carta di credito, PayPal e bonifico bancario.
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <div class="faq-question" onclick="toggleAnswer(this)">
+            Come posso restituire un prodotto?
+            <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+            Per restituire un prodotto, segui le istruzioni nella pagina "Resi e Rimborsi". Hai 30 giorni di tempo dalla data di acquisto.
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <div class="faq-question" onclick="toggleAnswer(this)">
+            Offrite assistenza post-vendita?
+            <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+            Sì, offriamo assistenza post-vendita gratuita per 30 giorni dopo l'acquisto.
+        </div>
+    </div>
+    <div class="faq-item">
+        <div class="faq-question" onclick="toggleAnswer(this)">
+            Posso tracciare l'ordine
+            <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+            Si potrai tracciare l'ordine attraverso una spedizione tracciata con mappa live
+        </div>
+    </div>
+    <div class="faq-item">
+        <div class="faq-question" onclick="toggleAnswer(this)">
+            Posso modificare il veicolo prima di ordinarlo?
+            <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+            Si puoi effettuare una serie di modifiche nel nostro catalogo
+        </div>
+    </div>
+    <div class="faq-item">
+        <div class="faq-question" onclick="toggleAnswer(this)">
+            Posso rateizzare il pagamento?
+            <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+            Si puoi usare il nostro calcolatore per vedere il prezzo finale
+        </div>
+    </div>
+
+</div>
+    <script>
+        function toggleAnswer(element) {
+            const answer = element.nextElementSibling; //
+            const icon = element.querySelector('.faq-icon'); 
+            answer.classList.toggle('open');
+            icon.classList.toggle('open');
+            icon.textContent = answer.classList.contains('open') ? '-' : '+';
+        }
+    </script>
     </body>
 </html>
