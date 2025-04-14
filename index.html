@@ -9,12 +9,23 @@
 <body>
     <header class="header">
         <div class="container">
-            <h1 class="logo">AutoMarket</h1>
+            <h1>
+            <button class="button" data-text="Awesome">
+                <span class="actual-text">&nbsp;Automarket&nbsp;</span>
+                <span aria-hidden="true" class="hover-text">&nbsp;Automarket&nbsp;</span>
+                </button>
+            </h1>
             
-            <nav align="center" class="navbar">
+            <button class="sidebar-toggle" onclick="toggleSidebar()">☰ Info</button>
+        </div>
+    </header>
+
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-content">
+            <h2>Informazioni</h2>
+            <nav class="navbar">
                 <!--più avanti mettiamo pagine e link-->
-                <ul>
-                    
+                <ul>        
                     <li><a href="about.html">About Us</a></li>
                     <li><a href="SellCars.html">Sell Cars</a></li>
                     <li><a href="BuyaCar.html">Buy a Car </a></li>
@@ -22,14 +33,17 @@
                     <li><a href="Contattaci.html">Contact</a></li>
                 </ul>
             </nav>
+            <p> Cerca di infilare la veccia navbar qua dentro in modo caruccio mantenendo lo stile </p>
+            <a href="#" class="btn">Chiudi</a>
         </div>
-    </header>
+    </div>
+
     <div class="cliente">
         <h1>Trova la tua prossima auto</h1>
         <p>Scopri le nostre auto in vendità </p>
         <br>
         <!-- per ora lascio referenza ad index-->
-        <a href="index.html"class="btn">Registrati come cliente</a> 
+        <a href="Register.html" class="btn">Registrati come cliente</a> 
     </div>
   
     <div class="venditore">
@@ -55,6 +69,11 @@
             <p>&copy;2025 AutoMarket. Tutti i diritti sono riservati</p>a
         </div>
     </footer>
-
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.style.width = sidebar.style.width === '250px' ? '0' : '250px';
+        }
+    </script>
 </body>
 </html>
