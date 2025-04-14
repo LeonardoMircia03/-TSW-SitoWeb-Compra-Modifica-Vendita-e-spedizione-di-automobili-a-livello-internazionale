@@ -15,6 +15,14 @@
                 <span aria-hidden="true" class="hover-text">&nbsp;Automarket&nbsp;</span>
                 </button>
             </h1>
+            
+            <button class="sidebar-toggle" onclick="toggleSidebar()">☰ Info</button>
+        </div>
+    </header>
+
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-content">
+            <h2>Informazioni</h2>
             <nav class="navbar">
                 <!--più avanti mettiamo pagine e link-->
                 <ul>        
@@ -25,8 +33,11 @@
                     <li><a href="Contattaci.html">Contact</a></li>
                 </ul>
             </nav>
+            <p> Cerca di infilare la veccia navbar qua dentro in modo caruccio mantenendo lo stile </p>
+            <a href="#" class="btn">Chiudi</a>
         </div>
-    </header>
+    </div>
+
     <div class="cliente">
         <h1>Trova la tua prossima auto</h1>
         <p>Scopri le nostre auto in vendità </p>
@@ -58,6 +69,11 @@
             <p>&copy;2025 AutoMarket. Tutti i diritti sono riservati</p>a
         </div>
     </footer>
-
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.style.width = sidebar.style.width === '250px' ? '0' : '250px';
+        }
+    </script>
 </body>
 </html>
