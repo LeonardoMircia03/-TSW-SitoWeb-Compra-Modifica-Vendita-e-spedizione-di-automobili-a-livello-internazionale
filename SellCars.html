@@ -1,20 +1,41 @@
 <!DOCTYPE html>
 <html lang="ita">
-    <head>
-        <title> Sell Cars - AutoMarket</title>
-        <link rel="stylesheet" href="stilicss/SellCars.css">
-    </head>
-    <body>
-        <header class="header">
-            <div>
-                <h1 class="logo">AutoMarket</h1>
-                <nav class="navbar">
-                    <ul>
-                        <li><a href="index.html">Home</a></li>
-                    </ul>
-                </nav>
+<head>
+    <title>Sell Cars - AutoMarket</title>
+    <link rel="stylesheet" href="stilicss/SellCars.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <button class="sidebar-toggle" id="sidebar-toggle">☰</button>
+            <div class="logo">
+                <h1>AutoMarket</h1>
             </div>
-        </header>
+            <div class="search-bar">  
+                <input placeholder="Searth the internet..." type="text" name="text" class="input">
+            </div>
+            <button> Accedi
+            </button>
+        </div>
+    </header>
 
-    </body>
+     <!-- Sidebar -->
+     <div class="sidebar" id="sidebar">
+        <button class="sidebar-close" id="sidebar-close">Close</button>
+        <h2>Sidebar</h2>
+        <p>This is the sidebar content.</p>
+        <!-- Add more content as needed -->
+    </div>
+    <script>
+        // JavaScript to toggle the sidebar
+        document.getElementById('sidebar-toggle').addEventListener('click', function() {
+            document.getElementById('sidebar').classList.toggle('active');
+        });
+
+        // JavaScript to close the sidebar
+        document.getElementById('sidebar-close').addEventListener('click', function() {
+            document.getElementById('sidebar').classList.remove('active');
+        });
+    </script>
+</body>
 </html>
