@@ -137,11 +137,16 @@ body {
 
 /* --------------Barra di navigazione -------------*/
 .navbar {
-  align-items: left;
+ 
   color: white;
+  font-size: 1.5rem;
+  text-align: center;
 }
 .navbar a {
-  color: red;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  
 }
 .navbar ul {
   list-style: none;
