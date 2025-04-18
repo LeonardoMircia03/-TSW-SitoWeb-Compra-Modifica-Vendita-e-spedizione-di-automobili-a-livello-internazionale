@@ -153,3 +153,49 @@ button {
     margin-bottom: 20px;
 }
 /* --------------------------SIDEBBAR -------------------*/
+
+
+/* --------------------------navbar -------------------*/
+.navbar {
+ 
+    color: white;
+    font-size: 1.5rem;
+    text-align: center;
+  }
+  .navbar a {
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    
+  }
+  .navbar ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+  }
+  @media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .navbar ul {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    .navbar ul li {
+        width: 100%;
+    }
+    .navbar ul li a {
+        width: 100%;
+        text-align: center;
+    }
+    .navbar ul li ul {
+        position: static;
+        display: none;
+    }
+    .navbar ul li:hover > ul {
+        display: block;
+    }
+  }
+  
