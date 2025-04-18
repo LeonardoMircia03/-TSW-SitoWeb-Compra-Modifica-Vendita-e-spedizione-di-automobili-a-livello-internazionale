@@ -1,73 +1,89 @@
-/* Barra di ricerca*/
-.search-bar-container {
-  max-width: 3000px;
-  margin: 10px;
-  padding: 10px;
-  background-color: #888888;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  align-items: left;
+/*Barra di ricerca*/
+
+.search-section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  text-align: center;
 }
-.filters-section {
+
+.hero-banner {
+  margin-bottom: 30px;
+}
+
+.hero-banner h1 {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #2c3e50;
+  margin-bottom: 10px;
+}
+
+.hero-banner p {
+  font-size: 1.2rem;
+  color: #7f8c8d;
+}
+
+.search-container {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.search-form {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 10px;
+  gap: 20px;
+  align-items: center;
 }
-.filter {
+
+.search-group {
+  position: relative;
   display: flex;
   flex-direction: column;
-  background-color: #f9f9f9;
-  border: 1px solid #e0e0e0;
-  border-radius: 4px;
-  padding: 10px;
 }
-.filter label {
+
+.search-group label {
+  font-size: 0.9rem;
   font-weight: bold;
+  color: #34495e;
   margin-bottom: 5px;
 }
-.filter select, .filter input {
+
+.search-group select,
+.search-group input {
   width: 100%;
-  padding: 8px;
-  border: none;
+  padding: 12px;
+  font-size: 1rem;
+  border: 1px solid #bdc3c7;
+  border-radius: 6px;
   outline: none;
-  font-size: 14px;
+  transition: border-color 0.3s ease;
 }
-.location {
-  position: relative;
-}
-.location svg {
-  position: absolute;
-  top: 50%;
-  right: 10px;
-  transform: translateY(-50%);
-  fill: #ccc;
-}
-.results-button button {
-  background-color: #333;
+.search-button {
+  
+  
+  background-color: #474747;
   color: white;
-  border: none;
-  padding: 10px 20px;
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: bold;
-  border-radius: 4px;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 6px;
   cursor: pointer;
-  transition: background-color 0.5s ease;
-}
-.results-button button:hover {
-  background-color: #f9f9f9;
-}
-
-
-
-
-/* Fine barra ricerca*/
-*{
-    margin:0;
-    padding:0;
-    box-sizing: border-box;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: background-color 0.3s ease;
 }
 
+.search-button:hover {
+  background-color:black;
+}
 
+/*Fine Barra di ricerca*/
 
 main {
   margin-top: 150px; /* Sposta il contenuto sotto l'header */

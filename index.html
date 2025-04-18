@@ -24,41 +24,48 @@
 
 
         <!-- Sezione inferiore: filtri e bottone di ricerca -->
-        <div class="filters-section">
-            <div class="filter">
-                <label for="marca">Marca</label>
-                <select id="marca">
-                    <option value="">Seleziona...</option>
-                    <option value="marca1">prova</option>
-                </select>
+        <section class="search-section">
+            <div class="hero-banner">
+                <h1>Trova la tua auto perfetta</h1>
+                <p>Esplora migliaia di veicoli nuovi e usati a portata di clic.</p>
             </div>
-            <div class="filter">
-                <label for="modello">Modello</label>
-                <select id="modello">
-                    <option value="">Seleziona...</option>
-                </select>
+    
+            <div class="search-container">
+                <form class="search-form">
+                    <div class="search-group">
+                        <label for="marca">Marca</label>
+                        <select id="marca">
+                            <option value="">Seleziona...</option>
+                        </select>
+                    </div>
+    
+                    <div class="search-group">
+                        <label for="modello">Modello</label>
+                        <select id="modello">
+                            <option value="">Seleziona...</option>
+                        </select>
+                    </div>
+    
+                    <div class="search-group">
+                        <label for="anno">Anno da</label>
+                        <select id="anno">
+                            <option value="">Seleziona...</option>
+                        </select>
+                    </div>
+    
+                    <div class="search-group">
+                        <label for="prezzo">Prezzo fino a</label>
+                        <select id="prezzo">
+                            <option value="">Seleziona ...</option>
+                        </select>
+                    </div>
+    
+    
+    
+                    <button type="submit" class="search-button">Cerca</button>
+                </form>
             </div>
-            <div class="filter">
-                <label for="anno">Anno da</label>
-                <select id="anno">
-                    <option value="">Seleziona...</option>
-                </select>
-            </div>
-            <div class="filter">
-                <label for="prezzo">Prezzo fino a</label>
-                <select id="prezzo">
-                    <option value="">Seleziona...</option>
-                </select>
-            </div>
-            <div class="filter location">
-                <label for="citta-cap">Città o CAP</label>
-                <input type="text" id="citta-cap" placeholder="Inserisci città o CAP">
-            </div>
-            <div class="results-button">
-                <button>Cerca</button>
-            </div>
-        </div>
-    </div>
+        </section>
     <div class="sidebar" id="sidebar">
         <div class="sidebar-content">
             <h2>Informazioni</h2>
