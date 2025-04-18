@@ -5,6 +5,7 @@
   margin: 0 auto;
   padding: 40px 20px;
   text-align: center;
+  background-color: white;
 }
 
 .hero-banner {
@@ -51,7 +52,6 @@
   color: #34495e;
   margin-bottom: 5px;
 }
-
 .search-group select,
 .search-group input {
   width: 100%;
@@ -63,7 +63,6 @@
   transition: border-color 0.3s ease;
 }
 .search-button {
-  
   
   background-color: #474747;
   color: white;
@@ -84,7 +83,13 @@
 }
 
 /*Fine Barra di ricerca*/
+#login{
+  text-decoration: none;
+  font-size: 3rem;
+  color: white;
 
+
+}
 main {
   margin-top: 150px; /* Sposta il contenuto sotto l'header */
 }
@@ -92,28 +97,12 @@ body {
     font-family: arial,sans-serif;
     line-height: 1.6;
     color:#333;
-    background-color: #f9f9f9;
+    background-color: #333;
+   
     margin-top: 150px; /* Aggiunge spazio per evitare che il contenuto si sovrapponga all'header */
 }
-.header {
-  background-color: #333;
-  color: #fff;
-  padding: 1rem;
-  position: fixed;
-  top: 0; 
-  left: 0;
-  width: 100%;
-  z-index: 1000; 
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
-}
 
-.header .container {
-  display: flex;
-  flex-direction: row; 
-  justify-content: space-between; 
-  align-items: center; 
-  gap: 20px; 
-}
+
 
 /*--------titolo sito*---------*/
 
@@ -194,23 +183,27 @@ body {
       display: block;
   }
 }
-
-
-
-
 .container {
-    width: 90%;
+ 
     max-width: 1200px;
-    margin: 0 auto;
+    margin: auto;
+    padding: 10rem;
+    align-items: center;
+    text-align: center;
+}
+.container h1{
+  color: white;
+  
+  font-style: italic;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 .footer {
   background-color: #000000;
   color: #fff;
   text-align: center;
-  padding: 1rem 0;
-  position: fixed;
-  width: 100%;
-  bottom: 0;
+  padding: 0.5rem;
+  position: relative;
+
 }
 .btn {
     display: inline-block;
@@ -245,17 +238,6 @@ body {
    .btn:hover::before {
     transform: translateX(0);
    }
-/*
-.btn{
-    background-color: #252222;
-    color: #fff;
-    padding: 10px 20px;
-    text-decoration: none;
-    border-radius: 5px;
-    font-size: 1rem;
-
-  }
-*/
 .vantaggi {
     max-width: 800px;
     margin: 0 auto;
@@ -381,7 +363,7 @@ body {
     --border-right: 3px;
     --text-stroke-color: rgba(255,255,255,0.6);
     --animation-color: #ffffff;
-    --fs-size: 2em;
+    --fs-size: 10rem; /*deve essere uguale ad actual text*/
     letter-spacing: 3px;
     text-decoration: none;
     font-size: var(--fs-size);
@@ -404,21 +386,14 @@ body {
     transition: 0.5s;
     -webkit-text-stroke: 1px var(--animation-color);
   }
+  .actual-text{
+    font-size: 10rem;
+  }
   /* hover */
   .button:hover .hover-text {
     width: 100%;
     filter: drop-shadow(0 0 23px var(--animation-color))
   }
-  .header .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* centra orizzontalmente */
-    gap: 20px; /* spazio tra h1 e nav */
-  }
-  
-
-
-
 
   /* Sidebar */
 .sidebar {
@@ -464,7 +439,7 @@ body {
   background: none;
   border: none;
   color: white;
-  font-size: 1.5rem;
+  font-size: 3rem;
   cursor: pointer;
   display: inline-block; /*il pulsante sia in linea */
 }
