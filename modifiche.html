@@ -1,12 +1,107 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modifiche - AutoMarket</title>
-    <link rel="stylesheet" href="stilicss/about.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Selettore Modifiche Auto</title>
+  <link rel="stylesheet" href="stilicss/modifiche.css" />
 </head>
 <body>
+    <img id="sfondo" src="stilicss/Immagini/modifiche/sfondo.png">
+  <div class="container">
+    <h1>Scegli le modifiche per la tua auto</h1>
+    <p>Seleziona le personalizzazioni che desideri applicare al tuo veicolo.</p>
+
+    <div class="modification-categories">
+
+      <!-- Categoria Estetica -->
+      <div class="category">
+        <h2>🔧 Modifiche Estetiche</h2>
+        <ul>
+          <li>
+            <label class="checkbox-label">
+              <input type="checkbox" name="esthetiche[]" value="cerchi">
+              <span class="checkmark"></span>
+              Cerchi personalizzati
+            </label>
+          </li>
+          <li>
+            <label class="checkbox-label">
+              <input type="checkbox" name="esthetiche[]" value="tappeti">
+              <span class="checkmark"></span>
+              Tappeti interni premium
+            </label>
+          </li>
+          <li>
+            <label class="checkbox-label">
+              <input type="checkbox" name="esthetiche[]" value="paraurti">
+              <span class="checkmark"></span>
+              Paraurti sportivo
+            </label>
+          </li>
+          <li>
+            <label class="checkbox-label">
+              <input type="checkbox" name="esthetiche[]" value="luci">
+              <span class="checkmark"></span>
+              Kit luci LED
+            </label>
+          </li>
+          <li>
+            <label class="checkbox-label">
+              <input type="checkbox" name="esthetiche[]" value="wrap">
+              <span class="checkmark"></span>
+              Wrap completo o parziale
+            </label>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Categoria Tecnica -->
+      <div class="category">
+        <h2>⚙️ Modifiche Tecniche</h2>
+        <ul>
+          <li>
+            <label class="checkbox-label">
+              <input type="checkbox" name="tecniche[]" value="sospensioni">
+              <span class="checkmark"></span>
+              Sospensioni regolabili
+            </label>
+          </li>
+          <li>
+            <label class="checkbox-label">
+              <input type="checkbox" name="tecniche[]" value="freni">
+              <span class="checkmark"></span>
+              Freni ad alte prestazioni
+            </label>
+          </li>
+          <li>
+            <label class="checkbox-label">
+              <input type="checkbox" name="tecniche[]" value="turbo">
+              <span class="checkmark"></span>
+              Sistema Turbo migliorato
+            </label>
+          </li>
+          <li>
+            <label class="checkbox-label">
+              <input type="checkbox" name="tecniche[]" value="cambio">
+              <span class="checkmark"></span>
+              Cambio manuale/automatico personalizzato
+            </label>
+          </li>
+          <li>
+            <label class="checkbox-label">
+              <input type="checkbox" name="tecniche[]" value="scarico">
+              <span class="checkmark"></span>
+              Scarico sportivo
+            </label>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+
+    <button type="submit" class="submit-btn">Conferma Modifiche</button>
+  </div>
 
 </body>
 </html>
