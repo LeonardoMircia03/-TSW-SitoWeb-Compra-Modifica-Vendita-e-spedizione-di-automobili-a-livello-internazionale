@@ -3,32 +3,67 @@
 <head>
 	<title>Slide Navbar</title>
     <link rel="stylesheet" href="stilicss/Login.css">
+	<script>
+		function validazioneForm(){
+			const username = document.getElementById("username").value.trim();
+			const email = document.getElementById("email").value.trim();
+			const password = document.getElementById("password").value.trim();
 
+			const emailPattern = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+
+			if (username.length < 3) {
+                alert("Il nome utente deve contenere almeno 3 caratteri.");
+                return false;
+            }
+
+			if(!emailPattern.test(email)){
+				alert("inserisci una email valida. ");
+				return false;
+			}
+
+			if (password.length < 6) {
+                alert("La password deve contenere almeno 6 caratteri.");
+                return false;
+            }
+
+            return true;
+        
+
+		}
+	</script>
 
 </head>
 
 <body>
+	<form action="php/register.php" method="POST" onsubmit="return validazioneForm();">
 	<img id="sfondo" src="stilicss/Immagini/login/login.png">
 	<div class="main">  	
 		<input type="checkbox" id="chk" aria-hidden="true">
 
 			<div class="signup">
-				<form>
-					<label for="chk" aria-hidden="true">Sign up</label>
-					<input type="text" name="txt" placeholder="User name" required="">
-					<input type="email" name="email" placeholder="Email" required="">
-          <input type="number" name="Telefono" placeholder="Telefono" required="">
-					<input type="password" name="pswd" placeholder="Password" required="">
-					<button>Sign up</button>
+				
+					<label for="chk" aria-hidden="true">Registrati</label>
+
+					<input type="text" name="username" id="username" placeholder="Username" required>
+
+					<input type="email" name="email" id="email" placeholder="Email" required>
+
+					<input type="password" name="password" id="password" placeholder="Password" required>
+
+					<button>Registrati</button>
 				</form>
 			</div>
 
 			<div class="login">
-				<form>
+				<form action="php/login.php" method="POST">
 					<label for="chk" aria-hidden="true">Login</label>
-					<input type="email" name="emaillogin" placeholder="Email" required="">
-					<input type="password" name="pswdlogin" placeholder="Password" required="">
+
+					<input type="email" name="email" id="email" placeholder="Email" required>
+
+					<input type="password" name="password" id="password" placeholder="Password" required>
+
 					<button>Login</button>
+
                     <a href="Recupero.html">Password Dimenticata</a>
 				</form>
 			</div>
