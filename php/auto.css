@@ -1,0 +1,126 @@
+/* Stili generali per la pagina */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 0;
+}
+
+/* Header */
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
+
+/* Barra di ricerca */
+.search-bar-container {
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 80%;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 8px;
+}
+
+.search-bar-container form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.search-bar-container label {
+    font-weight: bold;
+    margin-right: 10px;
+    margin-bottom: 5px;
+}
+
+.search-bar-container input {
+    padding: 10px;
+    font-size: 16px;
+    width: 200px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.search-bar-container button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.search-bar-container button:hover {
+    background-color: #45a049;
+}
+
+/* Sezione risultati della ricerca */
+.car-results {
+    width: 80%;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+}
+
+.car-item {
+    background-color: #fff;
+    padding: 15px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.car-item strong {
+    color: #333;
+}
+
+.car-item p {
+    margin: 5px 0;
+}
+
+/* Responsività */
+@media (max-width: 768px) {
+    .search-bar-container form {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .search-bar-container input,
+    .search-bar-container button {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}
+
+/* Stile footer */
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 15px;
+    margin-top: 40px;
+}
+
+footer p {
+    margin: 0;
+}
+
+/* Stilizzazione dei link */
+a {
+    color: #4CAF50;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
