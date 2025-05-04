@@ -11,7 +11,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if (!$username || !$email || !$password ) {
         echo "Errore: Tutti i campi sono obbligatori.";
     }
-
+    
     
     $passwordHash = password_hash($password, PASSWORD_DEFAULT);
 
@@ -22,12 +22,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $result = pg_query_params($dbconnect, $query, $params);
 
     if ($result) {
-        echo "Registrazione completata con successo!";
+        echo "Registrazione completata con successo!";/*modifica reinderizza alla pagina*/
     } else {
         echo "Errore durante la registrazione: " . pg_last_error($dbconnect);
     }
 } else {
     echo "Accesso non valido.";
 }
-
 ?>

@@ -1,13 +1,22 @@
+<?php
+   session_start();
+
+   if (!isset($_SESSION['username'])) {
+       header("Location: index.html");
+       exit;
+   } 
+?>
+
 <!DOCTYPE html>
 <html lang="ita">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AutoMarket - Buy and Sell Auto</title>
-    <link rel="stylesheet" href="stilicss/index.css">
+    <link rel="stylesheet" href="../stilicss/index.css">
 </head>
 <body >
-    <video class="video"id="video" autoplay muted loop><source src="stilicss/Immagini/video.mp4" type="video/mp4"></video>
+    <video class="video"id="video" autoplay muted loop><source src="../stilicss/Immagini/video.mp4" type="video/mp4"></video>
     <header>
         <div class="container">
             
@@ -19,7 +28,7 @@
             
             <h1>Nest Generation Luxury Auto Swapper</h1>
             <button class="sidebar-toggle" onclick="toggleSidebar()">☰ Info</button>
-            <a id="login">| Ben tornato </a>
+            <a id="login">| Benvenuto <?php echo htmlspecialchars($_SESSION['username']); ?> </a>
         </div>
        
     </header>
