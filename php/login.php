@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 require_once('config.php'); 
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
@@ -28,13 +29,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 $_SESSION['email'] = $user['email'];
 
 
-                header("Location: areaprivata.html"); /* mettere la location giusta */
+                header("Location: areaprivata.php"); /* mettere la location giusta */
                 exit;
             } else {
-                echo "Errore: Password errata.";
+                echo "Errore: Password errata.";/* inserisci domanda recupera password? */
             }
         } else {
-            echo "Errore: Utente non trovato.";
+            echo "Errore: Utente non trovato.";/* inserire collegamento al register */
         }
     } else {
         echo "Errore durante la connessione al database.";
