@@ -28,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 $_SESSION['email'] = $user['email'];
 
 
-                header("Location: login.html"); /* mettere la location giusta */
+                header("Location: areaprivata.html"); /* mettere la location giusta */
                 exit;
             } else {
                 echo "Errore: Password errata.";
