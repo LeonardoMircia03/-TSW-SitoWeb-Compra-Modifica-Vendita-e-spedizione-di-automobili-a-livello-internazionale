@@ -5,6 +5,7 @@
        header("Location: index.html");
        exit;
    } 
+   require_once('../php/config.php');
 ?>
 
 <!DOCTYPE html>
@@ -15,130 +16,157 @@
     <title>AutoMarket - Buy and Sell Auto</title>
     <link rel="stylesheet" href="../stilicss/index.css">
 </head>
-<body >
-    <video class="video"id="video" autoplay muted loop><source src="../stilicss/Immagini/video.mp4" type="video/mp4"></video>
+<body>
+    <video class="video" id="video" autoplay muted loop><source src="../stilicss/Immagini/video.mp4" type="video/mp4"></video>
     <header>
         <div class="container">
-            
             <button class="button" data-text="Awesome">
-
                 <span class="actual-text">&nbsp;Automarket&nbsp;</span>
                 <span aria-hidden="true" class="hover-text">&nbsp;Automarket&nbsp;</span>
-                </button>
-            
+            </button>
             <h1>Nest Generation Luxury Auto Swapper</h1>
             <button class="sidebar-toggle" onclick="toggleSidebar()">☰ Info</button>
             <a id="login">| Benvenuto <?php echo htmlspecialchars($_SESSION['username']); ?> </a>
         </div>
-       
     </header>
+
     <div class="search-bar-container">
-
-
-        <!-- Sezione inferiore: filtri e bottone di ricerca -->
         <section class="search-section">
             <div class="hero-banner">
                 <h1>Alla ricerca di un auto ?</h1>
                 <p>Esplora migliaia di veicoli nuovi e usati a portata di clic.</p>
             </div>
-    
+
             <div class="search-container">
-                <form class="search-form">
+                <form class="search-form" action="auto.php" method="GET">
                     <div class="search-group">
                         <label for="marca">Marca</label>
-                        <select id="marca">
+                        <select id="marca" name="marca">
                             <option value="">Seleziona...</option>
+                            <?php
+                            $query = "SELECT DISTINCT marca FROM auto ORDER BY marca";
+                            $result = pg_query($dbconnect, $query);
+                            while ($row = pg_fetch_assoc($result)) {
+                                $marca = htmlspecialchars($row['marca']);
+                                echo "<option value=\"$marca\">$marca</option>";
+                            }
+                            ?>
                         </select>
                     </div>
-    
+
                     <div class="search-group">
                         <label for="modello">Modello</label>
-                        <select id="modello">
+                        <select id="modello" name="modello">
                             <option value="">Seleziona...</option>
                         </select>
                     </div>
-    
+
                     <div class="search-group">
                         <label for="anno">Anno da</label>
-                        <select id="anno">
+                        <select id="anno" name="anno">
                             <option value="">Seleziona...</option>
+                            <?php
+                            $query = "SELECT DISTINCT anno FROM auto ORDER BY anno DESC";
+                            $result = pg_query($dbconnect, $query);
+                            while ($row = pg_fetch_assoc($result)) {
+                                $anno = htmlspecialchars($row['anno']);
+                                echo "<option value=\"$anno\">$anno</option>";
+                            }
+                            ?>
                         </select>
                     </div>
-    
+
                     <div class="search-group">
                         <label for="prezzo">Prezzo fino a</label>
-                        <select id="prezzo">
+                        <select id="prezzo" name="prezzo">
                             <option value="">Seleziona ...</option>
+                            <?php
+                            $query = "SELECT DISTINCT prezzo FROM auto ORDER BY prezzo ASC";
+                            $result = pg_query($dbconnect, $query);
+                            while ($row = pg_fetch_assoc($result)) {
+                                $prezzo = htmlspecialchars($row['prezzo']);
+                                echo "<option value=\"$prezzo\">€$prezzo</option>";
+                            }
+                            ?>
                         </select>
                     </div>
-    
-    
-    
+
                     <button type="submit" class="search-button">Cerca</button>
                 </form>
             </div>
         </section>
-    <div class="sidebar" id="sidebar">
-        <div class="sidebar-content">
-            <h2>Informazioni</h2>
-            <div class="navbar" >
-                <!--più avanti mettiamo pagine e link-->
-                        
+
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-content">
+                <h2>Informazioni</h2>
+                <div class="navbar">
                     <a href="about.html">About Us</a> </br>
-               
                     <a href="SellCars.html">Sell Cars</a></br>
-                
                     <a href="BuyaCar.html">Buy a Car </a></br>
-               
-                    <a href="FAQ.html">FAQ</a></li></br>
-               
+                    <a href="FAQ.html">FAQ</a></br>
                     <a href="Contattaci.html">Contact</a>
-
-                    
-            
+                </div>
             </div>
-            
-            
+            <a href="#" id="btnbarra" class="btn" onclick="toggleSidebar()">Chiudi</a>
         </div>
-        <a href="#" id="btnbarra" class="btn" onclick="toggleSidebar()">Chiudi</a>
-    </div>
 
-    <div class="cliente">
-        <h1>Trova la tua prossima auto</h1>
-        
-        <br>
-        <!-- per ora lascio referenza ad index-->
-        <a href="Register-Client.html" class="btn">Registrati come cliente</a> 
-    </div>
-  
-    <div class="venditore">
-        <h1>Vendi la tua Auto </h1>
-        
-        <br>
-    <!-- per ora lascio referenza ad index-->
-        <a href="Register-Seller.html"class="btn">Registrati come seller</a> 
-    </div>
-    <div class="vantaggi" >
-        <h1> I nostri servizi : </h1>
-        <ul>
-            <li><h3>Richiedi una <a href="modifiche.html">modifica</a> ci pensiamo noi !</h3></li>
-            <li><h3>La vendita è sempre assicurata</h3> </li>
-            <li><h3>Consegna <a href="index.html">tracciata</a> del veicolo direttametne a casa tua</h3></li>
-            <li><h3>Modalità di pagamento cash o <a href="index.html">prestito</a></h3></li>
-            <li><h3>Sistema di <a href="index.html">rating</a> dei venditori</h3></li>
-
-        </ul>
-    </div>
-    <footer class="footer">
-        <div>
-            <p>&copy;2025 AutoMarket. Tutti i diritti sono riservati</p>
+        <div class="cliente">
+            <h1>Trova la tua prossima auto</h1>
+            <br>
+            <a href="Register-Client.html" class="btn">Registrati come cliente</a> 
         </div>
-    </footer>
-    <script>
-        function toggleSidebar() {
-            const sidebar = document.getElementById('sidebar');
-            sidebar.style.width = sidebar.style.width === '250px' ? '0' : '250px';
-        }
-    </script>
-</body>
+
+        <div class="venditore">
+            <h1>Vendi la tua Auto </h1>
+            <br>
+            <a href="Register-Seller.html" class="btn">Registrati come seller</a> 
+        </div>
+
+        <div class="vantaggi">
+            <h1> I nostri servizi : </h1>
+            <ul>
+                <li><h3>Richiedi una <a href="modifiche.html">modifica</a> ci pensiamo noi !</h3></li>
+                <li><h3>La vendita è sempre assicurata</h3></li>
+                <li><h3>Consegna <a href="index.html">tracciata</a> del veicolo direttametne a casa tua</h3></li>
+                <li><h3>Modalità di pagamento cash o <a href="index.html">prestito</a></h3></li>
+                <li><h3>Sistema di <a href="index.html">rating</a> dei venditori</h3></li>
+            </ul>
+        </div>
+
+        <footer class="footer">
+            <div>
+                <p>&copy;2025 AutoMarket. Tutti i diritti sono riservati</p>
+            </div>
+        </footer>
+
+        <script>
+            function toggleSidebar() {
+                const sidebar = document.getElementById('sidebar');
+                sidebar.style.width = sidebar.style.width === '250px' ? '0' : '250px';
+            }
+        </script>
+
+        <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const marcaSelect = document.getElementById('marca');
+            const modelloSelect = document.getElementById('modello');
+
+            function aggiornaModelli() {
+                const marca = marcaSelect.value;
+                modelloSelect.innerHTML = '<option value="">Seleziona...</option>';
+
+                if (marca !== '') {
+                    fetch(`../php/get_modelli.php?marca=${encodeURIComponent(marca)}`)
+                        .then(response => response.text())
+                        .then(data => {
+                            modelloSelect.innerHTML += data;
+                        });
+                }
+            }
+
+            marcaSelect.addEventListener('change', aggiornaModelli);
+        });
+        </script>
+    </body>
 </html>
+
