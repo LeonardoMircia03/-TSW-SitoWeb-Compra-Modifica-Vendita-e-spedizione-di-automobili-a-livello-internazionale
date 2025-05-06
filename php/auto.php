@@ -1,5 +1,6 @@
 <?php
 require_once('config.php');
+session_start();
 
 $marche_result = pg_query($dbconnect, "SELECT DISTINCT marca FROM auto ORDER BY marca ASC");
 $modelli_result = pg_query($dbconnect, "SELECT DISTINCT modello FROM auto ORDER BY modello ASC");
@@ -43,16 +44,20 @@ $result = pg_query_params($dbconnect, $query, $params);
 <!DOCTYPE html>
 <html lang="it">
 <head>
-    <link rel="stylesheet" href="stilicss/styles.css">
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AutoMarket - Ricerca Auto</title>
+    <link rel="stylesheet" href="auto.css">
 </head>
 <body>
     <header>
         <h1>AutoMarket - Trova la tua Auto</h1>
     </header>
-
+    <?php
+$totale_carrello = isset($_SESSION['carrello']) ? count($_SESSION['carrello']) : 0;
+?>
+<a href="carrello.php" class="cart-link">🛒 Carrello (<?= $totale_carrello ?>)</a>
     <div class="search-bar-container">
         <form method="GET" action="auto.php">
             <label for="marca">Marca:</label>
@@ -95,23 +100,27 @@ $result = pg_query_params($dbconnect, $query, $params);
         </form>
     </div>
 
+    <?php if ($result && pg_num_rows($result) > 0): ?>
     <div class="car-results">
-        <?php
-        if ($result && pg_num_rows($result) > 0) {
-            while ($row = pg_fetch_assoc($result)) {
-                echo "<div class='car-item'>";
-                echo "<strong>Marca:</strong> " . htmlspecialchars($row['marca']) . "<br>";
-                echo "<strong>Modello:</strong> " . htmlspecialchars($row['modello']) . "<br>";
-                echo "<strong>Anno:</strong> " . htmlspecialchars($row['anno']) . "<br>";
-                echo "<strong>Prezzo:</strong> €" . htmlspecialchars($row['prezzo']) . "<br>";
-                echo "<strong>Città:</strong> " . htmlspecialchars($row['citta']) . "<br>";
-                echo "</div><hr>";
-            }
-        } else {
-            echo "<p>Nessuna auto trovata.</p>";
-        }
-        ?>
+        <?php while ($row = pg_fetch_assoc($result)): ?>
+            <div class="car-item">
+                <strong>Marca:</strong> <?= htmlspecialchars($row['marca']) ?><br>
+                <strong>Modello:</strong> <?= htmlspecialchars($row['modello']) ?><br>
+                <strong>Anno:</strong> <?= htmlspecialchars($row['anno']) ?><br>
+                <strong>Prezzo:</strong> €<?= htmlspecialchars($row['prezzo']) ?><br>
+                <strong>Città:</strong> <?= htmlspecialchars($row['citta']) ?><br>
+
+                <!-- Bottone Aggiungi al carrello -->
+                <form action="aggiungi_al_carrello.php" method="POST">
+                    <input type="hidden" name="id_auto" value="<?= $row['id'] ?>">
+                    <button type="submit" class="add-to-cart-btn">🛒 Aggiungi al carrello</button>
+                </form>
+            </div>
+        <?php endwhile; ?>
     </div>
+<?php else: ?>
+    <p>Nessuna auto trovata.</p>
+<?php endif; ?>
     <script>
     document.addEventListener('DOMContentLoaded', function () {
         const marcaSelect = document.getElementById('marca');
