@@ -1,6 +1,22 @@
 <?php
-require_once('config.php');
 session_start();
+require_once('config.php');
+
+$utente_loggato = null;
+
+if (isset($_SESSION['user_id'])) {
+    $user_id = $_SESSION['user_id'];
+
+    // Recupera il username dell'utente loggato
+    $query = "SELECT username FROM utenti WHERE id = $1";
+    $result = pg_query_params($dbconnect, $query, array($user_id));
+
+    if ($row = pg_fetch_assoc($result)) {
+        $utente_loggato = $row['username'];
+        $_SESSION['username'] = $utente_loggato; // Salva in sessione per usi futuri
+    }
+}
+
 
 $marche_result = pg_query($dbconnect, "SELECT DISTINCT marca FROM auto ORDER BY marca ASC");
 $modelli_result = pg_query($dbconnect, "SELECT DISTINCT modello FROM auto ORDER BY modello ASC");
@@ -41,6 +57,7 @@ if (!empty($where_clauses)) {
 $result = pg_query_params($dbconnect, $query, $params);
 ?>
 
+
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -57,6 +74,19 @@ $result = pg_query_params($dbconnect, $query, $params);
     <?php
 $totale_carrello = isset($_SESSION['carrello']) ? count($_SESSION['carrello']) : 0;
 ?>
+<?php if (isset($_SESSION['user_id'])): ?>
+    <div class="user-info">
+        👤 Benvenuto, <strong><?= htmlspecialchars($utente_loggato) ?></strong> |
+        <a href="carrello.php">🛒 Carrello</a> |
+        <a href="sell_cars.php">➕ Vendi un'auto</a> |
+        <a href="logout.php">Logout</a>
+    </div>
+<?php else: ?>
+    <div class="user-info">
+        <a href="../Login.html">Accedi</a> | 
+        <a href="../Login.html">Registrati</a>
+    </div>
+<?php endif; ?>
 <a href="carrello.php" class="cart-link">🛒 Carrello (<?= $totale_carrello ?>)</a>
     <div class="search-bar-container">
         <form method="GET" action="auto.php">
@@ -120,7 +150,10 @@ $totale_carrello = isset($_SESSION['carrello']) ? count($_SESSION['carrello']) :
     </div>
 <?php else: ?>
     <p>Nessuna auto trovata.</p>
+    <a id="back_to_home" href="areaprivata.php">Torna alla Home</a>
 <?php endif; ?>
+<a id="back_to_home" href="areaprivata.php">Torna alla Home</a>
+
     <script>
     document.addEventListener('DOMContentLoaded', function () {
         const marcaSelect = document.getElementById('marca');

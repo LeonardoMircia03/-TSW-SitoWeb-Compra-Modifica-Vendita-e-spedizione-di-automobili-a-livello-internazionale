@@ -1,24 +1,18 @@
 <?php
 session_start();
+require_once('config.php');
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_auto'])) {
-    $id_da_rimuovere = intval($_POST['id_auto']);
-
-    if (isset($_SESSION['carrello']) && is_array($_SESSION['carrello'])) {
-        // Trova la posizione dell'id nell'array
-        $key = array_search($id_da_rimuovere, $_SESSION['carrello']);
-
-        // Se trovato, lo rimuove
-        if ($key !== false) {
-            unset($_SESSION['carrello'][$key]);
-
-            // Riordina gli indici dell'array
-            $_SESSION['carrello'] = array_values($_SESSION['carrello']);
-        }
-    }
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit;
 }
 
-// Reindirizza al carrello
+$utente_id = $_SESSION['user_id'];
+$id_auto = intval($_POST['id_auto']);
+
+// Rimuovi dal carrello
+$query = "DELETE FROM carrello WHERE utente_id = $1 AND auto_id = $2";
+pg_query_params($dbconnect, $query, array($utente_id, $id_auto));
+
 header("Location: carrello.php");
 exit;
-?>

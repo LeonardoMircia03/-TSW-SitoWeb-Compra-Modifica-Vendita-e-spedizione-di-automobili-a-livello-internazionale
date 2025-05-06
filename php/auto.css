@@ -207,3 +207,9 @@ a:hover {
 .remove-from-cart-btn:hover {
     background-color: #d32f2f;
 }
+
+#back_to_home{
+    text-align: center;
+    font-size: 2rem;
+    margin-left: auto;
+}

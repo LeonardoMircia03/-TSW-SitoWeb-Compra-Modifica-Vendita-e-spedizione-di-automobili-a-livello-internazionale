@@ -1,24 +1,24 @@
 <?php
 session_start();
+require_once('config.php');
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_auto'])) {
-    $id_auto = intval($_POST['id_auto']);
-
-    // Inizializza l'array del carrello se non esiste
-    if (!isset($_SESSION['carrello'])) {
-        $_SESSION['carrello'] = [];
-    }
-
-    // Aggiungi l'auto al carrello (se non è già presente)
-    if (!in_array($id_auto, $_SESSION['carrello'])) {
-        $_SESSION['carrello'][] = $id_auto;
-        echo "<script>alert('Auto aggiunta al carrello!');</script>";
-    } else {
-        echo "<script>alert('Questa auto è già nel carrello.');</script>";
-    }
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit;
 }
 
-// Torna alla pagina di ricerca
-header("Location: auto.php");
+$utente_id = $_SESSION['user_id'];
+$id_auto = intval($_POST['id_auto']);
+
+// Verifica che l'auto non sia già nel carrello
+$query = "SELECT * FROM carrello WHERE utente_id = $1 AND auto_id = $2";
+$result = pg_query_params($dbconnect, $query, array($utente_id, $id_auto));
+
+if (pg_num_rows($result) == 0) {
+    // Inserisci nel carrello
+    $insert_query = "INSERT INTO carrello (utente_id, auto_id) VALUES ($1, $2)";
+    pg_query_params($dbconnect, $insert_query, array($utente_id, $id_auto));
+}
+
+header("Location: carrello.php");
 exit;
-?>

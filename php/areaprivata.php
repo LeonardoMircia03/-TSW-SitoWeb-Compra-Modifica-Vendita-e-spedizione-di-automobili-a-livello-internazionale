@@ -100,11 +100,11 @@
             <div class="sidebar-content">
                 <h2>Informazioni</h2>
                 <div class="navbar">
-                    <a href="about.html">About Us</a> </br>
-                    <a href="SellCars.html">Sell Cars</a></br>
-                    <a href="BuyaCar.html">Buy a Car </a></br>
-                    <a href="FAQ.html">FAQ</a></br>
-                    <a href="Contattaci.html">Contact</a>
+                    <a href="../about.html">About Us</a> </br>
+                    <a href="sell_cars.php">Sell Cars</a></br>
+                    <a href="auto.php">Cerca Auto </a></br>
+                    <a href="../FAQ.html">FAQ</a></br>
+                    <a href="../Contattaci.html">Contact</a>
                 </div>
             </div>
             <a href="#" id="btnbarra" class="btn" onclick="toggleSidebar()">Chiudi</a>
@@ -113,13 +113,11 @@
         <div class="cliente">
             <h1>Trova la tua prossima auto</h1>
             <br>
-            <a href="Register-Client.html" class="btn">Registrati come cliente</a> 
         </div>
 
         <div class="venditore">
             <h1>Vendi la tua Auto </h1>
             <br>
-            <a href="Register-Seller.html" class="btn">Registrati come seller</a> 
         </div>
 
         <div class="vantaggi">
