@@ -77,7 +77,7 @@ $totale_carrello = isset($_SESSION['carrello']) ? count($_SESSION['carrello']) :
 <?php if (isset($_SESSION['user_id'])): ?>
     <div class="user-info">
         👤 Benvenuto, <strong><?= htmlspecialchars($utente_loggato) ?></strong> |
-        <a href="carrello.php">🛒 Carrello</a> |
+        <a href="carrello.php">🛒 Carrello (<?= $totale_carrello ?>)</a> |
         <a href="sell_cars.php">➕ Vendi un'auto</a> |
         <a href="logout.php">Logout</a>
     </div>
@@ -87,7 +87,7 @@ $totale_carrello = isset($_SESSION['carrello']) ? count($_SESSION['carrello']) :
         <a href="../Login.html">Registrati</a>
     </div>
 <?php endif; ?>
-<a href="carrello.php" class="cart-link">🛒 Carrello (<?= $totale_carrello ?>)</a>
+
     <div class="search-bar-container">
         <form method="GET" action="auto.php">
             <label for="marca">Marca:</label>
