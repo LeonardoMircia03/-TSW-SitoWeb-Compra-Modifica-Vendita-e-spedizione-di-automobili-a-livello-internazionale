@@ -118,6 +118,64 @@ while ($row = pg_fetch_assoc($result)) {
     $rows[] = $row;
     $totale += $row['prezzo'];
 }
+$query = "
+    SELECT a.*, c.modifiche_estetiche, c.modifiche_tecniche 
+    FROM auto a
+    JOIN carrello c ON a.id = c.auto_id
+    WHERE c.utente_id = $1
+";
+
+$result = pg_query_params($dbconnect, $query, array($utente_id));
+
+if (!$result || pg_num_rows($result) == 0) {
+    // Messaggio se il carrello è vuoto
+    ?>
+    <!-- Pagina carrello vuoto -->
+    <?php
+    exit;
+}
+
+$rows = [];
+$totale_auto = 0;
+$totale_modifiche = 0;
+
+// Prezzi fissi per tipo di modifica
+$prezzi_estetici = [
+    'cerchi' => 500,
+    'tappeti' => 200,
+    'paraurti' => 800,
+    'luci' => 300,
+    'wrap' => 1500
+];
+
+$prezzi_tecnici = [
+    'sospensioni' => 1200,
+    'freni' => 1000,
+    'turbo' => 2500,
+    'cambio' => 900,
+    'scarico' => 600
+];
+
+while ($row = pg_fetch_assoc($result)) {
+    $rows[] = $row;
+    $totale_auto += $row['prezzo'];
+
+    // Decodifica le modifiche
+    $estetiche = json_decode($row['modifiche_estetiche'] ?? '[]', true);
+    $tecniche = json_decode($row['modifiche_tecniche'] ?? '[]', true);
+
+    if (is_array($estetiche)) {
+        foreach ($estetiche as $modifica) {
+            $totale_modifiche += $prezzi_estetici[$modifica] ?? 0;
+        }
+    }
+
+    if (is_array($tecniche)) {
+        foreach ($tecniche as $modifica) {
+            $totale_modifiche += $prezzi_tecnici[$modifica] ?? 0;
+        }
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -127,7 +185,7 @@ while ($row = pg_fetch_assoc($result)) {
     <title>Il tuo carrello</title>
     <!-- Poi facciamo i vari file apparte -->
     <style>
-        /* Reset */
+        
         * {
             box-sizing: border-box;
             margin: 0;
@@ -250,6 +308,20 @@ while ($row = pg_fetch_assoc($result)) {
         .back-link a:hover {
             background-color: #45a049;
         }
+        .modify-btn {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 8px 12px;
+            background-color: #00bcd4;
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background 0.3s ease;
+}
+
+        .modify-btn:hover {
+             background-color: #0097a7;
+}
     </style>
 </head>
 <body>
@@ -270,13 +342,19 @@ while ($row = pg_fetch_assoc($result)) {
                     <input type="hidden" name="id_auto" value="<?= $row['id'] ?>">
                     <button type="submit" class="remove-from-cart-btn">🗑️ Rimuovi</button>
                 </form>
+                <a href="../modifiche.php?auto_id=<?= $row['id'] ?>" class="modify-btn">🔧 Richiedi modifiche</a>
             </div>
         <?php endforeach; ?>
+
     </div>
 
-    <div class="cart-summary">
-        <h3>Totale: €<?= number_format($totale, 2, ',', '.') ?></h3>
-    </div>
+<div class="cart-summary">
+    <h3>
+        Totale Auto: €<?= number_format($totale_auto, 2, ',', '.') ?><br>
+        Totale Modifiche: €<?= number_format($totale_modifiche, 2, ',', '.') ?><br>
+        <strong>Totale Finale: €<?= number_format($totale_auto + $totale_modifiche, 2, ',', '.') ?></strong>
+    </h3>
+</div>
 
     <div class="back-link">
         <a href="auto.php">⬅ Torna alla ricerca</a>
