@@ -56,6 +56,9 @@ if (!empty($where_clauses)) {
 
 $result = pg_query_params($dbconnect, $query, $params);
 ?>
+<?php
+$totale_carrello = isset($_SESSION['carrello']) ? count($_SESSION['carrello']) : 0;
+?>
 
 
 <!DOCTYPE html>
@@ -68,25 +71,21 @@ $result = pg_query_params($dbconnect, $query, $params);
     <link rel="stylesheet" href="auto.css">
 </head>
 <body>
-    <header>
-        <h1>AutoMarket - Trova la tua Auto</h1>
-    </header>
-    <?php
-$totale_carrello = isset($_SESSION['carrello']) ? count($_SESSION['carrello']) : 0;
-?>
-<?php if (isset($_SESSION['user_id'])): ?>
-    <div class="user-info">
-        👤 Benvenuto, <strong><?= htmlspecialchars($utente_loggato) ?></strong> |
-        <a href="carrello.php">🛒 Carrello (<?= $totale_carrello ?>)</a> |
-        <a href="sell_cars.php">➕ Vendi un'auto</a> |
-        <a href="logout.php">Logout</a>
+<header class="main-header">
+    <h1 ><a id ="header" href="areaprivata.php"> AutoMarket - Trova la tua Auto </a></h1>
+    <div class="user-buttons">
+        <?php if (isset($_SESSION['user_id'])): ?>
+            <span class="welcome">👤 <?= htmlspecialchars($utente_loggato) ?></span>
+            <a href="carrello.php" class="header-btn">🛒 Carrello (<?= $totale_carrello ?>)</a>
+            <a href="sell_cars.php" class="header-btn">➕ Vendi</a>
+            <a href="logout.php" class="header-btn">Logout</a>
+        <?php else: ?>
+            <a href="../Login.html" class="header-btn">Accedi</a>
+            <a href="../Login.html" class="header-btn">Registrati</a>
+        <?php endif; ?>
     </div>
-<?php else: ?>
-    <div class="user-info">
-        <a href="../Login.html">Accedi</a> | 
-        <a href="../Login.html">Registrati</a>
-    </div>
-<?php endif; ?>
+</header>
+    
 
     <div class="search-bar-container">
         <form method="GET" action="auto.php">
@@ -152,7 +151,6 @@ $totale_carrello = isset($_SESSION['carrello']) ? count($_SESSION['carrello']) :
     <p>Nessuna auto trovata.</p>
     <a id="back_to_home" href="areaprivata.php">Torna alla Home</a>
 <?php endif; ?>
-<a id="back_to_home" href="areaprivata.php">Torna alla Home</a>
 
     <script>
     document.addEventListener('DOMContentLoaded', function () {

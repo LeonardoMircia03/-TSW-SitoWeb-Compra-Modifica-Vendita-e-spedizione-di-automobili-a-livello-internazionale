@@ -87,6 +87,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                             <p>La password inserita non è corretta.</p>
                             <p>Hai dimenticato la password?</p>
                             <a href="../Recupero.html">Recupera Password</a>
+                            <a href="../login.html">Ritorna al Login</a>
                         </div>
                     </body>
                 </html>';
@@ -102,7 +103,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     <style>
                         body {
                             font-family: Arial, sans-serif;
-                            background: linear-gradient(to right, #1976d2, #2196f3);
+                            background: linear-gradient(to right,rgb(56, 56, 56),rgb(33, 32, 32));
                             color: white;
                             display: flex;
                             justify-content: center;
@@ -132,7 +133,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                             margin-top: 20px;
                             padding: 10px 20px;
                             background-color: #fff;
-                            color: #1976d2;
+                            color: rgba(0, 0, 0, 0.8);
                             text-decoration: none;
                             border-radius: 5px;
                             font-weight: bold;
