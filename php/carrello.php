@@ -355,13 +355,41 @@ while ($row = pg_fetch_assoc($result)) {
         <strong>Totale Finale: €<?= number_format($totale_auto + $totale_modifiche, 2, ',', '.') ?></strong>
     </h3>
 </div>
+<div style="text-align: center; margin-top: 20px;">
+    <button id="show-payment-btn" class="modify-btn">💳 Paga</button>
+</div>
+
 
     <div class="back-link">
         <a href="auto.php">⬅ Torna alla ricerca</a>
     </div>
+<div id="payment-section" style="display: none; max-width: 600px; margin: 30px auto; background-color: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+    <h2 style="text-align:center; margin-bottom: 20px;">💳 Pagamento</h2>
+    <form action="processo_pagamento.php" method="POST">
+        <label for="carta">Numero Carta:</label><br>
+        <input type="text" id="carta" name="carta" required maxlength="16" style="width: 100%; padding: 8px; margin-bottom: 15px;"><br>
 
+        <label for="scadenza">Data Scadenza:</label><br>
+        <input type="month" id="scadenza" name="scadenza" required style="width: 100%; padding: 8px; margin-bottom: 15px;"><br>
+
+        <label for="cvv">CVV:</label><br>
+        <input type="text" id="cvv" name="cvv" required maxlength="3" style="width: 100%; padding: 8px; margin-bottom: 15px;"><br>
+
+        <input type="hidden" name="importo" value="<?= $totale_auto + $totale_modifiche ?>">
+
+        <button type="submit" class="modify-btn" style="width: 100%; font-size: 1.1rem;">✅ Conferma Pagamento</button>
+    </form>
+</div>
     <footer>
         <p>&copy; 2025 AutoMarket - Tutti i diritti riservati</p>
     </footer>
+    <script>
+    document.getElementById('show-payment-btn').addEventListener('click', function () {
+        const section = document.getElementById('payment-section');
+        section.style.display = section.style.display === 'none' ? 'block' : 'none';
+        this.textContent = section.style.display === 'block' ? '❌ Chiudi Pagamento' : '💳 Paga';
+    });
+</script>
+
 </body>
 </html>
