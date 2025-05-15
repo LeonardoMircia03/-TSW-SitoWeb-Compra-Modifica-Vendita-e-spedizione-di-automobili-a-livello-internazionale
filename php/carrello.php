@@ -364,15 +364,18 @@ while ($row = pg_fetch_assoc($result)) {
     </div>
 <div id="payment-section" style="display: none; max-width: 600px; margin: 30px auto; background-color: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
     <h2 style="text-align:center; margin-bottom: 20px;">💳 Pagamento</h2>
-    <form action="processo_pagamento.php" method="POST">
+    <form action="processo_pagamento.php" method="POST" id="payment-form">
         <label for="carta">Numero Carta:</label><br>
-        <input type="number" id="carta" name="carta" required maxlength="16" style="width: 100%; padding: 8px; margin-bottom: 15px;"><br>
+        <input type="text" id="carta" name="carta" maxlength="16" required pattern="[0-9]{16}" title="Il numero della carta deve essere di 16 cifre" style="width: 100%; padding: 8px; margin-bottom: 15px;"><br>
+        <div id="carta-error" style="color: red; font-size: 0.8rem; margin-top: -10px; margin-bottom: 10px; display: none;">Il numero della carta deve essere esattamente di 16 cifre.</div>
 
         <label for="scadenza">Data Scadenza:</label><br>
         <input type="date" id="scadenza" name="scadenza" required style="width: 100%; padding: 8px; margin-bottom: 15px;"><br>
+        <div id="scadenza-error" style="color: red; font-size: 0.8rem; margin-top: -10px; margin-bottom: 10px; display: none;">La data di scadenza deve essere futura alla data di oggi.</div>
 
         <label for="cvv">CVV:</label><br>
-        <input type="number" id="cvv" name="cvv" required maxlength="3" style="width: 100%; padding: 8px; margin-bottom: 15px;"><br>
+        <input type="text" id="cvv" name="cvv" maxlength="3" required pattern="[0-9]{3}" title="Il CVV deve essere di 3 cifre" style="width: 100%; padding: 8px; margin-bottom: 15px;"><br>
+        <div id="cvv-error" style="color: red; font-size: 0.8rem; margin-top: -10px; margin-bottom: 10px; display: none;">Il CVV deve essere esattamente di 3 cifre.</div>
 
         <input type="hidden" name="importo" value="<?= $totale_auto + $totale_modifiche ?>">
 
@@ -387,6 +390,56 @@ while ($row = pg_fetch_assoc($result)) {
         const section = document.getElementById('payment-section');
         section.style.display = section.style.display === 'none' ? 'block' : 'none';
         this.textContent = section.style.display === 'block' ? '❌ Chiudi Pagamento' : '💳 Paga';
+    });
+
+    // Validazione del form di pagamento
+    document.querySelector('#payment-section form').addEventListener('submit', function(e) {
+        let isValid = true;
+        
+        // Validazione numero carta (esattamente 16 cifre)
+        const cartaInput = document.getElementById('carta');
+        const cartaValue = cartaInput.value.replace(/\s+/g, ''); // Rimuove eventuali spazi
+        const cartaError = document.getElementById('carta-error');
+        
+        if (!/^\d{16}$/.test(cartaValue)) {
+            cartaError.style.display = 'block';
+            isValid = false;
+        } else {
+            cartaError.style.display = 'none';
+        }
+        
+        // Validazione data di scadenza (deve essere futura)
+        const scadenzaInput = document.getElementById('scadenza');
+        const scadenzaDate = new Date(scadenzaInput.value);
+        const today = new Date();
+        const scadenzaError = document.getElementById('scadenza-error');
+        
+        // Imposta le ore a 0 per confrontare solo le date
+        today.setHours(0, 0, 0, 0);
+        scadenzaDate.setHours(0, 0, 0, 0);
+        
+        if (scadenzaDate <= today) {
+            scadenzaError.style.display = 'block';
+            isValid = false;
+        } else {
+            scadenzaError.style.display = 'none';
+        }
+        
+        // Validazione CVV (esattamente 3 cifre)
+        const cvvInput = document.getElementById('cvv');
+        const cvvValue = cvvInput.value.trim();
+        const cvvError = document.getElementById('cvv-error');
+        
+        if (!/^\d{3}$/.test(cvvValue)) {
+            cvvError.style.display = 'block';
+            isValid = false;
+        } else {
+            cvvError.style.display = 'none';
+        }
+        
+        if (!isValid) {
+            e.preventDefault(); // Impedisce l'invio del form se non valido
+        }
     });
 </script>
 
