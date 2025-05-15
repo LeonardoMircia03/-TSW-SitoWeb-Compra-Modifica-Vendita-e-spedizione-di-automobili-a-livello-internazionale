@@ -1,0 +1,372 @@
+
+
+/* Stili generali */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #2a2a2a; 
+    color: #fff;
+    line-height: 1.6;
+    padding: 0;
+    position: relative;
+}
+
+
+.video-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+    overflow: hidden;
+}
+
+.video-background video {
+    min-width: 100%;
+    min-height: 100%;
+    object-fit: cover;
+    filter: brightness(0.7);
+}
+
+/* Header */
+header {
+    background: #333; 
+    color: white;
+    padding: 40px 20px;
+    text-align: center;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    position: relative;
+    z-index: 1;
+    border-bottom: 3px solid #444;
+}
+
+header h1 {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-family: 'Arial', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Contenuto principale */
+.main-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    position: relative;
+    z-index: 1;
+}
+
+/* Griglia auto */
+.car-results {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 25px;
+    margin-bottom: 30px;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Elementi auto */
+.car-item {
+    background-color: #353535; 
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    color: #eee; 
+    position: relative;
+    overflow: hidden;
+    border-top: 5px solid #555; 
+    border: 1px solid #444;
+}
+
+.car-item strong {
+    font-size: 1.4rem;
+    color: #ccc; 
+    display: block;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #444; 
+    padding-bottom: 8px;
+}
+
+.car-item:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.4);
+    background-color: rgba(60, 60, 60, 0.9); 
+}
+
+/* Riepilogo carrello */
+.cart-summary {
+    text-align: right;
+    font-size: 1.2rem;
+    padding: 25px;
+    background: #333; 
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    position: relative;
+    overflow: hidden;
+    color: #eee;
+    border: 1px solid #444;
+}
+
+.cart-summary::before {
+    content: '💰';
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 2.5rem;
+    opacity: 0.2;
+    color: #ccc;
+}
+
+.cart-summary h3 {
+    margin: 0;
+    line-height: 1.8;
+}
+
+.cart-summary strong {
+    font-size: 1.4rem;
+    color: #fff; /* Testo bianco per evidenziare */
+}
+
+/* Footer */
+footer {
+    background: #1a1a1a;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+    margin-top: 60px;
+    box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 1;
+}
+
+/* Link */
+a {
+    color: white    ;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Link per tornare indietro */
+.back-link {
+    display: block;
+    text-align: center;
+    margin: 30px 0;
+    font-size: 1.1rem;
+}
+
+.back-link a {
+    padding: 12px 24px;
+    background-color: #43a047; 
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+    font-weight: bold;
+    box-shadow: 0 4px 8px rgba(67, 160, 71, 0.2);
+    border: 1px solid #388e3c;
+}
+
+.back-link a:hover {
+    background-color: #388e3c; 
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(67, 160, 71, 0.3);
+}
+
+/* Pulsanti */
+.modify-btn {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 8px 16px;
+    background-color: #2196f3; 
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(33, 150, 243, 0.2);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.modify-btn:hover {
+    background-color: #1976d2; 
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(33, 150, 243, 0.3);
+}
+
+
+.active-option {
+    background-color: #43a047; 
+    font-weight: bold;
+    box-shadow: 0 4px 8px rgba(67, 160, 71, 0.2);
+    color: #fff;
+}
+
+.empty-cart-btn {
+    padding: 10px 20px;
+    background-color: #e53935; /* Rosso */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(229, 57, 53, 0.2);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid #b71c1c;
+}
+
+.empty-cart-btn:hover {
+    background-color: #b71c1c; 
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(229, 57, 53, 0.3);
+}
+
+.remove-from-cart-btn {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 8px 16px;
+    background-color: #e53935; 
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(229, 57, 53, 0.2);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid #b71c1c;
+}
+
+.remove-from-cart-btn:hover {
+    background-color: #b71c1c; 
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(229, 57, 53, 0.3);
+}
+
+/* Sezione pagamento */
+#payment-section {
+    background: #f2f2f2;
+    border-radius: 15px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
+    color: #222;
+    transition: all 0.5s ease;
+    border: 1px solid #ccc;
+}
+
+#loan-section {
+    background: #f2f2f2;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    color: #222;
+    border: 1px solid #ccc;
+}
+
+#loan-section label {
+    color: #222;
+    font-weight: 500;
+}
+
+#loan-section input, #loan-section select, #loan-section textarea {
+    background-color: #ffffff;
+    color: #484848;
+    border: 1px solid #888;
+    border-radius: 5px;
+    padding: 8px 12px;
+}
+
+#loan-section input::placeholder, #loan-section textarea::placeholder {
+    color: #bbb;
+    opacity: 1;
+}
+
+/* Gruppo pulsanti */
+.button-group {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: 20px 0;
+}
+
+/* Stili per il carrello vuoto */
+.empty-cart {
+    text-align: center;
+    padding: 60px 20px;
+    background-color: #333;
+    color: #eee;
+    border-radius: 10px;
+    max-width: 600px;
+    margin: 50px auto;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    border: 1px solid #444;
+}
+
+.empty-cart h2 {
+    color: #eee; 
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.empty-cart p {
+    font-size: 1.1rem;
+    color: #ccc; 
+    margin-bottom: 30px;
+}
+
+.empty-cart img {
+    width: 100px;
+    height: auto;
+    margin-bottom: 20px;
+    filter: brightness(0.8) invert(1); 
+}
+
+.go-back-btn {
+    padding: 12px 24px;
+    background-color: #43a047; 
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+    border: 1px solid #388e3c;
+    box-shadow: 0 4px 8px rgba(67, 160, 71, 0.2);
+}
+
+.go-back-btn:hover {
+    background-color: #388e3c; 
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(67, 160, 71, 0.3);
+}
