@@ -183,7 +183,6 @@ while ($row = pg_fetch_assoc($result)) {
 <head>
     <meta charset="UTF-8">
     <title>Il tuo carrello</title>
-    <!-- Poi facciamo i vari file apparte -->
     <style>
         
         * {
@@ -367,13 +366,13 @@ while ($row = pg_fetch_assoc($result)) {
     <h2 style="text-align:center; margin-bottom: 20px;">💳 Pagamento</h2>
     <form action="processo_pagamento.php" method="POST">
         <label for="carta">Numero Carta:</label><br>
-        <input type="text" id="carta" name="carta" required maxlength="16" style="width: 100%; padding: 8px; margin-bottom: 15px;"><br>
+        <input type="number" id="carta" name="carta" required maxlength="16" style="width: 100%; padding: 8px; margin-bottom: 15px;"><br>
 
         <label for="scadenza">Data Scadenza:</label><br>
-        <input type="month" id="scadenza" name="scadenza" required style="width: 100%; padding: 8px; margin-bottom: 15px;"><br>
+        <input type="date" id="scadenza" name="scadenza" required style="width: 100%; padding: 8px; margin-bottom: 15px;"><br>
 
         <label for="cvv">CVV:</label><br>
-        <input type="text" id="cvv" name="cvv" required maxlength="3" style="width: 100%; padding: 8px; margin-bottom: 15px;"><br>
+        <input type="number" id="cvv" name="cvv" required maxlength="3" style="width: 100%; padding: 8px; margin-bottom: 15px;"><br>
 
         <input type="hidden" name="importo" value="<?= $totale_auto + $totale_modifiche ?>">
 
