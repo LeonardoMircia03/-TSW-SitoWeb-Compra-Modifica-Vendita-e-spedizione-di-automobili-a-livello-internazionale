@@ -6,6 +6,12 @@
        exit;
    } 
    require_once('../php/config.php');
+require_once('review_model.php');
+
+// Get seller's rating
+$reviewModel = new ReviewModel($dbconnect);
+$sellerRating = $reviewModel->getSellerAverageRating($_SESSION['user_id']);
+$sellerReviews = $reviewModel->getSellerReviews($_SESSION['user_id']);
 ?>
 
 <!DOCTYPE html>
@@ -131,7 +137,67 @@
             </ul>
         </div>
 
-        <footer class="footer">
+        <div class="seller-reviews" style="background-color: #f9f9f9; border-radius: 10px; padding: 20px; margin-top: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            <h2 style="color: #333; border-bottom: 2px solid #007bff; padding-bottom: 10px; margin-bottom: 15px;">Le tue recensioni</h2>
+            <?php if (!empty($sellerReviews)): ?>
+                <div class="rating-summary" style="display: flex; align-items: center; margin-bottom: 20px;">
+                    <div style="flex: 1;">
+                        <h3 style="margin: 0; color: #555;">Valutazione Media</h3>
+                        <div class="stars" style="font-size: 24px; color: #ffc107;">
+                            <?php 
+                            $avgRating = $sellerRating['avg_rating'] ?? 0;
+                            for ($i = 1; $i <= 5; $i++) {
+                                echo $i <= $avgRating ? '★' : '☆';
+                            }
+                            ?>
+                        </div>
+                        <p style="margin: 5px 0 0; color: #777;"><?php echo number_format($avgRating, 1); ?> / 5 (<?php echo $sellerRating['total_reviews'] ?? 0; ?> recensioni)</p>
+                    </div>
+                </div>
+
+                <div class="reviews-list">
+                    <?php foreach ($sellerReviews as $review): ?>
+                    <div class="review" style="background-color: white; border-radius: 8px; padding: 15px; margin-bottom: 15px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                        <div class="review-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                            <span class="reviewer-name" style="font-weight: bold; color: #333;"><?php echo htmlspecialchars($review['reviewer_name']); ?></span>
+                            <div class="review-rating" style="color: #ffc107; font-size: 18px;">
+                                <?php 
+                                for ($i = 1; $i <= 5; $i++) {
+                                    echo $i <= $review['rating'] ? '★' : '☆';
+                                }
+                                ?>
+                            </div>
+                        </div>
+                        <p class="review-text" style="color: #555; margin-bottom: 10px;"><?php echo htmlspecialchars($review['review_text']); ?></p>
+                        <span class="review-date" style="color: #888; font-size: 0.8em;"><?php echo date('d/m/Y', strtotime($review['review_date'])); ?></span>
+                    </div>
+                    <?php endforeach; ?>
+                </div>
+            <?php else: ?>
+                <p style="color: #777; text-align: center; padding: 20px;">Non hai ancora ricevuto recensioni.</p>
+            <?php endif; ?>
+        </div>
+
+        <div class="seller-rating" style="background-color: #f9f9f9; border-radius: 10px; padding: 20px; margin-top: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            <h2 style="color: #333; border-bottom: 2px solid #007bff; padding-bottom: 10px; margin-bottom: 15px;">Il tuo profilo venditore</h2>
+            <div class="rating-summary" style="display: flex; align-items: center; margin-bottom: 20px;">
+                <div style="flex: 1;">
+                    <h3 style="margin: 0; color: #555;">Valutazione Complessiva</h3>
+                    <div class="stars" style="font-size: 24px; color: #ffc107;">
+                        <?php 
+                        $avgRating = $sellerRating['avg_rating'] ?? 0;
+                        for ($i = 1; $i <= 5; $i++) {
+                            echo $i <= $avgRating ? '★' : '☆';
+                        }
+                        ?>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-top: 10px;">
+                        <p style="margin: 0; color: #777;">Media: <?php echo number_format($avgRating, 1); ?> / 5</p>
+                        <p style="margin: 0; color: #777;">Totale recensioni: <?php echo $sellerRating['total_reviews'] ?? 0; ?></p>
+                    </div>
+                </div>
+            </div>
+        </div>      <footer class="footer">
             <div>
                 <p>&copy;2025 AutoMarket. Tutti i diritti sono riservati</p>
             </div>

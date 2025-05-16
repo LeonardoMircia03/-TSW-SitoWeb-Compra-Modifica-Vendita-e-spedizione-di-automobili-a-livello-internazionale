@@ -69,6 +69,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             display: block;
             margin-top: 15px;
             font-weight: bold;
+            color: #1a1a1a;  
+            font-size: 1rem;  
         }
 
         input[type="text"],

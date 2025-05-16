@@ -159,6 +159,133 @@ header h1 a {
     transform: scale(1.03);
 }
 
+/* Sezione Recensioni Venditore */
+.seller-reviews {
+    margin-top: 22px;
+    margin-bottom: 22px;
+    background: #23272f;
+    border-radius: 12px;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.14);
+    padding: 22px 22px 10px 22px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.seller-reviews h3 {
+    color: #00bfa5;
+    margin-bottom: 12px;
+    font-size: 1.35rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-align: left;
+}
+.avg-rating {
+    color: #ffd600;
+    font-size: 1.18rem;
+    margin-bottom: 12px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+.review {
+    background: #232323;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    padding: 14px 18px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.09);
+    border-left: 4px solid #00bfa5;
+}
+.review-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 6px;
+}
+.reviewer-name {
+    font-size: 1.07rem;
+    font-weight: 500;
+    color: #00bfa5;
+}
+.review-rating {
+    color: #ffd600;
+    font-size: 1.15rem;
+    letter-spacing: 2px;
+}
+.review-text {
+    font-size: 1rem;
+    color: #eee;
+    margin: 7px 0 3px 0;
+}
+.review-date {
+    color: #bbb;
+    font-size: 0.92rem;
+    font-style: italic;
+}
+.review-form {
+    background: #1f242a;
+    border-radius: 10px;
+    padding: 18px 20px;
+    margin-top: 18px;
+    margin-bottom: 12px;
+    box-shadow: 0 2px 8px rgba(0,191,165,0.09);
+}
+.review-form label {
+    color: #00bfa5;
+    font-weight: 500;
+    margin-top: 8px;
+}
+.review-form select,
+.review-form textarea {
+    width: 100%;
+    margin-top: 5px;
+    margin-bottom: 12px;
+    padding: 9px 12px;
+    border-radius: 6px;
+    border: 1px solid #bbb;
+    font-size: 1rem;
+    background: #292d33;
+    color: #fff;
+    resize: vertical;
+}
+.review-form textarea {
+    min-height: 70px;
+    max-height: 180px;
+}
+.review-form button {
+    background: #00bfa5;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 22px;
+    font-size: 1.05rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s, box-shadow 0.2s;
+    box-shadow: 0 2px 8px rgba(0,191,165,0.07);
+}
+.review-form button:hover {
+    background: #009e86;
+}
+.error-message {
+    background: #ff5252;
+    color: #fff;
+    padding: 8px 12px;
+    border-radius: 6px;
+    margin-bottom: 10px;
+    font-size: 1rem;
+    font-weight: 500;
+    box-shadow: 0 2px 8px rgba(255,82,82,0.09);
+}
+.success-message {
+    background: #00c853;
+    color: #fff;
+    padding: 8px 12px;
+    border-radius: 6px;
+    margin-bottom: 10px;
+    font-size: 1rem;
+    font-weight: 500;
+    box-shadow: 0 2px 8px rgba(0,200,83,0.09);
+}
+
 /* Risultati delle auto */
 .car-results {
     max-width: 1200px;
@@ -178,6 +305,10 @@ header h1 a {
     transition: all 0.3s ease;
     border-top: 5px solid #555;
     border: 1px solid #444;
+}
+
+.car-item:nth-child(6) { 
+    animation-delay: 0.40s; 
 }
 
 .car-item:hover {
@@ -258,6 +389,79 @@ a:hover {
 .add-to-cart-btn:hover {
     background-color: #45a049;
 }
+
+
+.car-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 18px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.17);
+    background: linear-gradient(120deg,#353535 80%,#23272f 100%);
+}
+
+.top-badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: #00bfa5;
+    color: #fff;
+    padding: 5px 12px;
+    border-radius: 12px;
+    font-size: 0.98rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    box-shadow: 0 2px 8px rgba(0,191,165,0.10);
+}
+
+.car-details {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.brand {
+    font-size: 1.15rem;
+    color: #ffd600;
+    letter-spacing: 1px;
+    text-shadow: 0 1px 2px #000;
+}
+
+.model {
+    font-size: 1.05rem;
+    color: #00bfa5;
+    font-weight: 500;
+}
+
+.info {
+    font-size: 0.98rem;
+    color: #ccc;
+}
+
+.price {
+    font-size: 1.1rem;
+    color: #00c853;
+    font-weight: 600;
+}
+
+.actions {
+    margin-top: 14px;
+    display: flex;
+    gap: 12px;
+}
+
+.cart-form {
+    display: inline-block;
+}
+
+.car-details-content {
+    flex: 1;
+}
+
+.model-label {
+    font-size: 1.05rem;
+    color: #fff;
+}
+
 .remove-from-cart-btn {
     background-color: #f44336;
     color: white;
