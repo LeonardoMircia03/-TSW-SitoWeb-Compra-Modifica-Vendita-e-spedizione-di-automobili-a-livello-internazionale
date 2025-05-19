@@ -10,15 +10,30 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         echo "Errore: Tutti i campi sono obbligatori.";
     }
 
-  
-    $passwordHash = password_hash($password, PASSWORD_DEFAULT);
-    
-    $query = "INSERT INTO utenti (email, username, password) VALUES ($1, $2, $3)";
-    $params = array($email, $username, $passwordHash);
-    $result = pg_query_params($dbconnect, $query, $params);
+      // Verifica se username o email sono già registrati
+    $checkQuery = "SELECT * FROM utenti WHERE email = $1 OR username = $2";
+    $checkParams = array($email, $username);
+    $checkResult = pg_query_params($dbconnect, $checkQuery, $checkParams);
 
-    if ($result) {
-     
+    if (pg_num_rows($checkResult) > 0) {
+
+        echo '
+        <html>
+            <head><title>Errore</title></head>
+            <body style="background: linear-gradient(to right, #d32f2f, #ff5722); display:flex; justify-content:center; align-items:center; height:100vh; margin:0; font-family: Arial;">
+                <div style="background:#fff; color:#c62828; padding:30px; border-radius:10px; text-align:center; max-width:400px; width:90%; box-shadow:0 5px 15px rgba(0,0,0,0.2);">
+                    <h2 style="color:#c62828;">❌Hai usato una email o un username gia in uso</h2>
+                    <p>'.pg_last_error($dbconnect).'</p>
+                    <a href="../login.html" style="display:inline-block; background:#c62828; color:white; padding:10px 20px; text-decoration:none; border-radius:5px;">Torna alla registrazione</a>
+                </div>
+            </body>
+        </html>';
+
+    } else {
+        $passwordHash = password_hash($password, PASSWORD_DEFAULT);
+        $insertQuery = "INSERT INTO utenti (email, username, password) VALUES ($1, $2, $3)";
+        $insertParams = array($email, $username, $passwordHash);
+         $insertResult = @pg_query_params($dbconnect, $insertQuery, $insertParams);
         echo '
         <html>
             <head>
@@ -27,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     body {
                         font-family: "Segoe UI", sans-serif;
                         background: linear-gradient(to right, #4CAF50, #66bb6a);
-                        color: white;
+                        color: white;   
                         display: flex;
                         justify-content: center;
                         align-items: center;
@@ -79,20 +94,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 </div>
             </body>
         </html>';
-        exit;
-    } else {
-        echo '
-        <html>
-            <head><title>Errore</title></head>
-            <body style="background: linear-gradient(to right, #d32f2f, #ff5722); display:flex; justify-content:center; align-items:center; height:100vh; margin:0; font-family: Arial;">
-                <div style="background:#fff; color:#c62828; padding:30px; border-radius:10px; text-align:center; max-width:400px; width:90%; box-shadow:0 5px 15px rgba(0,0,0,0.2);">
-                    <h2 style="color:#c62828;">❌ Errore nella registrazione</h2>
-                    <p>'.pg_last_error($dbconnect).'</p>
-                    <a href="../login.html" style="display:inline-block; background:#c62828; color:white; padding:10px 20px; text-decoration:none; border-radius:5px;">Torna alla registrazione</a>
-                </div>
-            </body>
-        </html>';
-        exit;
     }
+    
+
 } 
 ?>
