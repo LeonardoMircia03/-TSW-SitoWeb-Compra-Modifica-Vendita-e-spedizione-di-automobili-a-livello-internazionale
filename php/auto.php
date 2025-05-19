@@ -19,8 +19,6 @@ if (isset($_SESSION['user_id'])) {
         $_SESSION['username'] = $utente_loggato; // Salva in sessione per usi futuri
     }
 }
-
-
 $marche_result = pg_query($dbconnect, "SELECT DISTINCT marca FROM auto ORDER BY marca ASC");
 $modelli_result = pg_query($dbconnect, "SELECT DISTINCT modello FROM auto ORDER BY modello ASC");
 $anni_result = pg_query($dbconnect, "SELECT DISTINCT anno FROM auto ORDER BY anno DESC");
@@ -52,7 +50,7 @@ if (!empty($prezzo)) {
     $params[] = $prezzo;
 }
 
-$query = "SELECT * FROM auto";
+$query = "SELECT auto.*, utenti.username AS nome_venditore FROM auto JOIN utenti ON auto.utente_id = utenti.id";
 if (!empty($where_clauses)) {
     $query .= " WHERE " . implode(" AND ", $where_clauses);
 }
@@ -105,10 +103,12 @@ $totale_carrello = isset($_SESSION['carrello']) ? count($_SESSION['carrello']) :
 </head>
 <body>
 <header class="main-header">
-    <h1 ><a id ="header" href="areaprivata.php"> AutoMarket - Trova la tua Auto </a></h1>
+    <h1 >
+        <a id="header" href="<?php echo isset($_SESSION['user_id']) ? 'areaprivata.php' : '../index.html'; ?>"> AutoMarket - Trova la tua Auto </a>
+    </h1>
     <div class="user-buttons">
         <?php if (isset($_SESSION['user_id'])): ?>
-            <span class="welcome">👤 <?= htmlspecialchars($utente_loggato) ?></span>
+            <a href="profilo.php" class="welcome">👤 <?= htmlspecialchars($utente_loggato) ?></a>
             <a href="carrello.php" class="header-btn">🛒 Carrello (<?= $totale_carrello ?>)</a>
             <a href="sell_cars.php" class="header-btn">➕ Vendi</a>
             <a href="logout.php" class="header-btn">Logout</a>
@@ -197,7 +197,8 @@ $totale_carrello = isset($_SESSION['carrello']) ? count($_SESSION['carrello']) :
     <?php if ($result && pg_num_rows($result) > 0): ?>
     <div class="car-results">
 <!-- Effetto fade-in sulle card -->
-<?php while ($row = pg_fetch_assoc($result)): ?>
+<?php while ($row = pg_fetch_assoc($result)): 
+    $nome_venditore = htmlspecialchars($row['nome_venditore']); ?>
     
 <div class="car-item car-card">
     <div class="top-badge">TOP</div>
@@ -207,7 +208,12 @@ $totale_carrello = isset($_SESSION['carrello']) ? count($_SESSION['carrello']) :
             <strong class="brand"> <?= htmlspecialchars($row['marca']) ?> </strong><br>
             <span class="model-label">Modello:</span> <span class="model"> <?= htmlspecialchars($row['modello']) ?> </span><br>
             <span class="info">Anno: <?= $row['anno'] ?> | Città: <?= htmlspecialchars($row['citta']) ?></span><br>
-            <span class="price">Prezzo: €<?= number_format($row['prezzo'], 2, ',', '.') ?></span>
+            <p>Prezzo: € <?= number_format($row['prezzo'], 2, ',', '.') ?></p>
+            <p class="seller-name"> Venditore: <?= $nome_venditore ?></p>
+            <div class="car-description">
+                <strong>Descrizione:</strong>
+                <p><?= htmlspecialchars($row['descrizione'] ?? 'Nessuna descrizione disponibile') ?></p>
+            </div>
         </div>
     </div>
     <div class="actions">

@@ -109,6 +109,7 @@ $sellerReviews = $reviewModel->getSellerReviews($_SESSION['user_id']);
                     <a href="../about.html">About Us</a> </br>
                     <a href="sell_cars.php">Sell Cars</a></br>
                     <a href="auto.php">Cerca Auto </a></br>
+                    <a href="profilo.php">Le Mie Auto</a></br>
                     <a href="../FAQ.html">FAQ</a></br>
                     <a href="../Contattaci.html">Contact</a>
                 </div>

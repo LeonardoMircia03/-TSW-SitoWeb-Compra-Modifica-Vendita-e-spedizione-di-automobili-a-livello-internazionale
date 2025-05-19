@@ -17,6 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $anno = intval($_POST['anno']);
     $prezzo = floatval($_POST['prezzo']);
     $citta = pg_escape_string($dbconnect, $_POST['citta']);
+    $descrizione = pg_escape_string($dbconnect, $_POST['descrizione'] ?? '');
     $utente_id = $_SESSION['user_id'];
 
     // Validazione base
@@ -24,8 +25,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $error = "Tutti i campi sono obbligatori.";
     } else {
         // Inserisci l'auto nel database
-        $query = "INSERT INTO auto (marca, modello, anno, prezzo, citta, utente_id)
-                  VALUES ('$marca', '$modello', $anno, $prezzo, '$citta', $utente_id)";
+        $query = "INSERT INTO auto (marca, modello, anno, prezzo, citta, utente_id, descrizione)
+                  VALUES ('$marca', '$modello', $anno, $prezzo, '$citta', $utente_id, '$descrizione')";
 
         if (pg_query($dbconnect, $query)) {
             $success = "Auto inserita correttamente!";
@@ -75,7 +76,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         input[type="text"],
         input[type="number"],
-        input[type="number"] {
+        input[type="number"],
+        textarea {
             width: 100%;
             padding: 10px;
             margin-top: 5px;
@@ -161,6 +163,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <label for="citta">Città:</label>
         <input type="text" id="citta" name="citta" required>
+
+        <label for="descrizione">Descrizione dell'auto (opzionale):</label>
+        <textarea id="descrizione" name="descrizione" rows="4" placeholder="Inserisci dettagli aggiuntivi sull'auto"></textarea>
 
         <button type="submit">Inserisci Auto</button>
     </form>
