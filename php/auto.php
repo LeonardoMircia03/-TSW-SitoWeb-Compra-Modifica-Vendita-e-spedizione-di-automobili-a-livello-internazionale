@@ -220,118 +220,14 @@ $totale_carrello = isset($_SESSION['carrello']) ? count($_SESSION['carrello']) :
         <form action="aggiungi_al_carrello.php" method="POST" class="cart-form">
             <input type="hidden" name="id_auto" value="<?= $row['id'] ?>">
             <button type="submit" class="add-to-cart-btn">🛒 Aggiungi al carrello</button>
-        </form>
-        
+        </form> 
     </div>
 </div>
-<br>
-    <?php 
-                // Recensioni relative al venditore
-                $seller_id = $row['utente_id'];
-                $sellerReviews = $reviewModel->getSellerReviews($seller_id);
-                $avgSellerRating = $reviewModel->getSellerAverageRating($seller_id);
-                ?>
-                <div class="seller-reviews">
-                    <h3>Recensioni Venditore</h3>
-                    <?php if ($avgSellerRating !== null): ?>
-                        <div class="avg-rating">Valutazione media venditore: <?= round($avgSellerRating, 1) ?> / 5</div>
-                    <?php else: ?>
-                        <div class="avg-rating">Questo venditore non ha ancora recensioni.</div>
-                    <?php endif; ?>
-                    <?php if (!empty($sellerReviews)): ?>
-                        <?php foreach ($sellerReviews as $review): ?>
-                            <div class="review">
-                                <div class="review-header">
-                                    <span class="reviewer-name"><?= htmlspecialchars($review['reviewer_name']) ?></span>
-                                    <div class="review-rating">
-                                        <?php 
-                                        for ($i = 1; $i <= 5; $i++) {
-                                            echo $i <= $review['rating'] ? '★' : '☆';
-                                        }
-                                        ?>
-                                    </div>
-                                </div>
-                                <p class="review-text"><?= htmlspecialchars($review['review_text']) ?></p>
-                                <span class="review-date"><?= date('d/m/Y', strtotime($review['review_date'])) ?></span>
-                            </div>
-                        <?php endforeach; ?>
-                    <?php else: ?>
-                        <p>Nessuna recensione per questo venditore.</p>
-                    <?php endif; ?>
-
-                    <!-- Form Recensione Venditore -->
-                    <?php 
-require_once 'utils_acquisti.php';
-$puo_recensire = false;
-if (isset($_SESSION['user_id'])) {
-    $puo_recensire = utenteHaAcquistatoDaVenditore($dbconnect, $_SESSION['user_id'], $seller_id);
-}
-?>
-<?php if (isset($_SESSION['user_id']) && $puo_recensire): ?>
-                        <div class="review-form">
-                            <?php if (!empty($review_error)): ?>
-                                <div class="error-message"><?= $review_error ?></div>
-                            <?php endif; ?>
-                            <?php if (!empty($review_success)): ?>
-                                <div class="success-message"><?= $review_success ?></div>
-                            <?php endif; ?>
-                            <form method="POST" action="">
-                                <input type="hidden" name="car_id" value="<?= $row['id'] ?>">
-                                <input type="hidden" name="seller_id" value="<?= $seller_id ?>">
-                                <label for="rating">Valutazione venditore:</label>
-                                <select name="rating" id="rating" required>
-                                    <option value="">-- Seleziona --</option>
-                                    <?php for ($i = 1; $i <= 5; $i++): ?>
-                                        <option value="<?= $i ?>"><?= $i ?></option>
-                                    <?php endfor; ?>
-                                </select>
-                                <label for="review_text">Recensione:</label>
-                                <textarea name="review_text" id="review_text" required placeholder="Scrivi la tua recensione sul venditore..."></textarea>
-                                <button type="submit" name="submit_review">Invia Recensione</button>
-                            </form>
-                        </div>
-                    <?php else: ?>
-                        <?php if (!isset($_SESSION['user_id'])): ?>
-                            <p>Effettua il <a href="../Login.html">login</a> per lasciare una recensione.</p>
-                        <?php else: ?>
-                            <p>Puoi recensire questo venditore solo dopo aver acquistato da lui.</p>
-                        <?php endif; ?>
-                    <?php endif; ?>
-                </div>
-                </div>
-            </div>
         <?php endwhile; ?>
     </div>
 <?php else: ?>
     <p>Nessuna auto trovata.</p>
     <a id="back_to_home" href="areaprivata.php">Torna alla Home</a>
 <?php endif; ?>
-
-    <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const marcaSelect = document.getElementById('marca');
-        const modelloSelect = document.getElementById('modello');
-
-        function aggiornaModelli() {
-            const marca = marcaSelect.value;
-
-            modelloSelect.innerHTML = '<option value="">-- Tutti --</option>';
-
-            if (marca !== '') {
-                fetch(`get_modelli.php?marca=${encodeURIComponent(marca)}`)
-                    .then(response => response.text())
-                    .then(data => {
-                        modelloSelect.innerHTML += data;
-                    });
-            }
-        }
-
-        if (marcaSelect.value !== '') {
-            aggiornaModelli();
-        }
-
-        marcaSelect.addEventListener('change', aggiornaModelli);
-    });
-    </script>
 </body>
 
