@@ -125,11 +125,10 @@ while ($row = pg_fetch_assoc($result)) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Il tuo carrello | AutoMarket</title>
-    <link rel="stylesheet" href="../stilicss/index.css">
     <link rel="stylesheet" href="../stilicss/carrello.css">
 </head>
 <body>
-    <div class="video-background">
+    <div class="video-background">a
         <video autoplay muted loop>
             <source src="../stilicss/Immagini/video.mp4" type="video/mp4">
         </video>
@@ -137,7 +136,7 @@ while ($row = pg_fetch_assoc($result)) {
     
     <header>
         <h1>IL TUO CARRELLO</h1>
-        <p style="font-size: 1.2rem; margin-top: 10px;">Gestisci i tuoi veicoli e procedi al pagamento</p>
+        <p>Gestisci i tuoi veicoli e procedi al pagamento</p>
     </header>
     
     <div class="main-content">
@@ -170,7 +169,7 @@ while ($row = pg_fetch_assoc($result)) {
     </h3>
 </div>
 <div class="button-group">
-    <form action="svuota_carrello.php" method="POST" onsubmit="return confirm('Sei sicuro di voler rimuovere tutte le auto dal carrello?');" style="margin-bottom: 0;">
+    <form action="svuota_carrello.php" method="POST" onsubmit="return confirm('Sei sicuro di voler rimuovere tutte le auto dal carrello?');">
         <button type="submit" class="empty-cart-btn">🗑️ Svuota carrello</button>
     </form>
     <button id="show-payment-btn" class="modify-btn">💳 Paga</button>
@@ -180,26 +179,16 @@ while ($row = pg_fetch_assoc($result)) {
     <div class="back-link">
         <a href="auto.php">⬅ Torna alla ricerca</a>
     </div>
-    </div> <!-- Chiusura del main-content -->
-    
-<div id="payment-section" style="display: none; max-width: 600px; margin: 30px auto; background-color: rgba(255, 255, 255, 0.95); padding: 25px; border-radius: 15px; box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2); color: #333; opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s ease;">
-    <div style="margin-bottom: 25px; text-align: center;">
-        <button id="payment-option-direct" class="modify-btn" style="margin-right: 15px;">💵 Pagamento Diretto</button>
+        <div id="payment-section">
+    <div class="payment-options">
+        <button id="payment-option-direct" class="modify-btn">💵 Pagamento Diretto</button>
         <button id="payment-option-loan" class="modify-btn">🏦 Finanziamento</button>
     </div>
-    <div id="loan-section" style="display: none; margin-top: 20px; padding: 20px; background-color: #f8f9fa; border-radius: 12px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); opacity: 0; transform: translateY(10px); transition: opacity 0.4s ease, transform 0.4s ease;">
-        <div style="margin-bottom: 15px; padding: 10px; background-color: rgba(255,255,255,0.6); border-radius: 8px;">
-            <strong style="color: #2c3e50; font-size: 1.1rem;">Rata mensile:</strong> <span id="monthly-payment" style="font-weight: bold; color: #e74c3c; font-size: 1.1rem;"></span>
-        </div>
-        <div style="margin-bottom: 15px; padding: 10px; background-color: rgba(255,255,255,0.6); border-radius: 8px;">
-            <strong style="color: #2c3e50; font-size: 1.1rem;">Totale da pagare:</strong> <span id="total-payment" style="font-weight: bold; color: #2c3e50; font-size: 1.1rem;"></span>
-        </div>
-        <div style="margin-bottom: 15px; padding: 10px; background-color: rgba(255,255,255,0.6); border-radius: 8px;">
-            <strong style="color: #2c3e50; font-size: 1.1rem;">Totale interessi:</strong> <span id="total-interest" style="font-weight: bold; color: #3498db; font-size: 1.1rem;"></span>
-        </div>
-        <div style="margin-bottom: 15px;">
+    <div id="loan-section">
+
+        <div class="loan-duration-container">
             <label for="loan-duration">Durata del finanziamento (mesi):</label>
-            <select id="loan-duration" style="width: 100%; padding: 8px; margin-top: 5px; border: 1px solid #ddd; border-radius: 6px; box-shadow: inset 0 1px 3px rgba(0,0,0,0.1); transition: all 0.3s ease;" onfocus="this.style.borderColor='#4CAF50'; this.style.boxShadow='0 0 0 3px rgba(76, 175, 80, 0.1)'" onblur="this.style.borderColor='#ddd'; this.style.boxShadow='inset 0 1px 3px rgba(0,0,0,0.1)'">
+            <select id="loan-duration" class="loan-duration-select">
                 <option value="12">12 mesi</option>
                 <option value="24">24 mesi</option>
                 <option value="36">36 mesi</option>
@@ -207,51 +196,81 @@ while ($row = pg_fetch_assoc($result)) {
                 <option value="60">60 mesi</option>
             </select>
         </div>
-        <div style="margin-bottom: 15px;">
+        <div class="loan-downpayment-container">
             <label for="loan-downpayment">Anticipo (€):</label>
-            <input type="number" id="loan-downpayment" min="0" value="0" style="width: 100%; padding: 8px; margin-top: 5px; border: 1px solid #ddd; border-radius: 6px; box-shadow: inset 0 1px 3px rgba(0,0,0,0.1); transition: all 0.3s ease;" onfocus="this.style.borderColor='#4CAF50'; this.style.boxShadow='0 0 0 3px rgba(76, 175, 80, 0.1)'" onblur="this.style.borderColor='#ddd'; this.style.boxShadow='inset 0 1px 3px rgba(0,0,0,0.1)'">
+            <input type="number" id="loan-downpayment" min="0" value="0" class="loan-downpayment-input">
         </div>
         
-        <div style="margin-bottom: 20px; padding: 15px; background-color: rgba(255,255,255,0.8); border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
-            <p style="margin-bottom: 10px; font-weight: bold; color: #2c3e50;">Tipo di ammortamento:</p>
+        <div class="loan-model-container">
+            <p>Tipo di ammortamento:</p>
             
-            <div style="display: flex; gap: 15px;">
-                <label style="display: flex; align-items: center; cursor: pointer; padding: 10px; border-radius: 6px; transition: all 0.3s ease; flex: 1; background-color: #e8f5e9; box-shadow: 0 2px 5px rgba(0,0,0,0.05); border: 1px solid #c8e6c9;" class="loan-model-option" onmouseover="this.style.boxShadow='0 4px 8px rgba(0,0,0,0.1)';this.style.transform='translateY(-2px)'" onmouseout="this.style.boxShadow='0 2px 5px rgba(0,0,0,0.05)';this.style.transform='translateY(0)'">
-                    <input type="radio" name="loan-model" id="french-model" checked style="margin-right: 10px;">
+            <div class="loan-model-options">
+                <label class="loan-model-option loan-model-option-french">
+                    <input type="radio" name="loan-model" id="french-model" checked>
                     <div>
                         <strong>Francese</strong>
-                        <p style="margin: 5px 0 0; font-size: 0.9rem; color: #555;">Rata costante</p>
+                        <p class="loan-model-option-description">Rata costante</p>
                     </div>
                 </label>
                 
-                <label style="display: flex; align-items: center; cursor: pointer; padding: 10px; border-radius: 6px; transition: all 0.3s ease; flex: 1; background-color: #e3f2fd; box-shadow: 0 2px 5px rgba(0,0,0,0.05); border: 1px solid #bbdefb;" class="loan-model-option" onmouseover="this.style.boxShadow='0 4px 8px rgba(0,0,0,0.1)';this.style.transform='translateY(-2px)'" onmouseout="this.style.boxShadow='0 2px 5px rgba(0,0,0,0.05)';this.style.transform='translateY(0)'">
-                    <input type="radio" name="loan-model" id="italian-model" style="margin-right: 10px;">
+                <label class="loan-model-option loan-model-option-italian">
+                    <input type="radio" name="loan-model" id="italian-model">
                     <div>
                         <strong>Italiano</strong>
-                        <p style="margin: 5px 0 0; font-size: 0.9rem; color: #555;">Quota capitale costante</p>
+                        <p class="loan-model-option-description">Quota capitale costante</p>
                     </div>
                 </label>
             </div>
+        </div>    
+        <p id="model-description" class="loan-model-description">Calcolo con ammortamento alla francese: rata costante per tutta la durata del prestito.</p>
+
+        <h2 id="payment-title">💳 Pagamento Diretto</h2>
+        <form action="processo_pagamento.php" method="POST" id="payment-form">
+            <div style="margin-bottom: 20px;">
+                <label for="carta">Numero Carta:</label>
+                <input type="text" id="carta" name="carta" maxlength="16" required pattern="[0-9]{16}" title="Il numero della carta deve essere di 16 cifre" class="payment-form-input">
+                <div id="carta-error" class="payment-form-error">Il numero della carta deve essere esattamente di 16 cifre.</div>
+            </div>
             
-            <p id="model-description" style="margin-top: 10px; font-size: 0.9rem; color: #666; font-style: italic;">Calcolo con ammortamento alla francese: rata costante per tutta la durata del prestito.</p>
-        </div>
-        <div style="background-color: #e8f5e9; padding: 10px; border-radius: 5px; margin-top: 15px;">
+            <div class="payment-form-section">
+                <label for="titolare">Intestatario Carta:</label>
+                <input type="text" id="titolare" name="titolare" required class="payment-form-input">
+            </div>
+            
+            <div class="payment-form-split">
+                <div>
+                    <label for="scadenza">Data Scadenza:</label>
+                    <input type="date" id="scadenza" name="scadenza" required class="payment-form-input">
+                    <div id="scadenza-error" class="scadenza-error">La data di scadenza deve essere futura alla data di oggi.</div>
+                </div>
+                <div>
+                    <label for="cvv">CVV:</label>
+                    <input type="text" id="cvv" name="cvv" maxlength="3" required pattern="[0-9]{3}" title="Il CVV deve essere di 3 cifre" class="payment-form-input">
+                    <div id="cvv-error" class="payment-form-error">Il CVV deve essere esattamente di 3 cifre.</div>
+                </div>
+            </div>
+            
+            <input type="hidden" name="importo" value="<?= $totale_auto + $totale_modifiche ?>">
+            
+            <button type="submit" class="submit-payment-btn">💳 Conferma Pagamento</button>
+        </form>
+        <div class="loan-details">
             <p><strong>Importo totale:</strong> €<span id="loan-total-amount"><?= number_format($totale_auto + $totale_modifiche, 2, ',', '.') ?></span></p>
             <p><strong>Tasso di interesse:</strong> <span id="loan-interest-rate">5.9</span>%</p>
             <p><strong id="monthly-payment-label">Rata mensile costante:</strong> €<span id="loan-monthly-payment">0,00</span></p>
             <p><strong>Importo totale da pagare:</strong> €<span id="loan-total-payment">0,00</span></p>
         </div>
-        <div id="amortization-container" style="margin-top: 15px; max-height: 300px; overflow-y: auto; font-size: 0.9rem;">
-            <h4 style="margin-top: 25px; margin-bottom: 15px; color: #2c3e50; text-align: center; font-size: 1.3rem;">Piano di ammortamento</h4>
-            <div style="max-height: 300px; overflow-y: auto; border: 1px solid #ddd; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-                <table id="amortization-table" style="width: 100%; border-collapse: collapse;">
+        <div id="amortization-container">
+            <h4 class="amortization-container h4">Piano di ammortamento</h4>
+            <div class="amortization-table-wrapper">
+                <table id="amortization-table">
                     <thead>
-                        <tr style="background: linear-gradient(to right, #3498db, #2980b9); color: white;">
-                            <th style="padding: 12px; text-align: left; border-bottom: 1px solid #ddd;">Mese</th>
-                            <th style="padding: 12px; text-align: left; border-bottom: 1px solid #ddd;">Rata</th>
-                            <th style="padding: 12px; text-align: left; border-bottom: 1px solid #ddd;">Quota Capitale</th>
-                            <th style="padding: 12px; text-align: left; border-bottom: 1px solid #ddd;">Quota Interessi</th>
-                            <th style="padding: 12px; text-align: left; border-bottom: 1px solid #ddd;">Debito Residuo</th>
+                        <tr>
+                            <th>Mese</th>
+                            <th>Rata</th>
+                            <th>Quota Capitale</th>
+                            <th>Quota Interessi</th>
+                            <th>Debito Residuo</th>
                         </tr>
                     </thead>
                     <tbody id="amortization-body">
@@ -260,42 +279,43 @@ while ($row = pg_fetch_assoc($result)) {
                 </table>
             </div>
         </div>
-        <button id="apply-loan" class="modify-btn" style="width: 100%; margin-top: 20px; background: linear-gradient(to right, #4CAF50, #2E7D32); color: white; padding: 12px; border: none; border-radius: 8px; font-weight: bold; font-size: 1rem; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 6px 12px rgba(0,0,0,0.15)';" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 4px 6px rgba(0,0,0,0.1)';">🏦 Applica Finanziamento</button>
+        <button id="apply-loan" class="modify-btn">🏦 Applica Finanziamento</button>
     </div>
-    <h2 style="text-align:center; margin-bottom: 20px;" id="payment-title">💳 Pagamento Diretto</h2>
-    <form action="processo_pagamento.php" method="POST" id="payment-form" style="opacity: 0; transform: translateY(10px); transition: opacity 0.4s ease, transform 0.4s ease;">
+    <h2 id="payment-title">💳 Pagamento Diretto</h2>
+    <form action="processo_pagamento.php" method="POST" id="payment-form">
         <div style="margin-bottom: 20px;">
-            <label for="carta" style="display: block; margin-bottom: 8px; font-weight: bold; color: #34495e;">Numero Carta:</label>
-            <input type="text" id="carta" name="carta" maxlength="16" required pattern="[0-9]{16}" title="Il numero della carta deve essere di 16 cifre" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 6px; box-shadow: inset 0 1px 3px rgba(0,0,0,0.1); transition: all 0.3s ease;" onfocus="this.style.borderColor='#4CAF50'; this.style.boxShadow='0 0 0 3px rgba(76, 175, 80, 0.1)'" onblur="this.style.borderColor='#ddd'; this.style.boxShadow='inset 0 1px 3px rgba(0,0,0,0.1)'">
-            <div id="carta-error" style="color: #e74c3c; font-size: 0.9rem; margin-top: 5px; display: none;">Il numero della carta deve essere esattamente di 16 cifre.</div>
+            <label for="carta">Numero Carta:</label>
+            <input type="text" id="carta" name="carta" maxlength="16" required pattern="[0-9]{16}" title="Il numero della carta deve essere di 16 cifre" class="payment-form-input">
+            <div id="carta-error" class="payment-form-error">Il numero della carta deve essere esattamente di 16 cifre.</div>
         </div>
         
-        <div style="margin-bottom: 20px;">
-            <label for="titolare" style="display: block; margin-bottom: 8px; font-weight: bold; color: #34495e;">Intestatario Carta:</label>
-            <input type="text" id="titolare" name="titolare" required style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 6px; box-shadow: inset 0 1px 3px rgba(0,0,0,0.1); transition: all 0.3s ease;" onfocus="this.style.borderColor='#4CAF50'; this.style.boxShadow='0 0 0 3px rgba(76, 175, 80, 0.1)'" onblur="this.style.borderColor='#ddd'; this.style.boxShadow='inset 0 1px 3px rgba(0,0,0,0.1)'">
+        <div class="payment-form-section">
+            <label for="titolare">Intestatario Carta:</label>
+            <input type="text" id="titolare" name="titolare" required class="payment-form-input">
         </div>
         
-        <div style="display: flex; gap: 15px; margin-bottom: 20px;">
-            <div style="flex: 1;">
-                <label for="scadenza" style="display: block; margin-bottom: 8px; font-weight: bold; color: #34495e;">Data Scadenza:</label>
-                <input type="date" id="scadenza" name="scadenza" required style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 6px; box-shadow: inset 0 1px 3px rgba(0,0,0,0.1); transition: all 0.3s ease;" onfocus="this.style.borderColor='#4CAF50'; this.style.boxShadow='0 0 0 3px rgba(76, 175, 80, 0.1)'" onblur="this.style.borderColor='#ddd'; this.style.boxShadow='inset 0 1px 3px rgba(0,0,0,0.1)'">
-                <div id="scadenza-error" style="color: #e74c3c; font-size: 0.9rem; margin-top: 5px; display: none;">La data di scadenza deve essere futura alla data di oggi.</div>
+        <div class="payment-form-split">
+            <div>
+                <label for="scadenza">Data Scadenza:</label>
+                <input type="date" id="scadenza" name="scadenza" required class="payment-form-input">
+                <div id="scadenza-error" class="scadenza-error">La data di scadenza deve essere futura alla data di oggi.</div>
             </div>
-            <div style="flex: 1;">
-                <label for="cvv" style="display: block; margin-bottom: 8px; font-weight: bold; color: #34495e;">CVV:</label>
-                <input type="text" id="cvv" name="cvv" maxlength="3" required pattern="[0-9]{3}" title="Il CVV deve essere di 3 cifre" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 6px; box-shadow: inset 0 1px 3px rgba(0,0,0,0.1); transition: all 0.3s ease;" onfocus="this.style.borderColor='#4CAF50'; this.style.boxShadow='0 0 0 3px rgba(76, 175, 80, 0.1)'" onblur="this.style.borderColor='#ddd'; this.style.boxShadow='inset 0 1px 3px rgba(0,0,0,0.1)'">
-                <div id="cvv-error" style="color: #e74c3c; font-size: 0.9rem; margin-top: 5px; display: none;">Il CVV deve essere esattamente di 3 cifre.</div>
+            <div>
+                <label for="cvv">CVV:</label>
+                <input type="text" id="cvv" name="cvv" maxlength="3" required pattern="[0-9]{3}" title="Il CVV deve essere di 3 cifre" class="payment-form-input">
+                <div id="cvv-error" class="payment-form-error">Il CVV deve essere esattamente di 3 cifre.</div>
             </div>
         </div>
         
         <input type="hidden" name="importo" value="<?= $totale_auto + $totale_modifiche ?>">
         
-        <button type="submit" style="background: linear-gradient(to right, #4CAF50, #2E7D32); color: white; padding: 14px 20px; border: none; border-radius: 8px; cursor: pointer; font-size: 16px; width: 100%; font-weight: bold; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 6px 12px rgba(0,0,0,0.15)';" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 4px 6px rgba(0,0,0,0.1)';">💳 Conferma Pagamento</button>
+        <button type="submit" class="submit-payment-btn">💳 Conferma Pagamento</button>
     </form>
 </div>
     <footer>
         <p>&copy; 2025 AutoMarket - Tutti i diritti riservati</p>
     </footer>
+    </div> <!-- Chiusura del main-content -->
     <script>
     document.getElementById('show-payment-btn').addEventListener('click', function () {
         const section = document.getElementById('payment-section');
@@ -332,7 +352,7 @@ while ($row = pg_fetch_assoc($result)) {
     const paymentTitle = document.getElementById('payment-title');
     
     document.getElementById('payment-option-direct').addEventListener('click', function() {
-        // Nascondi la sezione prestito con transizione
+        // Nascondi la sezione prestito
         loanSection.style.opacity = '0';
         loanSection.style.transform = 'translateY(10px)';
         
@@ -357,9 +377,9 @@ while ($row = pg_fetch_assoc($result)) {
             existingLoanField.remove();
         }
         
-        // Rimuovi il messaggio di conferma del finanziamento se presente
-        const confirmationMessages = paymentForm.querySelectorAll('div[style*="background-color: #e8f5e9"]');
-        confirmationMessages.forEach(msg => msg.remove());
+        // Rimuovi eventuali messaggi di conferma precedenti
+        const existingConfirmations = loanSection.querySelectorAll('div[data-confirmation="true"]');
+        existingConfirmations.forEach(msg => msg.remove());
     });
     
     document.getElementById('payment-option-loan').addEventListener('click', function() {
@@ -381,21 +401,23 @@ while ($row = pg_fetch_assoc($result)) {
         paymentTitle.innerHTML = '🏦 Finanziamento';
         document.getElementById('payment-option-loan').classList.add('active-option');
         document.getElementById('payment-option-direct').classList.remove('active-option');
-        calculateLoan();
+        
+        // Rimuovi eventuali messaggi di conferma precedenti
+        const existingConfirmations = loanSection.querySelectorAll('div[data-confirmation="true"]');
+        existingConfirmations.forEach(msg => msg.remove());
     });
     
     // Aggiungi classe active-option al pulsante di pagamento diretto all'inizio
     document.getElementById('payment-option-direct').classList.add('active-option');
     
     // Mostra automaticamente il form di pagamento all'inizio
-    setTimeout(() => {
-        paymentForm.style.opacity = '1';
-        paymentForm.style.transform = 'translateY(0)';
-    }, 500);
+    paymentForm.style.display = 'block';
+    paymentForm.style.opacity = '1';
+    paymentForm.style.transform = 'translateY(0)';
     
     // Funzione per calcolare il finanziamento in base al modello selezionato
     function calculateLoan() {
-        const totalAmount = <?= $totale_auto + $totale_modifiche ?>;
+        const totalAmount = <?= $totale_auto + $totale_modifiche ?>;;
         const duration = parseInt(document.getElementById('loan-duration').value);
         const downPayment = parseFloat(document.getElementById('loan-downpayment').value) || 0;
         const interestRate = 5.9; // Tasso di interesse fisso del 5.9%
@@ -419,8 +441,17 @@ while ($row = pg_fetch_assoc($result)) {
             document.getElementById('model-description').textContent = "Calcolo con ammortamento alla francese: rata costante per tutta la durata del prestito.";
             document.getElementById('monthly-payment-label').textContent = "Rata mensile costante:";
             
+            // Aggiorna i dettagli del prestito
+            document.getElementById('loan-monthly-payment').textContent = monthlyPayment.toFixed(2).replace('.', ',');
+            document.getElementById('loan-total-payment').textContent = totalPayment.toFixed(2).replace('.', ',');
+            document.getElementById('loan-interest-rate').textContent = interestRate.toFixed(1);
+            
             // Genera la tabella di ammortamento francese
             generateFrenchAmortizationTable(loanAmount, monthlyRate, monthlyPayment, duration);
+            
+            // Rimuovi eventuali messaggi di conferma precedenti
+            const existingConfirmations = loanSection.querySelectorAll('div[data-confirmation="true"]');
+            existingConfirmations.forEach(msg => msg.remove());
         } else {
             // Modello Italiano (quota capitale costante)
             // La quota capitale è costante = loanAmount / duration
@@ -464,6 +495,10 @@ while ($row = pg_fetch_assoc($result)) {
     
     // Esegui il calcolo all'avvio della pagina
     calculateLoan();
+
+    // Mostra il form di pagamento diretto di default
+    document.getElementById('loan-section').style.display = 'none';
+    document.getElementById('payment-form').style.display = 'block';
     
     // Funzione per generare la tabella di ammortamento francese (rata costante)
     function generateFrenchAmortizationTable(loanAmount, monthlyRate, monthlyPayment, duration) {

@@ -49,12 +49,514 @@ header {
 
 header h1 {
     font-size: 3rem;
+}
+
+/* Inline styles from carrello.php */
+header p {
+    font-size: 1.2rem;
+    margin-top: 10px;
+}
+
+.button-group form {
+    margin-bottom: 0;
+}
+
+#payment-section {
+    display: none;
+    max-width: 600px;
+    margin: 30px auto;
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+    color: #333;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+#payment-section .modify-btn {
+    margin-right: 15px;
+}
+
+#loan-section {
+    display: none;
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+#loan-section > div {
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: rgba(255,255,255,0.6);
+    border-radius: 8px;
+}
+
+#loan-section strong {
+    color: #4CAF50;
+    font-size: 1.1rem;
+}
+
+#loan-section span {
     font-weight: bold;
+    font-size: 1.1rem;
+}
+
+#loan-section span[id*='payment'] {
+    color: #e74c3c;
+}
+
+#loan-section span[id*='total'] {
+    color: #2c3e50;
+}
+
+#loan-section span[id*='interest'] {
+    color: #3498db;
+}
+
+#payment-title {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#payment-form {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 25px;
+    border-radius: 12px;
+    color: white;
+}
+
+#payment-form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #f0f0f0;
+}
+
+.loan-details {
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 15px;
+    border-radius: 10px;
+    margin-top: 15px;
+    color: white;
+    border: 1px solid #4CAF50;
+}
+
+.loan-details p {
     margin-bottom: 10px;
-    font-family: 'Arial', sans-serif;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    color: #f0f0f0;
+}
+
+/* Amortization Table Styles */
+.amortization-container {
+    margin-top: 15px;
+    max-height: 300px;
+    overflow-y: auto;
+    font-size: 0.9rem;
+}
+
+.amortization-container h4 {
+    margin-top: 25px;
+    margin-bottom: 15px;
+    color: #2c3e50;
+    text-align: center;
+    font-size: 1.3rem;
+}
+
+.amortization-table-wrapper {
+    max-height: 300px;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+#amortization-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#amortization-table thead tr {
+    background: linear-gradient(to right, #3498db, #2980b9);
+    color: white;
+}
+
+#amortization-table th {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Payment Form Styles */
+.payment-form-section {
+    margin-bottom: 20px;
+}
+
+.payment-form-section label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #34495e;
+}
+
+.payment-form-input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #555;
+    border-radius: 6px;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.3);
+    transition: all 0.3s ease;
+}
+
+.payment-form-input:focus {
+    border-color: #4CAF50;
+    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.3);
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.payment-form-error {
+    color: #ff6b6b;
+    font-size: 0.9rem;
+    margin-top: 5px;
+    display: none;
+    background-color: rgba(255, 0, 0, 0.2);
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid #ff6b6b;
+}
+
+.scadenza-error {
+    color: #ff6b6b;
+    font-size: 0.9rem;
+    margin-top: 5px;
+    display: none;
+    background-color: rgba(255, 0, 0, 0.2);
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid #ff6b6b;
+}
+
+.payment-form-split {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.payment-form-split > div {
+    flex: 1;
+}
+
+.submit-payment-btn {
+    background: linear-gradient(to right, #4CAF50, #2E7D32);
+    color: white;
+    padding: 14px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+    font-weight: bold;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+.submit-payment-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+/* Loan Model Selection Styles */
+.loan-model-container {
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: rgba(255,255,255,0.8);
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.loan-model-container p {
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+.loan-model-options {
+    display: flex;
+    gap: 15px;
+}
+
+.loan-model-option {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    flex: 1;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.loan-model-option:hover {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transform: translateY(-2px);
+}
+
+.loan-model-option input[type='radio'] {
+    margin-right: 10px;
+}
+
+.loan-model-option-french {
+    background-color: #e8f5e9;
+    border: 1px solid #c8e6c9;
+}
+
+.loan-model-option-italian {
+    background-color: #e3f2fd;
+    border: 1px solid #bbdefb;
+}
+
+.loan-model-option-description {
+    margin: 5px 0 0;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.loan-model-description {
+    margin-top: 10px;
+    font-size: 0.9rem;
+    color: #666;
+    font-style: italic;
+}
+
+/* Apply Loan Button */
+#apply-loan {
+    width: 100%;
+    margin-top: 20px;
+    background: linear-gradient(to right, #4CAF50, #2E7D32);
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 1rem;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+#apply-loan:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+/*Barra di ricerca*/
+
+.search-section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  text-align: center;
+  background-color: white;
+}
+
+.hero-banner {
+  margin-bottom: 30px;
+}
+
+.hero-banner h1 {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #2c3e50;
+  margin-bottom: 10px;
+}
+
+.hero-banner p {
+  font-size: 1.2rem;
+  color: #7f8c8d;
+}
+
+.search-container {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.search-form {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  align-items: center;
+}
+
+.search-group {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.search-group label {
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: #34495e;
+  margin-bottom: 5px;
+}
+.search-group select,
+.search-group input {
+  width: 100%;
+  padding: 12px;
+  font-size: 1rem;
+  border: 1px solid #bdc3c7;
+  border-radius: 6px;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+.search-button {
+  background-color: #474747;
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.search-button:hover {
+  background-color:black;
+}
+
+/*Fine Barra di ricerca*/
+#login{
+  text-decoration: none;
+  font-size: 3rem;
+  color: white;
+}
+
+main {
+  margin-top: 150px; /* Sposta il contenuto sotto l'header */
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #2a2a2a;
+    margin-top: 150px; /* Aggiunge spazio per evitare che il contenuto si sovrapponga all'header */
+}
+
+.video-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2; /* Mette il video dietro gli altri elementi */
+  overflow: hidden;
+}
+
+.video-background video {
+  min-width: 100%;
+  min-height: 100%;
+  object-fit: cover; /* Copre l'intera area senza deformare il video */
+  filter: brightness(0.7); /* Opzionale: riduce la luminosità per migliorare la leggibilità */
+}
+
+.logo {
+    text-align: center;
+    font-family:'Times New Roman', Times, serif;
+    font-size: 30rem;
+}
+
+/* invito acquisto prova*/
+.cliente {
+    color: #fff;
+    text-align: center;
+    padding: 100px 0;
+    font-weight: bold;
+    align-items: center;
+}
+
+.cliente h1 {
+  margin-left: auto;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 4rem;
+}
+
+.venditore {
+    color:#fff;
+    text-align: center;
+    padding: 100px 0;
+    font-weight: bold;
+    align-items: center;
+}
+
+.venditore h1 {
+  margin-left: auto;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 4rem;
+}
+
+/* --------------Barra di navigazione -------------*/
+.navbar {
+  color: white;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.navbar a {
+  color: white;
+  text-align: center;
+  text-decoration: none;
+}
+
+.navbar ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+@media (max-width: 768px) {
+  .navbar {
+      flex-direction: column;
+      align-items: flex-start;
+  }
+  .navbar ul {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+  }
+  .navbar ul li {
+      width: 100%;
+  }
+  .navbar ul li a {
+      width: 100%;
+      text-align: center;
+  }
+  .navbar ul li ul {
+      position: static;
+      display: none;
+  }
+  .navbar ul li:hover > ul {
+      display: block;
+  }
 }
 
 /* Contenuto principale */
