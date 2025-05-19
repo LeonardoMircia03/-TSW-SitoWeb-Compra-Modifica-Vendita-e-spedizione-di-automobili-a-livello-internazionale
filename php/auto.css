@@ -200,6 +200,98 @@ header h1 a {
     justify-content: space-between;
     margin-bottom: 6px;
 }
+
+/* Hero Section */
+.hero-section {
+    background: linear-gradient(120deg,#00bfa5 60%,#23272f 100%);
+    color: #fff;
+    padding: 60px 0 40px 0;
+    text-align: center;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+}
+
+.hero-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+}
+
+.hero-section p:first-of-type {
+    font-size: 1.25rem;
+    color: #e0f7fa;
+    margin-bottom: 8px;
+}
+
+.hero-section p:last-of-type {
+    font-size: 1.1rem;
+    color: #fff;
+    max-width: 620px;
+    margin: 0 auto;
+}
+
+/* Why Us Section */
+.why-us-section {
+    background: #fff;
+    color: #23272f;
+    max-width: 1100px;
+    margin: 40px auto 0 auto;
+    border-radius: 18px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+    padding: 32px 28px 18px 28px;
+    text-align: center;
+}
+
+.why-us-section h3 {
+    font-size: 1.5rem;
+    color: #00bfa5;
+    margin-bottom: 18px;
+}
+
+.why-us-section > div {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 32px;
+}
+
+.why-us-section > div > div {
+    flex: 1 1 220px;
+    min-width: 180px;
+}
+
+.why-us-section > div > div > span:first-of-type {
+    font-size: 2.1rem;
+}
+
+.why-us-section > div > div > p {
+    font-weight: 500;
+    margin-bottom: 4px;
+}
+
+.why-us-section > div > div > span:last-of-type {
+    font-size: 0.98rem;
+    color: #555;
+}
+
+.why-us-section .extra-features {
+    flex: 1 1 220px;
+    min-width: 180px;
+}
+
+.why-us-section .extra-features > span:first-of-type {
+    font-size: 2.1rem;
+}
+
+.why-us-section .extra-features > p {
+    font-weight: 500;
+    margin-bottom: 4px;
+}
+
+.why-us-section .extra-features > span:last-of-type {
+    font-size: 0.98rem;
+    color: #555;
+}
 .reviewer-name {
     font-size: 1.07rem;
     font-weight: 500;

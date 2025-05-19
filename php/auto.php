@@ -119,43 +119,38 @@ $totale_carrello = isset($_SESSION['carrello']) ? count($_SESSION['carrello']) :
     </div>
 </header>
 
-<!-- HERO SECTION -->
-<section class="hero-section" style="background: linear-gradient(120deg,#00bfa5 60%,#23272f 100%); color: #fff; padding: 60px 0 40px 0; text-align: center; box-shadow: 0 8px 32px rgba(0,0,0,0.18);">
-    <h2 style="font-size: 2.5rem; margin-bottom: 10px; font-weight: 700; letter-spacing: 1.5px;">Benvenuto su AutoMarket</h2>
-    <p style="font-size: 1.25rem; color: #e0f7fa; margin-bottom: 8px;">Il tuo portale di fiducia per comprare, vendere e recensire auto in tutta Italia</p>
-    <p style="font-size: 1.1rem; color: #fff; max-width: 620px; margin: 0 auto;">Scopri centinaia di auto, leggi le recensioni dei venditori e trova la tua occasione perfetta in pochi click!</p>
+<section class="hero-section">
+    <h2>Benvenuto su AutoMarket</h2>
+    <p>Il tuo portale di fiducia per comprare, vendere e recensire auto in tutta Italia</p>
+    <p>Scopri centinaia di auto, leggi le recensioni dei venditori e trova la tua occasione perfetta in pochi click!</p>
 </section>
 
-<!-- FINE HERO SECTION -->
-    
-
-    <!-- SEZIONE MOTIVAZIONALE -->
-<section class="why-us-section" style="background: #fff; color: #23272f; max-width: 1100px; margin: 40px auto 0 auto; border-radius: 18px; box-shadow: 0 4px 24px rgba(0,0,0,0.10); padding: 32px 28px 18px 28px; text-align: center;">
-    <h3 style="font-size: 1.5rem; color: #00bfa5; margin-bottom: 18px;">Perché scegliere AutoMarket?</h3>
-    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 32px;">
-        <div style="flex:1 1 220px; min-width: 180px;">
-            <span style="font-size: 2.1rem;">🔒</span>
-            <p style="font-weight: 500; margin-bottom: 4px;">Transazioni Sicure</p>
-            <span style="font-size: 0.98rem; color: #555;">Pagamenti protetti e utenti verificati</span>
+<section class="why-us-section">
+    <h3>Perché scegliere AutoMarket?</h3>
+    <div>
+        <div class="extra-features">
+            <span>🔒</span>
+            <p>Transazioni Sicure</p>
+            <span>Pagamenti protetti e utenti verificati</span>
         </div>
-        <div style="flex:1 1 220px; min-width: 180px;">
-            <span style="font-size: 2.1rem;">⭐</span>
-            <p style="font-weight: 500; margin-bottom: 4px;">Recensioni Autentiche</p>
-            <span style="font-size: 0.98rem; color: #555;">Solo chi ha acquistato può recensire</span>
+        <div class="extra-features">
+            <span>⭐</span>
+            <p>Recensioni Autentiche</p>
+            <span>Solo chi ha acquistato può recensire</span>
         </div>
-        <div style="flex:1 1 220px; min-width: 180px;">
-            <span style="font-size: 2.1rem;">🚗</span>
-            <p style="font-weight: 500; margin-bottom: 4px;">Ampia Scelta</p>
-            <span style="font-size: 0.98rem; color: #555;">Auto per ogni esigenza e budget</span>
+        <div class="extra-features">
+            <span>🚗</span>
+            <p>Ampia Scelta</p>
+            <span>Auto per ogni esigenza e budget</span>
         </div>
-        <div style="flex:1 1 220px; min-width: 180px;">
-            <span style="font-size: 2.1rem;">💬</span>
-            <p style="font-weight: 500; margin-bottom: 4px;">Supporto Dedicato</p>
-            <span style="font-size: 0.98rem; color: #555;">Assistenza rapida e cordiale</span>
+        <div class="extra-features">
+            <span>💬</span>
+            <p>Supporto Dedicato</p>
+            <span>Assistenza rapida e cordiale</span>
         </div>
     </div>
 </section>
-<!-- FINE SEZIONE MOTIVAZIONALE -->
+
 
 <div class="search-bar-container">
         <form method="GET" action="auto.php">
@@ -200,9 +195,8 @@ $totale_carrello = isset($_SESSION['carrello']) ? count($_SESSION['carrello']) :
     </div>
 
     <?php if ($result && pg_num_rows($result) > 0): ?>
-    <div class="car-results" style="margin-top: 32px;">
+    <div class="car-results">
 <!-- Effetto fade-in sulle card -->
-<link rel="stylesheet" href="auto.css">
 <?php while ($row = pg_fetch_assoc($result)): ?>
     
 <div class="car-item car-card">
