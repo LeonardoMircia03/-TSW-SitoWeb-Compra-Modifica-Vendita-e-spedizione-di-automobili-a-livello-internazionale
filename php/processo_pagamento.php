@@ -19,21 +19,20 @@ if (
 
 $utente_id = $_SESSION['user_id'];
 
-// Svuota il carrello dell'utente nel database
-$query = "DELETE FROM carrello WHERE utente_id = $1";
-$result = pg_query_params($dbconnect, $query, array($utente_id));
+// Verifica se ci sono auto nel carrello
+$query_carrello = "
+    SELECT c.auto_id, a.utente_id, a.prezzo 
+    FROM carrello c 
+    JOIN auto a ON c.auto_id = a.id 
+    WHERE c.utente_id = $1
+";
+$result_carrello = pg_query_params($dbconnect, $query_carrello, array($utente_id));
 
-if (!$result) {
-    // Errore durante la rimozione
-    die("Errore durante il pagamento. Riprova.");
-}
-
-// Svuota anche il carrello nella sessione per aggiornare il contatore
-if (isset($_SESSION['carrello'])) {
-    $_SESSION['carrello'] = [];
+if (!$result_carrello || pg_num_rows($result_carrello) == 0) {
+    die("Nessuna auto trovata nel carrello. Riprova.");
 }
 
 // Reindirizza a una pagina di conferma
-header("Location: pagamento_successo.php");
+header("Location: pagamento_successo.php?success=1");
 exit;
 ?>

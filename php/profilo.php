@@ -67,9 +67,9 @@ $query_acquistate = "
     FROM auto 
     JOIN transazione ON auto.id = transazione.auto_id
     JOIN utenti ON transazione.venditore_id = utenti.id
-    WHERE transazione.acquirente_id = $user_id
+    WHERE transazione.acquirente_id = $1
 ";
-$result_acquistate = pg_query($dbconnect, $query_acquistate);
+$result_acquistate = pg_query_params($dbconnect, $query_acquistate, array($user_id));
 ?>
 
 <!DOCTYPE html>
@@ -218,7 +218,7 @@ $result_acquistate = pg_query($dbconnect, $query_acquistate);
                 <?php endwhile; ?>
             <?php else: ?>
                 <div class="no-cars">
-                    <p>Non hai ancora venduto nessuna auto.</p>
+                    <p>Non hai auto vendute.</p>
                 </div>
             <?php endif; ?>
         </div>
@@ -234,17 +234,21 @@ $result_acquistate = pg_query($dbconnect, $query_acquistate);
                                 <span class="model-label">Modello:</span> <span class="model"><?= htmlspecialchars($row['modello']) ?></span><br>
                                 <span class="info">Anno: <?= $row['anno'] ?> | Città: <?= htmlspecialchars($row['citta']) ?></span><br>
                                 <p>Prezzo: € <?= number_format($row['prezzo'], 2, ',', '.') ?></p>
-                                <p class="seller-name">Venditore: <?= htmlspecialchars($row['nome_venditore']) ?></p>
+                                <p>Venditore: <?= htmlspecialchars($row['nome_venditore']) ?></p>
                             </div>
                         </div>
                     </div>
                 <?php endwhile; ?>
             <?php else: ?>
                 <div class="no-cars">
-                    <p>Non hai ancora acquistato nessuna auto.</p>
+                    <p>Non hai auto acquistate.</p>
                 </div>
             <?php endif; ?>
         </div>
+
+        <?php pg_free_result($result_in_vendita); ?>
+        <?php pg_free_result($result_vendute); ?>
+        <?php pg_free_result($result_acquistate); ?>
     </div>
 </body>
 </html>
