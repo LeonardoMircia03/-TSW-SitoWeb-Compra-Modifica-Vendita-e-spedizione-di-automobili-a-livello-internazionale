@@ -50,9 +50,17 @@ if (!empty($prezzo)) {
     $params[] = $prezzo;
 }
 
-$query = "SELECT auto.*, utenti.username AS nome_venditore FROM auto JOIN utenti ON auto.utente_id = utenti.id";
+$query = "SELECT auto.*, utenti.username AS nome_venditore 
+    FROM auto 
+    JOIN utenti ON auto.utente_id = utenti.id 
+    WHERE auto.id NOT IN (
+        SELECT auto_id 
+        FROM transazione
+    )
+    AND auto.utente_id != $1";
+$params = array_merge($params, array($user_id));
 if (!empty($where_clauses)) {
-    $query .= " WHERE " . implode(" AND ", $where_clauses);
+    $query .= " AND " . implode(" AND ", $where_clauses);
 }
 
 $result = pg_query_params($dbconnect, $query, $params);
