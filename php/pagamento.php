@@ -261,10 +261,10 @@ if (!$result || pg_num_rows($result) == 0) {
         // Calcola iniziale
         updateLoan();
         </script>
-        <form id="payment-form" action="processa_pagamento.php" method="POST" style="margin-top:30px;">
+        <form id="payment-form" action="processo_pagamento.php" method="POST" style="margin-top:30px;">
             <div class="form-group">
                 <label for="card-number">Numero carta:</label>
-                <input type="text" id="card-number" name="card_number" placeholder="1234 5678 9012 3456" required>
+                <input type="text" id="card-number" name="carta" placeholder="1234 5678 9012 3456" required>
                 <span class="error" id="card-number-error"></span>
             </div>
             <div class="form-group">
@@ -274,7 +274,7 @@ if (!$result || pg_num_rows($result) == 0) {
             </div>
             <div class="form-group">
                 <label for="expiry-date">Data di scadenza:</label>
-                <input type="text" id="expiry-date" name="expiry_date" placeholder="MM/YY" required>
+                <input type="text" id="expiry-date" name="scadenza" placeholder="MM/YY" required>
                 <span class="error" id="expiry-date-error"></span>
             </div>
             <div class="form-group">
