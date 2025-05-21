@@ -97,11 +97,11 @@
             <div class="sidebar-content">
                 <h2>Informazioni</h2>
                 <div class="navbar">
-                    <a href="../about.html">About Us</a> </br>
-                    <a href="sell_cars.php">Sell Cars</a></br>
-                    <a href="auto.php">Cerca Auto </a></br>
-                    <a href="../FAQ.html">FAQ</a></br>
-                    <a href="../Contattaci.html">Contact</a>
+                    <a href="about.html">About Us</a> </br>
+                    <a href="php/sell_cars.php">Sell Cars</a></br>
+                    <a href="php/auto.php">Cerca Auto </a></br>
+                    <a href="FAQ.html">FAQ</a></br>
+                    
                 </div>
             </div>
             <a href="#" id="btnbarra" class="btn" onclick="toggleSidebar()">Chiudi</a>
@@ -129,9 +129,8 @@
         <ul>
             <li><h3>Richiedi una modifica</a> ci pensiamo noi !</h3></li>
             <li><h3>La vendita è sempre assicurata</h3> </li>
-            <li><h3>Consegna <a href="index.html">tracciata</a> del veicolo direttametne a casa tua</h3></li>
-            <li><h3>Modalità di pagamento cash o <a href="index.html">prestito</a></h3></li>
-            <li><h3>Sistema di <a href="index.html">rating</a> dei venditori</h3></li>
+            <li><h3>Modalità di pagamento cash o prestito</h3></li>
+            <li><h3>Sistema di rating dei venditori</h3></li>
 
         </ul>
     </div>
@@ -169,6 +168,18 @@
             }
 
             marcaSelect.addEventListener('change', aggiornaModelli);
+        });
+        </script>
+
+        <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const searchForm = document.querySelector('.search-form');
+            if (searchForm) {
+                searchForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    window.location.href = 'Login.html';
+                });
+            }
         });
         </script>
     </body>

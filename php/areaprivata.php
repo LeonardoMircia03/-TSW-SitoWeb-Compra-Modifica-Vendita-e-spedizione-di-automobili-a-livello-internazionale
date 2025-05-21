@@ -112,7 +112,7 @@ $sellerReviews = $reviewModel->getSellerReviews($_SESSION['user_id']);
                     <a href="auto.php">Cerca Auto </a></br>
                     <a href="profilo.php">Le Mie Auto</a></br>
                     <a href="../FAQ.html">FAQ</a></br>
-                    <a href="../Contattaci.html">Contact</a>
+                    
                 </div>
             </div>
             <a href="#" id="btnbarra" class="btn" onclick="toggleSidebar()">Chiudi</a>
@@ -127,17 +127,16 @@ $sellerReviews = $reviewModel->getSellerReviews($_SESSION['user_id']);
             <h1>Vendi la tua Auto </h1>
             <br>
         </div>
+    <div class="vantaggi" >
+        <h1> I nostri servizi : </h1>
+        <ul>
+            <li><h3>Richiedi una modifica</a> ci pensiamo noi !</h3></li>
+            <li><h3>La vendita è sempre assicurata</h3> </li>
+            <li><h3>Modalità di pagamento cash o prestito</h3></li>
+            <li><h3>Sistema di rating dei venditori</h3></li>
 
-        <div class="vantaggi">
-            <h1> I nostri servizi : </h1>
-            <ul>
-                <li><h3>Richiedi una <a href="modifiche.html">modifica</a> ci pensiamo noi !</h3></li>
-                <li><h3>La vendita è sempre assicurata</h3></li>
-                <li><h3>Consegna <a href="index.html">tracciata</a> del veicolo direttametne a casa tua</h3></li>
-                <li><h3>Modalità di pagamento cash o <a href="index.html">prestito</a></h3></li>
-                <li><h3>Sistema di <a href="index.html">rating</a> dei venditori</h3></li>
-            </ul>
-        </div>
+        </ul>
+    </div>
 
         <div class="seller-reviews" style="background-color: #f9f9f9; border-radius: 10px; padding: 20px; margin-top: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
             <h2 style="color: #333; border-bottom: 2px solid #007bff; padding-bottom: 10px; margin-bottom: 15px;">Le tue recensioni</h2>
