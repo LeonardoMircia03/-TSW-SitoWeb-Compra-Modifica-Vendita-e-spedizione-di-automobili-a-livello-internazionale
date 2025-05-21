@@ -6,6 +6,7 @@ require_once('review_model.php');
 $utente_loggato = null;
 $review_error = '';
 $review_success = '';
+$user_id = null;
 
 if (isset($_SESSION['user_id'])) {
     $user_id = $_SESSION['user_id'];
@@ -50,20 +51,33 @@ if (!empty($prezzo)) {
     $params[] = $prezzo;
 }
 
-$query = "SELECT auto.*, utenti.username AS nome_venditore 
-    FROM auto 
-    JOIN utenti ON auto.utente_id = utenti.id 
-    WHERE auto.id NOT IN (
-        SELECT auto_id 
-        FROM transazione
-    )
-    AND auto.utente_id != $1";
-$params = array_merge($params, array($user_id));
-if (!empty($where_clauses)) {
-    $query .= " AND " . implode(" AND ", $where_clauses);
+if ($user_id !== null) {
+    $query = "SELECT auto.*, utenti.username AS nome_venditore 
+        FROM auto 
+        JOIN utenti ON auto.utente_id = utenti.id 
+        WHERE auto.id NOT IN (
+            SELECT auto_id 
+            FROM transazione
+        )
+        AND auto.utente_id != $1";
+    $params = array_merge($params, array($user_id));
+    if (!empty($where_clauses)) {
+        $query .= " AND " . implode(" AND ", $where_clauses);
+    }
+    $result = pg_query_params($dbconnect, $query, $params);
+} else {
+    $query = "SELECT auto.*, utenti.username AS nome_venditore 
+        FROM auto 
+        JOIN utenti ON auto.utente_id = utenti.id 
+        WHERE auto.id NOT IN (
+            SELECT auto_id 
+            FROM transazione
+        )";
+    if (!empty($where_clauses)) {
+        $query .= " AND " . implode(" AND ", $where_clauses);
+    }
+    $result = pg_query($dbconnect, $query);
 }
-
-$result = pg_query_params($dbconnect, $query, $params);
 
 // Inizializza il modello recensioni
 require_once 'review_model.php';

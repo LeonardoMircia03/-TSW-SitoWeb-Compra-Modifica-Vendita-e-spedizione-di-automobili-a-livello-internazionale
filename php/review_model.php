@@ -41,13 +41,16 @@ class ReviewModel {
         return $result !== false;
     }
 
-    // Get average rating for a seller
+    // Get average rating and total reviews for a seller
     public function getSellerAverageRating($sellerId)
     {
-        $query = "SELECT AVG(rating) as average_rating FROM user_car_reviews WHERE seller_id = $1";
+        $query = "SELECT AVG(rating) as avg_rating, COUNT(*) as total_reviews FROM user_car_reviews WHERE seller_id = $1";
         $result = pg_query_params($this->conn, $query, array($sellerId));
         $row = pg_fetch_assoc($result);
-        return $row && $row['average_rating'] !== null ? floatval($row['average_rating']) : null;
+        return [
+            'avg_rating' => $row && $row['avg_rating'] !== null ? floatval($row['avg_rating']) : 0,
+            'total_reviews' => $row ? intval($row['total_reviews']) : 0
+        ];
     }
 
 

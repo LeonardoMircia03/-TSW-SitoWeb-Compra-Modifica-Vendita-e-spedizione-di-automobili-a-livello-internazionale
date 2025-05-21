@@ -2,6 +2,7 @@
 session_start();
 require_once 'config.php';
 require_once 'review_model.php';
+require_once 'utils_acquisti.php';
 
 // Check if user is logged in
 if (!isset($_SESSION['user_id'])) {
@@ -21,12 +22,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     try {
-        $db = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
-        if ($db->connect_error) {
-            throw new Exception("Connessione al database fallita: " . $db->connect_error);
+        // Usa la connessione già creata in config.php
+        global $dbconnect;
+        if (!$dbconnect) {
+            throw new Exception("Connessione al database fallita");
         }
 
-        $reviewModel = new ReviewModel($db);
+        // Controllo: l'utente ha acquistato da questo venditore?
+        if (!utenteHaAcquistatoDaVenditore($dbconnect, $_SESSION['user_id'], $sellerId)) {
+            echo "<script>alert('Puoi recensire solo venditori da cui hai acquistato.'); window.location.href='profilo.php';</script>";
+            exit;
+        }
+
+        $reviewModel = new ReviewModel($dbconnect);
         $result = $reviewModel->submitReview(
             $sellerId, 
             $_SESSION['user_id'], 
@@ -36,18 +44,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         );
 
         if ($result) {
-            echo json_encode([
-                'success' => true, 
-                'message' => 'Recensione inviata con successo!'
-            ]);
+            header('Location: profilo.php?review=success');
+            exit;
         } else {
-            echo json_encode([
-                'success' => false, 
-                'message' => 'Impossibile inviare la recensione'
-            ]);
+            echo "<script>alert('Impossibile inviare la recensione. Riprova.'); window.location.href='profilo.php';</script>";
+            exit;
         }
-
-        $db->close();
+    
     } catch (Exception $e) {
         echo json_encode([
             'success' => false, 

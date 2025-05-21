@@ -13,13 +13,45 @@ $utente_id = $_SESSION['user_id'];
 $query = "SELECT a.*, c.modifiche_estetiche, c.modifiche_tecniche FROM auto a JOIN carrello c ON a.id = c.auto_id WHERE c.utente_id = $1";
 $result = pg_query_params($dbconnect, $query, array($utente_id));
 
+// Prezzi delle modifiche come da carrello.php
+$prezzi_estetici = [
+    'cerchi' => 500,
+    'tappeti' => 200,
+    'paraurti' => 800,
+    'luci' => 300,
+    'wrap' => 1500
+];
+$prezzi_tecnici = [
+    'sospensioni' => 1200,
+    'freni' => 1000,
+    'turbo' => 2500,
+    'cambio' => 900,
+    'scarico' => 600
+];
+
 $carrello = [];
 $totale = 0;
 if ($result && pg_num_rows($result) > 0) {
     while ($row = pg_fetch_assoc($result)) {
+        $prezzo_modifiche_estetiche = 0;
+        $prezzo_modifiche_tecniche = 0;
+        $modifiche_estetiche = json_decode($row['modifiche_estetiche'] ?? '[]', true);
+        $modifiche_tecniche = json_decode($row['modifiche_tecniche'] ?? '[]', true);
+        if (!is_array($modifiche_estetiche)) $modifiche_estetiche = [];
+        if (!is_array($modifiche_tecniche)) $modifiche_tecniche = [];
+        foreach ($modifiche_estetiche as $modifica) {
+            $prezzo_modifiche_estetiche += $prezzi_estetici[$modifica] ?? 0;
+        }
+        foreach ($modifiche_tecniche as $modifica) {
+            $prezzo_modifiche_tecniche += $prezzi_tecnici[$modifica] ?? 0;
+        }
+        $row['prezzo_modifiche_estetiche'] = $prezzo_modifiche_estetiche;
+        $row['prezzo_modifiche_tecniche'] = $prezzo_modifiche_tecniche;
+        $row['modifiche_estetiche_arr'] = $modifiche_estetiche;
+        $row['modifiche_tecniche_arr'] = $modifiche_tecniche;
+        $row['prezzo_totale'] = $row['prezzo'] + $prezzo_modifiche_estetiche + $prezzo_modifiche_tecniche;
         $carrello[] = $row;
-        $totale += $row['prezzo'];
-        // Puoi aggiungere qui il calcolo delle modifiche se vuoi mostrarle anche nel pagamento
+        $totale += $row['prezzo'] + $prezzo_modifiche_estetiche + $prezzo_modifiche_tecniche;
     }
 }
 
@@ -44,26 +76,49 @@ if (!$result || pg_num_rows($result) == 0) {
             <h2>Riepilogo del carrello</h2>
             <div class="summary-items">
                 <?php foreach ($carrello as $item): ?>
-                    <div class="summary-item">
-                        <div class="item-details">
-                            <h3><?php echo htmlspecialchars($item['modello']); ?></h3>
-                            <p><?php echo htmlspecialchars($item['descrizione']); ?></p>
-                        </div>
-                        <div class="item-price">
-                            <?php echo number_format($item['prezzo'], 2, ',', '.'); ?> €
-                        </div>
-                    </div>
-                <?php endforeach; ?>
+    <div class="summary-item">
+        <div class="item-details">
+            <h3><?php echo htmlspecialchars($item['modello']); ?></h3>
+            <p><?php echo htmlspecialchars($item['descrizione']); ?></p>
+            <?php if (!empty($item['modifiche_estetiche_arr'])): ?>
+                <p>Modifiche estetiche:
+                    <?php foreach ($item['modifiche_estetiche_arr'] as $mod): ?>
+                        <span style="margin-right: 8px;">
+                            <?php echo htmlspecialchars($mod); ?> (+<?php echo number_format($prezzi_estetici[$mod] ?? 0, 2, ',', '.'); ?> €)
+                        </span>
+                    <?php endforeach; ?>
+                </p>
+            <?php endif; ?>
+            <?php if (!empty($item['modifiche_tecniche_arr'])): ?>
+                <p>Modifiche tecniche:
+                    <?php foreach ($item['modifiche_tecniche_arr'] as $mod): ?>
+                        <span style="margin-right: 8px;">
+                            <?php echo htmlspecialchars($mod); ?> (+<?php echo number_format($prezzi_tecnici[$mod] ?? 0, 2, ',', '.'); ?> €)
+                        </span>
+                    <?php endforeach; ?>
+                </p>
+            <?php endif; ?>
+        </div>
+        <div class="item-price">
+            <?php echo number_format($item['prezzo_totale'], 2, ',', '.'); ?> €
+        </div>
+    </div>
+<?php endforeach; ?>
             </div>
             <div class="total">
-                <h3>Totale da pagare:</h3>
-                <span><?php echo number_format($totale, 2, ',', '.'); ?> €</span>
-            </div>
+    <h3>Totale da pagare:</h3>
+    <span id="totale-pagamento"><?php echo number_format($totale, 2, ',', '.'); ?> €</span>
+</div>
         </div>
         <div class="payment-method-selector">
-            <label><input type="radio" name="payment-method" value="direct" id="payment-method-direct" checked> Pagamento diretto</label>
-            <label><input type="radio" name="payment-method" value="loan" id="payment-method-loan"> Finanziamento</label>
-        </div>
+    <label><input type="radio" name="payment-method" value="direct" id="payment-method-direct" checked> Pagamento diretto</label>
+    <label><input type="radio" name="payment-method" value="loan" id="payment-method-loan"> Finanziamento</label>
+</div>
+<div id="anticipo-container" style="display:none; margin: 15px 0 10px 0;">
+    <label for="anticipo_percentuale"><b>Anticipo (%):</b></label>
+    <input type="number" id="anticipo_percentuale" min="1" max="99" value="20" style="width: 60px;">%
+    <button type="button" id="applica-anticipo" class="pay-button" style="margin-left:10px;">Applica Finanziamento</button>
+</div>
         <div id="loan-section" style="display:none; margin-top:30px;">
             <h2>Calcola il tuo finanziamento</h2>
             <div class="loan-form">
@@ -261,20 +316,22 @@ if (!$result || pg_num_rows($result) == 0) {
         // Calcola iniziale
         updateLoan();
         </script>
-        <form id="payment-form" action="processa_pagamento.php" method="POST" style="margin-top:30px;">
+        <form id="payment-form" action="processo_pagamento.php" method="POST" style="margin-top:30px;">
+    <input type="hidden" name="anticipo" id="anticipo_hidden" value="">
+    <input type="hidden" name="tipo_pagamento" id="tipo_pagamento_hidden" value="direct">
             <div class="form-group">
                 <label for="card-number">Numero carta:</label>
-                <input type="text" id="card-number" name="card_number" placeholder="1234 5678 9012 3456" required>
+                <input type="text" id="card-number" name="carta" placeholder="1234 5678 9012 3456" required>
                 <span class="error" id="card-number-error"></span>
             </div>
             <div class="form-group">
                 <label for="card-holder">Nome titolare:</label>
-                <input type="text" id="card-holder" name="card_holder" placeholder="Nome e cognome" required>
+                <input type="text" id="card-holder" name="titolare" placeholder="Nome e cognome" required>
                 <span class="error" id="card-holder-error"></span>
             </div>
             <div class="form-group">
                 <label for="expiry-date">Data di scadenza:</label>
-                <input type="text" id="expiry-date" name="expiry_date" placeholder="MM/YY" required>
+                <input type="text" id="expiry-date" name="scadenza" placeholder="MM/YY" required>
                 <span class="error" id="expiry-date-error"></span>
             </div>
             <div class="form-group">
@@ -421,5 +478,6 @@ if (!$result || pg_num_rows($result) == 0) {
         if (!valid) e.preventDefault();
     });
     </script>
+<script src="../pagamento_anticipo.js"></script>
 </body>
 </html>

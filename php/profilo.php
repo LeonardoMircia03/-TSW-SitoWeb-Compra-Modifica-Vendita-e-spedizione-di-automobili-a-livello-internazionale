@@ -157,6 +157,7 @@ $result_acquistate = pg_query_params($dbconnect, $query_acquistate, array($user_
 <body>
     <div class="profile-container">
         <a href="areaprivata.php" class="back-button">← Torna all'Area Privata</a>
+        <a href="auto.php" class="back-button" style="margin-left:10px;">🔍 Ricerca Auto</a>
 
         <?php if (
             !empty(
@@ -224,6 +225,12 @@ $result_acquistate = pg_query_params($dbconnect, $query_acquistate, array($user_
         </div>
 
         <h2 class="section-title">Auto Acquistate</h2>
+        <?php if (isset($_GET['review']) && $_GET['review'] === 'success'): ?>
+            <div style="background: #d4edda; color: #155724; border: 1px solid #c3e6cb; border-radius: 6px; padding: 14px 18px; margin-bottom: 18px; display: flex; align-items: center; gap: 10px; font-size: 1.08rem;">
+                <span style="font-size: 1.5em;">&#10003;</span>
+                <span><strong>Recensione inviata!</strong> Grazie per aver condiviso la tua esperienza.</span>
+            </div>
+        <?php endif; ?>
         <div class="car-grid">
             <?php if (pg_num_rows($result_acquistate) > 0): ?>
                 <?php while ($row = pg_fetch_assoc($result_acquistate)): ?>
@@ -235,6 +242,45 @@ $result_acquistate = pg_query_params($dbconnect, $query_acquistate, array($user_
                                 <span class="info">Anno: <?= $row['anno'] ?> | Città: <?= htmlspecialchars($row['citta']) ?></span><br>
                                 <p>Prezzo: € <?= number_format($row['prezzo'], 2, ',', '.') ?></p>
                                 <p>Venditore: <?= htmlspecialchars($row['nome_venditore']) ?></p>
+                                <?php
+                                    // Mostra il form recensione solo se non già recensito
+                                    $giàRecensito = false;
+                                    // Serve id venditore e id auto
+                                    $venditore_id = $row['venditore_id'] ?? $row['utente_id'] ?? null;
+                                    $car_id = $row['id'];
+                                    if ($venditore_id) {
+                                        $check_review = pg_query_params(
+                                            $dbconnect,
+                                            "SELECT 1 FROM user_car_reviews WHERE seller_id = $1 AND reviewer_id = $2 AND car_id = $3 LIMIT 1",
+                                            array($venditore_id, $user_id, $car_id)
+                                        );
+                                        if ($check_review && pg_num_rows($check_review) > 0) {
+                                            $giàRecensito = true;
+                                        }
+                                    }
+                                ?>
+                                <div class="review-section">
+                                    <?php if ($giàRecensito): ?>
+                                        <div style="background: #23272f; color: #e0e0e0; border: 1px solid #444; border-radius: 6px; padding: 13px 18px; margin-bottom: 12px; font-size: 1.05rem;">
+    <span style="font-size:1.2em;">&#9888;&#65039;</span> Hai già lasciato una recensione per questa auto e venditore.
+</div>
+                                    <?php else: ?>
+                                        <form class="review-form" method="POST" action="submit_review.php" onsubmit="return confirm('Confermi l\'invio della recensione?');">
+                                            <input type="hidden" name="seller_id" value="<?= htmlspecialchars($venditore_id) ?>">
+                                            <input type="hidden" name="car_id" value="<?= htmlspecialchars($car_id) ?>">
+                                            <label for="rating_<?= $car_id ?>">Valutazione:</label>
+                                            <select name="rating" id="rating_<?= $car_id ?>" required>
+                                                <option value="">Scegli...</option>
+                                                <?php for ($i = 5; $i >= 1; $i--): ?>
+                                                    <option value="<?= $i ?>"><?= $i ?> stelle</option>
+                                                <?php endfor; ?>
+                                            </select>
+                                            <label for="review_text_<?= $car_id ?>">Recensione:</label>
+                                            <textarea name="review_text" id="review_text_<?= $car_id ?>" maxlength="500" required placeholder="Scrivi la tua esperienza..."></textarea>
+                                            <button type="submit">Invia Recensione</button>
+                                        </form>
+                                    <?php endif; ?>
+                                </div>
                             </div>
                         </div>
                     </div>
