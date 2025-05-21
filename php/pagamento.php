@@ -316,9 +316,7 @@ if (!$result || pg_num_rows($result) == 0) {
         // Calcola iniziale
         updateLoan();
         </script>
-        <form id="payment-form" action="processo_pagamento.php" method="POST" style="margin-top:30px;">
-    <input type="hidden" name="anticipo" id="anticipo_hidden" value="">
-    <input type="hidden" name="tipo_pagamento" id="tipo_pagamento_hidden" value="direct">
+        <form id="payment-form" action="processa_pagamento.php" method="POST" style="margin-top:30px;">
             <div class="form-group">
                 <label for="card-number">Numero carta:</label>
                 <input type="text" id="card-number" name="carta" placeholder="1234 5678 9012 3456" required>
