@@ -102,7 +102,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>Seleziona Modifiche</title>
     <link rel="stylesheet" href="stilicss/modifiche.css">
 </head>
-<body>
+<body style="background: #fff;">
     <img id="sfondo" src="stilicss/Immagini/modifiche/sfondo.png" alt="Sfondo">
 <div class="container">
     <h1>Scegli le modifiche per questa auto</h1>
@@ -116,35 +116,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <ul>
         <li>
             <label class="checkbox-label">
-                <input type="checkbox" name="esthetiche[]" value="cerchi" data-prezzo="500">
+                <input type="checkbox" name="esthetiche[]" value="cerchi" data-prezzo="500" <?= in_array('cerchi', $esthetiche_salvate) ? 'checked' : '' ?>>
                 <span class="checkmark"></span>
                 Cerchi personalizzati (+€500)
             </label>
         </li>
         <li>
             <label class="checkbox-label">
-                <input type="checkbox" name="esthetiche[]" value="tappeti" data-prezzo="200">
+                <input type="checkbox" name="esthetiche[]" value="tappeti" data-prezzo="200" <?= in_array('tappeti', $esthetiche_salvate) ? 'checked' : '' ?>>
                 <span class="checkmark"></span>
                 Tappeti interni premium (+€200)
             </label>
         </li>
         <li>
             <label class="checkbox-label">
-                <input type="checkbox" name="esthetiche[]" value="paraurti" data-prezzo="800">
+                <input type="checkbox" name="esthetiche[]" value="paraurti" data-prezzo="800" <?= in_array('paraurti', $esthetiche_salvate) ? 'checked' : '' ?>>
                 <span class="checkmark"></span>
                 Paraurti sportivo (+€800)
             </label>
         </li>
         <li>
             <label class="checkbox-label">
-                <input type="checkbox" name="esthetiche[]" value="luci" data-prezzo="300">
+                <input type="checkbox" name="esthetiche[]" value="luci" data-prezzo="300" <?= in_array('luci', $esthetiche_salvate) ? 'checked' : '' ?>>
                 <span class="checkmark"></span>
                 Kit luci LED (+€300)
             </label>
         </li>
         <li>
             <label class="checkbox-label">
-                <input type="checkbox" name="esthetiche[]" value="wrap" data-prezzo="1500">
+                <input type="checkbox" name="esthetiche[]" value="wrap" data-prezzo="1500" <?= in_array('wrap', $esthetiche_salvate) ? 'checked' : '' ?>>
                 <span class="checkmark"></span>
                 Wrap completo o parziale (+€1500)
             </label>
@@ -158,35 +158,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <ul>
         <li>
             <label class="checkbox-label">
-                <input type="checkbox" name="tecniche[]" value="sospensioni" data-prezzo="1200">
+                <input type="checkbox" name="tecniche[]" value="sospensioni" data-prezzo="1200" <?= in_array('sospensioni', $tecniche_salvate) ? 'checked' : '' ?>>
                 <span class="checkmark"></span>
                 Sospensioni regolabili (+€1200)
             </label>
         </li>
         <li>
             <label class="checkbox-label">
-                <input type="checkbox" name="tecniche[]" value="freni" data-prezzo="1000">
+                <input type="checkbox" name="tecniche[]" value="freni" data-prezzo="1000" <?= in_array('freni', $tecniche_salvate) ? 'checked' : '' ?>>
                 <span class="checkmark"></span>
                 Freni ad alte prestazioni (+€1000)
             </label>
         </li>
         <li>
             <label class="checkbox-label">
-                <input type="checkbox" name="tecniche[]" value="turbo" data-prezzo="2500">
+                <input type="checkbox" name="tecniche[]" value="turbo" data-prezzo="2500" <?= in_array('turbo', $tecniche_salvate) ? 'checked' : '' ?>>
                 <span class="checkmark"></span>
                 Sistema Turbo migliorato (+€2500)
             </label>
         </li>
         <li>
             <label class="checkbox-label">
-                <input type="checkbox" name="tecniche[]" value="cambio" data-prezzo="900">
+                <input type="checkbox" name="tecniche[]" value="cambio" data-prezzo="900" <?= in_array('cambio', $tecniche_salvate) ? 'checked' : '' ?>>
                 <span class="checkmark"></span>
                 Cambio manuale/automatico (+€900)
             </label>
         </li>
         <li>
             <label class="checkbox-label">
-                <input type="checkbox" name="tecniche[]" value="scarico" data-prezzo="600">
+                <input type="checkbox" name="tecniche[]" value="scarico" data-prezzo="600" <?= in_array('scarico', $tecniche_salvate) ? 'checked' : '' ?>></input>
                 <span class="checkmark"></span>
                 Scarico sportivo (+€600)
             </label>

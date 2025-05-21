@@ -222,7 +222,7 @@ if ($result && pg_num_rows($result) > 0) {
                     <input type="hidden" name="id_auto" value="<?= $row['id'] ?>">
                     <button type="submit" class="remove-from-cart-btn">🗑️ Rimuovi</button>
                 </form>
-                <a href="../modifiche.php?auto_id=<?= $row['id'] ?>" class="modify-btn">🔧 Richiedi modifiche</a>
+                <a href="../modifiche.php?auto_id=<?= $row['id'] ?>" class="modify-btn">🔧 Modifica o rimuovi modifiche</a>
             </div>
         <?php endforeach; ?>
 

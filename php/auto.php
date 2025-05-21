@@ -21,7 +21,15 @@ if (isset($_SESSION['user_id'])) {
     }
 }
 $marche_result = pg_query($dbconnect, "SELECT DISTINCT marca FROM auto ORDER BY marca ASC");
-$modelli_result = pg_query($dbconnect, "SELECT DISTINCT modello FROM auto ORDER BY modello ASC");
+if (!empty($marca)) {
+    $modelli_result = pg_query_params(
+        $dbconnect,
+        "SELECT DISTINCT modello FROM auto WHERE id NOT IN (SELECT auto_id FROM transazione) AND marca = $1 ORDER BY modello ASC",
+        array($marca)
+    );
+} else {
+    $modelli_result = pg_query($dbconnect, "SELECT DISTINCT modello FROM auto WHERE id NOT IN (SELECT auto_id FROM transazione) ORDER BY modello ASC");
+}
 $anni_result = pg_query($dbconnect, "SELECT DISTINCT anno FROM auto ORDER BY anno DESC");
 $prezzi_result = pg_query($dbconnect, "SELECT DISTINCT prezzo FROM auto ORDER BY prezzo ASC");
 
@@ -52,7 +60,7 @@ if (!empty($prezzo)) {
 }
 
 if ($user_id !== null) {
-    $query = "SELECT auto.*, utenti.username AS nome_venditore 
+    $query = "SELECT auto.*, utenti.username AS nome_venditore, utenti.id AS utente_id 
         FROM auto 
         JOIN utenti ON auto.utente_id = utenti.id 
         WHERE auto.id NOT IN (
@@ -60,13 +68,31 @@ if ($user_id !== null) {
             FROM transazione
         )
         AND auto.utente_id != $1";
-    $params = array_merge($params, array($user_id));
-    if (!empty($where_clauses)) {
-        $query .= " AND " . implode(" AND ", $where_clauses);
+    $params_with_user = array($user_id);
+    $param_index = 2;
+    $where_clauses_fixed = [];
+    if (!empty($marca)) {
+        $where_clauses_fixed[] = "marca = $" . $param_index++;
+        $params_with_user[] = $marca;
     }
-    $result = pg_query_params($dbconnect, $query, $params);
+    if (!empty($modello)) {
+        $where_clauses_fixed[] = "modello = $" . $param_index++;
+        $params_with_user[] = $modello;
+    }
+    if (!empty($anno)) {
+        $where_clauses_fixed[] = "anno = $" . $param_index++;
+        $params_with_user[] = $anno;
+    }
+    if (!empty($prezzo)) {
+        $where_clauses_fixed[] = "prezzo <= $" . $param_index++;
+        $params_with_user[] = $prezzo;
+    }
+    if (!empty($where_clauses_fixed)) {
+        $query .= " AND " . implode(" AND ", $where_clauses_fixed);
+    }
+    $result = pg_query_params($dbconnect, $query, $params_with_user);
 } else {
-    $query = "SELECT auto.*, utenti.username AS nome_venditore 
+    $query = "SELECT auto.*, utenti.username AS nome_venditore, utenti.id AS utente_id 
         FROM auto 
         JOIN utenti ON auto.utente_id = utenti.id 
         WHERE auto.id NOT IN (
@@ -231,7 +257,7 @@ $totale_carrello = isset($_SESSION['carrello']) ? count($_SESSION['carrello']) :
             <span class="model-label">Modello:</span> <span class="model"> <?= htmlspecialchars($row['modello']) ?> </span><br>
             <span class="info">Anno: <?= $row['anno'] ?> | Città: <?= htmlspecialchars($row['citta']) ?></span><br>
             <p>Prezzo: € <?= number_format($row['prezzo'], 2, ',', '.') ?></p>
-            <p class="seller-name"> Venditore: <?= $nome_venditore ?></p>
+            <p class="seller-name"> Venditore: <a href="recensioni_venditore.php?user_id=<?= $row['utente_id'] ?>"> <?= htmlspecialchars($row['nome_venditore']) ?> </a></p>
             <div class="car-description">
                 <strong>Descrizione:</strong>
                 <p><?= htmlspecialchars($row['descrizione'] ?? 'Nessuna descrizione disponibile') ?></p>
