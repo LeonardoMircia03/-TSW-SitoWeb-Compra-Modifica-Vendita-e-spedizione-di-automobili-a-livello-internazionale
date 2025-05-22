@@ -94,50 +94,7 @@ if (!$result || pg_num_rows($result) == 0) {
     exit;
 }
 
-$acquisto_success = '';
-if (
-    $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['conferma_pagamento']) &&
-    !empty($_POST['carta']) &&
-    !empty($_POST['scadenza']) &&
-    !empty($_POST['cvv'])
-) {
-    if (!empty($rows)) {
-        foreach ($rows as $auto) {
-            $venditore_id = $auto['utente_id'];
-            $acquirente_id = $utente_id;
-            $auto_id = $auto['id'];
-            $data = date('Y-m-d H:i:s');
-            $prezzo = $auto['prezzo'];
-            $modifiche_estetiche = $auto['modifiche_estetiche'];
-            $modifiche_tecniche = $auto['modifiche_tecniche'];
-            $query_trans = "INSERT INTO transazione (auto_id, venditore_id, acquirente_id, data_transazione, prezzo_totale, modifiche_estetiche, modifiche_tecniche) VALUES ($1, $2, $3, $4, $5, $6, $7)";
-            $result_trans = pg_query_params($dbconnect, $query_trans, [
-                $auto_id,
-                $venditore_id,
-                $acquirente_id,
-                $data,
-                $prezzo,
-                $modifiche_estetiche,
-                $modifiche_tecniche
-            ]);
-            if (!$result_trans) {
-                error_log('Errore inserimento transazione: ' . pg_last_error($dbconnect));
-            }
-            // Rimuovi dal carrello sessione
-            if (isset($_SESSION['carrello'])) {
-                if (($key = array_search($auto_id, $_SESSION['carrello'])) !== false) {
-                    unset($_SESSION['carrello'][$key]);
-                }
-            }
-        }
-        $acquisto_success = 'Acquisto completato con successo!';
-        header('Location: carrello.php?acquisto=1');
-        exit;
-    }
-}
-if (isset($_GET['acquisto'])) {
-    $acquisto_success = 'Acquisto completato con successo!';
-}
+
 
 $query = "SELECT a.*, c.modifiche_estetiche, c.modifiche_tecniche FROM auto a JOIN carrello c ON a.id = c.auto_id WHERE c.utente_id = $1";
 $result = pg_query_params($dbconnect, $query, array($utente_id));

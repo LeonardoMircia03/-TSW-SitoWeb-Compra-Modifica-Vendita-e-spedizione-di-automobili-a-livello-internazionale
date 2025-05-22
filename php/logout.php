@@ -23,5 +23,5 @@ if (ini_get("session.use_cookies")) {
 session_destroy();
 
 // Reindirizza l'utente alla homepage o alla pagina login
-header("Location: auto.php"); // Puoi cambiare con index.php o login.php
+header("Location: ../index.html"); 
 exit;

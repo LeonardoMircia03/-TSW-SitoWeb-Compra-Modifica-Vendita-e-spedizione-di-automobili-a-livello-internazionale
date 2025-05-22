@@ -83,6 +83,129 @@
 }
 
 /*Fine Barra di ricerca*/
+
+.seller-reviews {
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  padding: 20px;
+  margin-top: 20px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+.seller-rating {
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  padding: 20px;
+  margin-top: 20px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.seller-reviews-title {
+  color: #333;
+  border-bottom: 2px solid #007bff;
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+}
+.seller-rating-title {
+  color: #333;
+  border-bottom: 2px solid #007bff;
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+}
+
+.rating-summary {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.rating-summary-main {
+  flex: 1;
+}
+.rating-summary-label {
+  margin: 0;
+  color: #555;
+}
+.stars {
+  font-size: 24px;
+  color: #ffc107;
+}
+.rating-summary-info {
+  margin: 5px 0 0;
+  color: #777;
+}
+.seller-rating-summary-bottom {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+.seller-rating-media {
+  margin: 0;
+  color: #777;
+}
+.seller-rating-totale {
+  margin: 0;
+  color: #777;
+}
+
+.review {
+  background-color: white;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 15px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.review-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.reviewer-name {
+  font-weight: bold;
+  color: #333;
+}
+.review-rating {
+  color: #ffc107;
+  font-size: 18px;
+}
+.review-text {
+  color: #555;
+  margin-bottom: 10px;
+}
+.review-date {
+  color: #888;
+  font-size: 0.8em;
+}
+.no-reviews {
+  color: #777;
+  text-align: center;
+  padding: 20px;
+}
+
+.login-link {
+    cursor: pointer;
+    color: white;
+}
+
+.logout-btn {
+    margin-left: 18px;
+    padding: 7px 18px;
+    background: #f44336;
+    color: #fff;
+    border-radius: 6px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.2s;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+    display: inline-block;
+}
+.logout-btn:hover {
+    background: #c82333;
+    color: #fff;
+    text-decoration: none;
+}
+
 #login{
   text-decoration: none;
   font-size: 3rem;

@@ -67,7 +67,7 @@ if (!$result || pg_num_rows($result) == 0) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pagamento | AutoMarket</title>
     <link rel="stylesheet" href="../stilicss/pagamento.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
 </head>
 <body>
     <div class="payment-container">
@@ -168,7 +168,7 @@ if (!$result || pg_num_rows($result) == 0) {
         const paymentForm = document.getElementById('payment-form');
         const loanDuration = document.getElementById('loan-duration');
         const loanDownpayment = document.getElementById('loan-downpayment');
-        const loanInterestRate = 3.5; // tasso fisso esempio
+        const loanInterestRate = 3.5; 
         const frenchModelRadio = document.getElementById('french-model');
         const italianModelRadio = document.getElementById('italian-model');
         const loanMonthlyPayment = document.getElementById('loan-monthly-payment');
@@ -250,20 +250,6 @@ if (!$result || pg_num_rows($result) == 0) {
             // Mostra form pagamento e nascondi loan
             loanSection.style.display = 'none';
             paymentForm.style.display = 'block';
-            // Mostra un messaggio di conferma sopra il form
-            let msg = document.getElementById('loan-applied-msg');
-            if (!msg) {
-                msg = document.createElement('div');
-                msg.id = 'loan-applied-msg';
-                msg.style.background = '#e6ffe6';
-                msg.style.color = '#217a00';
-                msg.style.padding = '10px 20px';
-                msg.style.marginBottom = '15px';
-                msg.style.borderRadius = '6px';
-                msg.style.fontWeight = 'bold';
-                msg.innerText = 'Hai scelto il finanziamento. Completa i dati per il pagamento della prima rata.';
-                paymentForm.parentNode.insertBefore(msg, paymentForm);
-            }
             // Aggiorna il totale e mostra la prima rata
             const totalSpan = document.querySelector('.total span');
             const firstInstallment = frenchModelRadio.checked ?
@@ -308,9 +294,7 @@ if (!$result || pg_num_rows($result) == 0) {
                 }
             }
             topBox.innerHTML = `Totale finanziato: <span style='color:#217a00;'>${loanTotalPayment.textContent} €</span> &nbsp; | &nbsp; <span id="first-installment-info" style="color:#217a00;">Prima rata: ${firstInstallment.toFixed(2).replace('.', ',')} €</span>`;
-            // (opzionale) nascondi il totale originale nel riepilogo carrello
             if (totalSpan) totalSpan.style.display = 'none';
-            // Scrolla fino al form pagamento
             paymentForm.scrollIntoView({ behavior: 'smooth', block: 'start' });
         });
         // Calcola iniziale

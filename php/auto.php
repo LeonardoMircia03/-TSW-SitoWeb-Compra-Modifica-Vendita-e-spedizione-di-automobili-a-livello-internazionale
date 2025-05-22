@@ -2,22 +2,17 @@
 session_start();
 require_once('config.php');
 require_once('review_model.php');
-
 $utente_loggato = null;
 $review_error = '';
 $review_success = '';
 $user_id = null;
-
 if (isset($_SESSION['user_id'])) {
     $user_id = $_SESSION['user_id'];
-
-    // Recupera il username dell'utente loggato
     $query = "SELECT username FROM utenti WHERE id = $1";
     $result = pg_query_params($dbconnect, $query, array($user_id));
-
     if ($row = pg_fetch_assoc($result)) {
         $utente_loggato = $row['username'];
-        $_SESSION['username'] = $utente_loggato; // Salva in sessione per usi futuri
+        $_SESSION['username'] = $utente_loggato; 
     }
 }
 $marche_result = pg_query($dbconnect, "SELECT DISTINCT marca FROM auto ORDER BY marca ASC");
@@ -32,7 +27,6 @@ if (!empty($marca)) {
 }
 $anni_result = pg_query($dbconnect, "SELECT DISTINCT anno FROM auto ORDER BY anno DESC");
 $prezzi_result = pg_query($dbconnect, "SELECT DISTINCT prezzo FROM auto ORDER BY prezzo ASC");
-
 $marca = $_GET['marca'] ?? '';
 $modello = $_GET['modello'] ?? '';
 $anno = $_GET['anno'] ?? '';
@@ -109,7 +103,7 @@ if ($user_id !== null) {
 require_once 'review_model.php';
 $reviewModel = new ReviewModel($dbconnect);
 
-// Handle review submission
+// Recensioni con protezione x attacchii
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_review'])) {
     if (!isset($_SESSION['user_id'])) {
         $review_error = 'Devi effettuare il login per lasciare una recensione.';
@@ -121,8 +115,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_review'])) {
 
         if (!$car_id || !$seller_id || !$rating || !$review_text) {
             $review_error = 'Tutti i campi sono obbligatori.';
-        } else {
-            try {
+        } else { 
                 $reviewModel = new ReviewModel($dbconnect);
                 $result = $reviewModel->submitReview($seller_id, $_SESSION['user_id'], $car_id, $rating, $review_text);
                 
@@ -131,12 +124,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_review'])) {
                 } else {
                     $review_error = 'Impossibile inviare la recensione. Riprova più tardi.';
                 }
-            } catch (Exception $e) {
-                $review_error = 'Si è verificato un errore: ' . $e->getMessage();
             }
         }
     }
-}
+
 
 $totale_carrello = isset($_SESSION['carrello']) ? count($_SESSION['carrello']) : 0;
 ?>
