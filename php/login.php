@@ -8,6 +8,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     $email = $_POST['email'] ?? null;
     $password = $_POST['password'] ?? null;
+// ||||||| CHECK SUI CAMPI OBBLIGATORI  |||||||||||||
 
     if (!$email || !$password) {
         echo "Errore: email e password sono obbligatori.";

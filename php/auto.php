@@ -15,6 +15,7 @@ if (isset($_SESSION['user_id'])) {
         $_SESSION['username'] = $utente_loggato; 
     }
 }
+// |||||| Vengono mostrate solamente auto in vendita da utenti diversi che non siano già state acquistate in precedenza"
 $marche_result = pg_query($dbconnect, "SELECT DISTINCT marca FROM auto ORDER BY marca ASC");
 if (!empty($marca)) {
     $modelli_result = pg_query_params(

@@ -86,15 +86,7 @@
             <h2>Contatti</h2>
             <p>Hai domande? Non esitare a contattarci!</p>
             <?php if (isset($_GET['success']) && $_GET['success'] == 1): ?>
-<script>
-    alert('Messaggio inviato con successo!');
-    // Rimuovi il parametro success dall'URL senza ricaricare la pagina
-    if (window.history.replaceState) {
-        const url = new URL(window.location);
-        url.searchParams.delete('success');
-        window.history.replaceState({}, document.title, url.pathname + url.search);
-    }
-</script>
+
 <?php endif; ?>
 <form action="salva_contatto.php" method="post" class="contact-form">
     <input type="text" name="nome" placeholder="Nome" required>

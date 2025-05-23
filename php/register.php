@@ -5,12 +5,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $username = $_POST['username'] ?? null;
     $email = $_POST['email'] ?? null;
     $password = $_POST['password'] ?? null;
-
+// ||||||| CHECK SUI CAMPI OBBLIGATORI  |||||||||||||
     if (!$username || !$email || !$password ) {
         echo "Errore: Tutti i campi sono obbligatori.";
     }
 
-      // Verifica se username o email sono già registrati
+      // ||||||| Verifica se username o email sono già registrati ||||||
     $checkQuery = "SELECT * FROM utenti WHERE email = $1 OR username = $2";
     $checkParams = array($email, $username);
     $checkResult = pg_query_params($dbconnect, $checkQuery, $checkParams);
@@ -28,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 </div>
             </body>
         </html>';
-
+// altrimenti registraa l'utente
     } else {
         $passwordHash = password_hash($password, PASSWORD_DEFAULT);
         $insertQuery = "INSERT INTO utenti (email, username, password) VALUES ($1, $2, $3)";
