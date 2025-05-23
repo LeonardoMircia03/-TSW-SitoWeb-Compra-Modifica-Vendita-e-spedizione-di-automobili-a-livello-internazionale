@@ -49,15 +49,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             background-color: #f5f5f5;
             margin: 0;
             padding: 20px;
+            position: relative;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .video {
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            min-width: 100vw;
+            min-height: 100vh;
+            width: auto;
+            height: auto;
+            z-index: -1;
+            object-fit: cover;
+            opacity: 0.7;
+            background: #000;
         }
 
         .container {
             max-width: 600px;
             margin: 0 auto;
-            background-color: #fff;
+            background-color: rgba(255,255,255,0.95);
             padding: 30px;
             border-radius: 10px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 1;
         }
 
         h2 {
@@ -138,6 +157,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </style>
 </head>
 <body>
+    <video class="video" id="video" autoplay muted loop><source src="../stilicss/Immagini/video2.mp4" type="video/mp4"></video>
+    
 
 <div class="container">
     <h2>Inserisci un'Auto in Vendita</h2>

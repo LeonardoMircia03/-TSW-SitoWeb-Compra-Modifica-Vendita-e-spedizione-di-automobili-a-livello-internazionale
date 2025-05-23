@@ -1,0 +1,17 @@
+
+
+.rating-summary {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.stars {
+    font-size: 24px;
+    color: #ffc107;
+}
+
+.seller-rating-summary-bottom {
+    
+}
+

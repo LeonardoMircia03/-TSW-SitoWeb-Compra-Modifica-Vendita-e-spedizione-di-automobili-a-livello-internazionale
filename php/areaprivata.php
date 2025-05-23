@@ -20,6 +20,7 @@ $sellerReviews = $reviewModel->getSellerReviews($_SESSION['user_id']);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AutoMarket - Buy and Sell Auto</title>
     <link rel="stylesheet" href="../stilicss/index.css">
+    <link rel="stylesheet" href="../stilicss/areaprivata.css">
 </head>
 <body>
     <video class="video" id="video" autoplay muted loop><source src="../stilicss/Immagini/video.mp4" type="video/mp4"></video>
@@ -140,10 +141,10 @@ $sellerReviews = $reviewModel->getSellerReviews($_SESSION['user_id']);
         <div class="seller-reviews">
             <h2 class="seller-reviews-title">Le tue recensioni</h2>
             <?php if (!empty($sellerReviews)): ?>
-                <div class="rating-summary" style="display: flex; align-items: center; margin-bottom: 20px;">
+                <div class="rating-summary" class="rating-summary">
                     <div style="flex: 1;">
                         <h3 class="rating-summary-label">Valutazione Media</h3>
-                        <div class="stars" style="font-size: 24px; color: #ffc107;">
+                        <div class="stars" class="stars">
                             <?php 
                             $avgRating = $sellerRating['avg_rating'] ?? 0;
                             for ($i = 1; $i <= 5; $i++) {
@@ -180,10 +181,10 @@ $sellerReviews = $reviewModel->getSellerReviews($_SESSION['user_id']);
 
         <div class="seller-rating">
             <h2 class="seller-rating-title">Il tuo profilo venditore</h2>
-            <div class="rating-summary" style="display: flex; align-items: center; margin-bottom: 20px;">
+            <div class="rating-summary" class="rating-summary">
                 <div style="flex: 1;">
                     <h3 class="rating-summary-label">Valutazione Complessiva</h3>
-                    <div class="stars" style="font-size: 24px; color: #ffc107;">
+                    <div class="stars" class="stars">
                         <?php 
                         $avgRating = $sellerRating['avg_rating'] ?? 0;
                         for ($i = 1; $i <= 5; $i++) {
