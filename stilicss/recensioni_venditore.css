@@ -1,0 +1,164 @@
+body {
+    background: url("../stilicss/Immagini/recensioni.jpg") no-repeat center center fixed;
+    background-size: cover;
+    min-height: 100vh;
+    position: relative;
+    font-family: 'Segoe UI', 'Arial', sans-serif;
+    margin: 0;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.6);
+    z-index: 0;
+}
+
+.section-title {
+    text-align: center;
+    color: #fff;
+    font-size: 2.5em;
+    margin-bottom: 18px;
+    margin-top: 10px;
+    letter-spacing: 1.5px;
+    font-weight: 800;
+    text-shadow: 0 4px 18px rgba(0,0,0,0.45), 0 1px 0 #00bfa5;
+    background: rgba(0,191,165,0.13);
+    border-radius: 10px;
+    padding: 18px 0 14px 0;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.09);
+    border-bottom: 3px solid #00bfa5;
+    width: 100%;
+    max-width: 98%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.section-title span {
+    color: #00ffd0;
+    text-shadow: 0 2px 8px #008f7f, 0 1px 0 #23272f;
+}
+
+
+.profile-container {
+    position: relative;
+    z-index: 1;
+    max-width: 650px;
+    margin: 40px auto 30px auto;
+    background: rgba(255,255,255,0.85);
+    border-radius: 18px;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.25);
+    padding: 38px 28px 28px 28px;
+    backdrop-filter: blur(2px);
+    min-height: 60vh;
+}
+
+#header {
+    display: block;
+    text-align: center;
+    font-size: 2.1em;
+    font-weight: 700;
+    color: #00bfa5;
+    margin-bottom: 18px;
+    text-decoration: none;
+    letter-spacing: 1.5px;
+    transition: color 0.2s;
+}
+#header:hover {
+    color: #008f7f;
+}
+
+.section-title {
+    text-align: center;
+    color: #23272f;
+    font-size: 1.7em;
+    margin-bottom: 18px;
+    border-bottom: 2px solid #00bfa5;
+    padding-bottom: 8px;
+    letter-spacing: 1px;
+}
+
+.back-button {
+    display: inline-block;
+    background: linear-gradient(90deg, #00bfa5 60%, #008f7f 100%);
+    color: #fff;
+    font-weight: 600;
+    border: none;
+    border-radius: 6px;
+    padding: 11px 26px;
+    margin-bottom: 22px;
+    text-decoration: none;
+    font-size: 1.1em;
+    transition: background 0.2s, transform 0.2s;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+.back-button:hover {
+    background: linear-gradient(90deg, #008f7f 60%, #00bfa5 100%);
+    transform: translateY(-2px) scale(1.04);
+}
+
+.review-card {
+    background: rgba(255,255,255,0.98);
+    border-radius: 12px;
+    margin-bottom: 28px;
+    padding: 24px 22px 18px 22px;
+    box-shadow: 0 4px 18px 0 rgba(31, 38, 135, 0.09);
+    transition: box-shadow 0.2s, transform 0.2s;
+    border: 1.5px solid #e0e0e0;
+    font-size: 1.15em;
+}
+.review-card:hover {
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.17);
+    transform: translateY(-4px) scale(1.01);
+}
+
+.review-header {
+    font-weight: 600;
+    color: #00bfa5;
+    margin-bottom: 10px;
+    font-size: 1.08em;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+    align-items: center;
+}
+.review-rating {
+    color: #fbc02d;
+    font-size: 1.2em;
+    font-weight: 700;
+}
+.review-date {
+    color: #888;
+    font-size: 0.98em;
+    margin-left: 12px;
+}
+.reviewer-name {
+    color: #008f7f;
+    font-weight: 500;
+}
+
+.no-cars {
+    text-align: center;
+    color: #888;
+    padding: 28px 12px;
+    background: rgba(255,255,255,0.93);
+    border-radius: 10px;
+    font-size: 1.13em;
+    margin-top: 24px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+}
+
+@media (max-width: 700px) {
+    .profile-container {
+        padding: 16px 4vw 18px 4vw;
+        max-width: 98vw;
+     font-size: 1.2em; 
+    }
+.review-date { color: #888;
+     font-size: 0.95em; 
+     margin-left: 12px; 
+    }
+.reviewer-name { color: #008f7f;
+     font-weight: 500; 
+    }

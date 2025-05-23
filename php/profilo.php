@@ -78,6 +78,7 @@ $result_acquistate = pg_query_params($dbconnect, $query_acquistate, array($user_
     <meta charset="UTF-8">
     <title>Profilo Utente - Le Mie Auto</title>
     <link rel="stylesheet" href="auto.css">
+    <link rel="stylesheet" href="../stilicss/profilo.css">
     <style>
         .profile-container {
             max-width: 1200px;
@@ -169,9 +170,9 @@ $result_acquistate = pg_query_params($dbconnect, $query_acquistate, array($user_
             <div class="error-message"><?= htmlspecialchars($remove_error) ?></div>
         <?php endif; ?>
         
-        <h1 class="section-title">🚗 Le Mie Auto</h1>
+        <h1 class="section-title" align="center">🚗 Le Mie Auto</h1>
 
-        <h2 class="section-title">Auto in Vendita</h2>
+        <h2 class="section-title" align="center">Auto in Vendita</h2>
         <div class="car-grid">
             <?php if (pg_num_rows($result_in_vendita) > 0): ?>
                 <?php while ($row = pg_fetch_assoc($result_in_vendita)): ?>

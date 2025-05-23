@@ -141,6 +141,7 @@ $totale_carrello = isset($_SESSION['carrello']) ? count($_SESSION['carrello']) :
     <link rel="stylesheet" href="auto.css">
 </head>
 <body>
+    <video class="video" id="video" autoplay muted loop><source src="../stilicss/Immagini/video3.mp4" type="video/mp4"></video>
 <header class="main-header">
     <h1 >
         <a id="header" href="<?php echo isset($_SESSION['user_id']) ? 'areaprivata.php' : '../index.html'; ?>"> AutoMarket - Trova la tua Auto </a>

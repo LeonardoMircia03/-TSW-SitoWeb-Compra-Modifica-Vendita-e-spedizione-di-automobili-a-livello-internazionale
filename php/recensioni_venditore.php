@@ -29,17 +29,12 @@ $result_recensioni = pg_query_params($dbconnect, $query_recensioni, array($user_
     <meta charset="UTF-8">
     <title>Recensioni di <?= htmlspecialchars($venditore['username']) ?></title>
     <link rel="stylesheet" href="auto.css">
-    <style>
-        .review-card { background: #fff; border-radius: 8px; margin-bottom: 18px; padding: 18px; box-shadow: 0 2px 6px #ddd; }
-        .review-header { font-weight: bold; color: #00bfa5; margin-bottom: 8px; }
-        .review-rating { color: #fbc02d; font-size: 1.2em; }
-        .review-date { color: #888; font-size: 0.95em; margin-left: 12px; }
-        .reviewer-name { color: #008f7f; font-weight: 500; }
-    </style>
+    <link rel="stylesheet" href="../stilicss/recensioni_venditore.css">
 </head>
 <body>
 <div class="profile-container">
     <a href="auto.php" class="back-button">← Torna alla ricerca</a>
+    <a id="header" href="<?php echo isset($_SESSION['user_id']) ? 'areaprivata.php' : '../index.html'; ?>"> AutoMarket - Trova la tua Auto </a>
     <h1 class="section-title">Recensioni per <span style="color:#00bfa5;"><?= htmlspecialchars($venditore['username']) ?></span></h1>
     <?php if ($result_recensioni && pg_num_rows($result_recensioni) > 0): ?>
         <?php while ($rec = pg_fetch_assoc($result_recensioni)): ?>
