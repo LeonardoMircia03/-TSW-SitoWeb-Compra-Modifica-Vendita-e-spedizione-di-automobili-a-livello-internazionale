@@ -43,7 +43,7 @@ $sellerReviews = $reviewModel->getSellerReviews($_SESSION['user_id']);
                 <h1>Alla ricerca di un auto ?</h1>
                 <p>Esplora migliaia di veicoli nuovi e usati a portata di clic.</p>
             </div>
-
+            <!--   -->
             <div class="search-container">
                 <form class="search-form" action="auto.php" method="GET">
                     <div class="search-group">
