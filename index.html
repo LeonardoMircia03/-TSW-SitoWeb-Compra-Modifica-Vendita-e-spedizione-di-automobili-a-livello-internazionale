@@ -18,8 +18,8 @@
                 </button>
             
             <h1>Next Generation Luxury Auto Swapper</h1>
-            <button class="sidebar-toggle" onclick="toggleSidebar()">☰ Info</button>
-            <a id="login" href="Login.html">| Accedi/Registrati </a>
+            <button  class="sidebar-toggle" onclick="toggleSidebar()">☰ Info</button>
+            <a id="login" href="Login.html"> Accedi/Registrati </a>
         </div>
        
     </header>
@@ -142,7 +142,16 @@
         <script>
             function toggleSidebar() {
                 const sidebar = document.getElementById('sidebar');
-                sidebar.style.width = sidebar.style.width === '250px' ? '0' : '250px';
+                const isOpen = sidebar.style.width !== '' && sidebar.style.width !== '0px' && sidebar.style.width !== '0';
+                if (isOpen) {
+                    sidebar.style.width = '0';
+                } else {
+                    if (window.innerWidth <= 768) {
+                        sidebar.style.width = '80vw';
+                    } else {
+                        sidebar.style.width = '250px';
+                    }
+                }
             }
         </script>
 

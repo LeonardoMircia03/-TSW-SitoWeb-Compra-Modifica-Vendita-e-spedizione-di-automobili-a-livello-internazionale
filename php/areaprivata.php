@@ -32,7 +32,7 @@ $sellerReviews = $reviewModel->getSellerReviews($_SESSION['user_id']);
             </button>
             <h1>Nest Generation Luxury Auto Swapper</h1>
             <button class="sidebar-toggle" onclick="toggleSidebar()">☰ Info</button>
-            <a id="login" href="profilo.php" class="login-link">| Benvenuto <?php echo htmlspecialchars($_SESSION['username']); ?> </a>
+            <a id="login" href="profilo.php" class="login-link"> Benvenuto <?php echo htmlspecialchars($_SESSION['username']); ?> </a>
             <a href="logout.php" class="logout-btn">Logout</a>
         </div>
     </header>

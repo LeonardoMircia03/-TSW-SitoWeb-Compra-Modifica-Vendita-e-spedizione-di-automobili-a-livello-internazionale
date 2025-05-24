@@ -2,3 +2,10 @@ body {
     background: url("../stilicss/Immagini/immagine_profilo.jpg") no-repeat center center fixed;
     background-size: cover;
 }
+
+@media (max-width: 600px) {
+  .car-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+}
