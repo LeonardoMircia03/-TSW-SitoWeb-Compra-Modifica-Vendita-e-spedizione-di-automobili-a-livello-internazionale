@@ -79,7 +79,7 @@ $result_acquistate = pg_query_params($dbconnect, $query_acquistate, array($user_
     <title>Profilo Utente - Le Mie Auto</title>
     <link rel="stylesheet" href="../stilicss/index.css">
     <link rel="stylesheet" href="../stilicss/areaprivata.css">
-    <link rel="stylesheet" href="auto.css">
+    <link rel="stylesheet" href="../stilicss/auto.css">
     <link rel="stylesheet" href="../stilicss/profilo.css">
     <style>
         .profile-container {

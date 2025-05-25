@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once('php/config.php'); 
+require_once('config.php');
 if (!isset($dbconnect) || !$dbconnect) {
     die("Connessione al database fallita.");
 }
@@ -23,7 +23,7 @@ if ($nome && $email && $oggetto && $messaggio) {
     }
     $result = pg_query_params($dbconnect, $query, $params);
     if ($result) {
-        header("Location: about.html?success=1");
+        header("Location: ../html/about.html?success=1");
         exit();
     } else {
         echo "<p style='color:red;'>Errore nell'invio del messaggio.</p>";

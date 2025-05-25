@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once('php/config.php');
+require_once('config.php');
 
 if (!isset($_SESSION['user_id'])) {
     header("Location: php/login.php");
@@ -100,10 +100,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <title>Seleziona Modifiche</title>
-    <link rel="stylesheet" href="stilicss/modifiche.css">
+    <link rel="stylesheet" href="../stilicss/modifiche.css">
 </head>
 <body style="background: #fff;">
-    <img id="sfondo" src="stilicss/Immagini/modifiche/sfondo.png" alt="Sfondo">
+    <img id="sfondo" src="../stilicss/Immagini/modifiche/sfondo.png" alt="Sfondo">
 <div class="container">
     <h1>Scegli le modifiche per questa auto</h1>
     <p>Puoi aggiungere modifiche estetiche e tecniche alla tua auto.</p>
@@ -198,7 +198,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <!-- Bottone submit -->
 <button type="submit" class="submit-btn">💾 Salva Modifiche</button>
-<a href="php/carrello.php" class="back-link">⬅ Torna al Carrello</a>
+<a href="carrello.php" class="back-link">⬅ Torna al Carrello</a>
 </form>
 <!-- Riepilogo totale -->
 <div id="total-container">

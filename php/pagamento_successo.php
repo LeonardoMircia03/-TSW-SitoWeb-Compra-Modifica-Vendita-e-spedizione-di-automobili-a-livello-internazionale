@@ -13,7 +13,7 @@ if (isset($_GET['success']) && $_GET['success'] == '1') {
     
     // Recupera le auto dal carrello
     $query_carrello = "
-        SELECT c.auto_id, a.utente_id, a.prezzo 
+        SELECT c.auto_id, a.utente_id, a.prezzo, c.modifiche_estetiche, c.modifiche_tecniche 
         FROM carrello c 
         JOIN auto a ON c.auto_id = a.id 
         WHERE c.utente_id = $1
@@ -38,15 +38,17 @@ if (isset($_GET['success']) && $_GET['success'] == '1') {
             
             // Inserisce la transazione
             $query_transazione = "
-                INSERT INTO transazione (auto_id, venditore_id, acquirente_id, prezzo_totale, data_transazione)
-                VALUES ($1, $2, $3, $4, CURRENT_TIMESTAMP)
+                INSERT INTO transazione (auto_id, venditore_id, acquirente_id, prezzo_totale, modifiche_estetiche, modifiche_tecniche, data_transazione)
+                VALUES ($1, $2, $3, $4, $5, $6, CURRENT_TIMESTAMP)
             ";
             
             $params = array(
                 $row['auto_id'],
                 $row['utente_id'],
                 $utente_id,
-                $row['prezzo']
+                $row['prezzo'],
+                $row['modifiche_estetiche'],
+                $row['modifiche_tecniche']
             );
             
             error_log("Eseguendo query transazione: " . $query_transazione);

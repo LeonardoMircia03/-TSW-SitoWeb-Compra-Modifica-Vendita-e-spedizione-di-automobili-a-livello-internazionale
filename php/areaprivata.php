@@ -2,10 +2,10 @@
    session_start();
 
    if (!isset($_SESSION['username'])) {
-       header("Location: index.html");
+       header("Location: html/index.html");
        exit;
    } 
-   require_once('../php/config.php');
+   require_once('config.php');
 require_once('review_model.php');
 
 $reviewModel = new ReviewModel($dbconnect);

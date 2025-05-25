@@ -42,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <title>Inserisci Annuncio</title>
-    <link rel="stylesheet" href="auto.css">
+    <link rel="stylesheet" href="../stilicss/auto.css">
     <style>
         body {
             font-family: 'Segoe UI', sans-serif;

@@ -3,7 +3,7 @@ session_start();
 require_once('config.php');
 
 if (!isset($_SESSION['user_id'])) {
-    header("Location: ../login.html");
+    header("Location: ../html/Login.html");
     exit;
 }
 
@@ -20,7 +20,7 @@ if ($result_check && pg_num_rows($result_check) == 0) {
     pg_query_params($dbconnect, $query_insert, array($utente_id, $id_auto));
 }
 
-// Aggiorna la sessione locale del carrello (opzionale)
+// Aggiorna la sessione locale del carrello 
 if (!isset($_SESSION['carrello'])) {
     $_SESSION['carrello'] = [];
 }

@@ -24,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 <div style="background:#fff; color:#c62828; padding:30px; border-radius:10px; text-align:center; max-width:400px; width:90%; box-shadow:0 5px 15px rgba(0,0,0,0.2);">
                     <h2 style="color:#c62828;">❌Hai usato una email o un username gia in uso</h2>
                     <p>'.pg_last_error($dbconnect).'</p>
-                    <a href="../login.html" style="display:inline-block; background:#c62828; color:white; padding:10px 20px; text-decoration:none; border-radius:5px;">Torna alla registrazione</a>
+                    <a href="../html/Login.html" style="display:inline-block; background:#c62828; color:white; padding:10px 20px; text-decoration:none; border-radius:5px;">Torna alla registrazione</a>
                 </div>
             </body>
         </html>';
@@ -90,7 +90,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 <div class="success-box">
                     <h2>✅ Registrazione completata!</h2>
                     <p>Sei stato registrato correttamente. Ora puoi effettuare il login.</p>
-                    <a href="../login.html">Accedi al tuo account</a>
+                    <a href="../html/Login.html">Accedi al tuo account</a>
                 </div>
             </body>
         </html>';

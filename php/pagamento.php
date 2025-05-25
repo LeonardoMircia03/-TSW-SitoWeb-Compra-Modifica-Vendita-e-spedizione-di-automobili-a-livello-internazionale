@@ -460,6 +460,6 @@ if (!$result || pg_num_rows($result) == 0) {
         if (!valid) e.preventDefault();
     });
     </script>
-<script src="../pagamento_anticipo.js"></script>
+<script src="../js/pagamento_anticipo.js"></script>
 </body>
 </html>

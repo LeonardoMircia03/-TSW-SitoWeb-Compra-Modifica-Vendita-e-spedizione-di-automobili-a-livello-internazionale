@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Us - AutoMarket</title>
-    <link rel="stylesheet" href="stilicss/about.css">
+    <link rel="stylesheet" href="../stilicss/about.css">
 </head>
 <body>
     <!-- Header -->
@@ -50,17 +50,17 @@
             <p>Un gruppo di esperti appassionati di auto e tecnologia al tuo servizio.</p>
             <div class="team-members">
                 <div class="member">
-                    <img src="stilicss/Immagini/about/CEO.png" alt="Mario Rossi">
+                    <img src="../stilicss/Immagini/about/CEO.png" alt="Mario Rossi">
                     <h3>Mario Rossi</h3>
                     <h4>Fondatore & CEO</h4>
                 </div>
                 <div class="member">
-                    <img src="stilicss/Immagini/about/resp.png" alt="Laura Bianchi">
+                    <img src="../stilicss/Immagini/about/resp.png" alt="Laura Bianchi">
                     <h3>Laura Bianchi</h3>
                     <h4>Responsabile Vendite</h4>
                 </div>
                 <div class="member">
-                    <img src="stilicss/Immagini/about/tecnico.png" alt="Giuseppe Verdi">
+                    <img src="../stilicss/Immagini/about/tecnico.png" alt="Giuseppe Verdi">
                     <h3>Giuseppe Verdi</h3>
                     <h4>Responsabile Tecnico</h4>
                 </div>
@@ -88,7 +88,7 @@
             <?php if (isset($_GET['success']) && $_GET['success'] == 1): ?>
 
 <?php endif; ?>
-<form action="salva_contatto.php" method="post" class="contact-form">
+<form action="php/salva_contatto.php" method="post" class="contact-form">
     <input type="text" name="nome" placeholder="Nome" required>
     <input type="email" name="email" placeholder="Email" required>
     <input type="text" name="oggetto" placeholder="Oggetto" required>

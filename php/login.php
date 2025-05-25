@@ -87,8 +87,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                             <h2>❌ Password errata</h2>
                             <p>La password inserita non è corretta.</p>
                             <p>Hai dimenticato la password?</p>
-                            <a href="../Recupero.html">Recupera Password</a>
-                            <a href="../login.html">Ritorna al Login</a>
+                            <a href="../html/Recupero.html">Recupera Password</a>
+                            <a href="../html/Login.html">Ritorna al Login</a>
                         </div>
                     </body>
                 </html>';
@@ -150,7 +150,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                         <h2>🚫 Utente non trovato</h2>
                         <p>Sembra che non tu abbia ancora un account.</p>
                         <p>Registrati per accedere alle tue auto preferite!</p>
-                        <a href="../Login.html">Registrati Ora</a>
+                        <a href="../html/Login.html">Registrati Ora</a>
                     </div>
                 </body>
             </html>';
@@ -212,7 +212,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     <h2>🔧 Problema Tecnico</h2>
                     <p>Si è verificato un errore durante il tentativo di accesso.</p>
                     <p>Potresti riprovare più tardi o contattare l’amministratore.</p>
-                    <a href="../login.html">Riprova</a>
+                    <a href="../html/Login.html">Riprova</a>
                 </div>
             </body>
         </html>';

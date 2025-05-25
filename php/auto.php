@@ -140,13 +140,13 @@ $totale_carrello = isset($_SESSION['carrello']) ? count($_SESSION['carrello']) :
     <title>AutoMarket - Ricerca Auto</title>
     <link rel="stylesheet" href="../stilicss/index.css">
     <link rel="stylesheet" href="../stilicss/areaprivata.css">
-    <link rel="stylesheet" href="auto.css"><!-- solo per regole aggiuntive specifiche -->
+    <link rel="stylesheet" href="../stilicss/auto.css"><!-- solo per regole aggiuntive specifiche -->
 </head>
 <body>
     <video class="video" id="video" autoplay muted loop><source src="../stilicss/Immagini/video3.mp4" type="video/mp4"></video>
 <header class="main-header">
     <h1 >
-        <a id="header" href="<?php echo isset($_SESSION['user_id']) ? 'areaprivata.php' : '../index.html'; ?>"> AutoMarket - Trova la tua Auto </a>
+        <a id="header" href="<?php echo isset($_SESSION['user_id']) ? 'areaprivata.php' : '../html/index.html'; ?>"> AutoMarket - Trova la tua Auto </a>
     </h1>
     <div class="user-buttons">
         <?php if (isset($_SESSION['user_id'])): ?>
@@ -155,8 +155,8 @@ $totale_carrello = isset($_SESSION['carrello']) ? count($_SESSION['carrello']) :
             <a href="sell_cars.php" class="header-btn">➕ Vendi</a>
             <a href="logout.php" class="header-btn">Logout</a>
         <?php else: ?>
-            <a href="../Login.html" class="header-btn">Accedi</a>
-            <a href="../Login.html" class="header-btn">Registrati</a>
+            <a href="../html/Login.html" class="header-btn">Accedi</a>
+            <a href="../html/Login.html" class="header-btn">Registrati</a>
         <?php endif; ?>
     </div>
 </header>
