@@ -10,7 +10,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $query = "DELETE FROM carrello WHERE utente_id = $1 AND auto_id = $2";
     pg_query_params($dbconnect, $query, array($utente_id, $id_auto));
 
-    // Rimuovi anche dalla sessione locale se usi $_SESSION['carrello']
     if (isset($_SESSION['carrello'])) {
         $key = array_search($id_auto, $_SESSION['carrello']);
         if ($key !== false) {
@@ -20,6 +19,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-// Reindirizza alla pagina principale (dove il carrello si aggiorna)
+
 header("Location: auto.php");
 exit;

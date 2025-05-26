@@ -15,7 +15,7 @@
    <!-- Contenitore FAQ -->
 <div class="faq-container">
     <div class="faq-item">
-        <div class="faq-question" onclick="toggleAnswer(this)"><!--This=Elemento clicccato-->
+        <div class="faq-question" onclick="toggleAnswer(this)">
             Come posso contattarvi?
             <span class="faq-icon">+</span>
         </div>
@@ -84,7 +84,7 @@
 </div>
     <script>
         function toggleAnswer(element) {
-            const answer = element.nextElementSibling; //
+            const answer = element.nextElementSibling; 
             const icon = element.querySelector('.faq-icon'); 
             answer.classList.toggle('open');
             icon.classList.toggle('open');

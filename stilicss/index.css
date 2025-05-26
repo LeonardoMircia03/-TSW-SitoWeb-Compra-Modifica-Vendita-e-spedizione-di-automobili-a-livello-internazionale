@@ -238,7 +238,7 @@ body {
   min-width: 100%;
   min-height: 100%;
   object-fit: cover; /* Copre l'intera area senza deformare il video */
-  filter: brightness(0.7); /* Opzionale: riduce la luminosità per migliorare la leggibilità */
+  filter: brightness(0.7); 
 }
 /*--------titolo sito*---------*/
 

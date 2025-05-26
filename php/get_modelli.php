@@ -10,7 +10,6 @@ if (!empty($marca)) {
 
     if ($result) {
         while ($row = pg_fetch_assoc($result)) {
-            // Escaping HTML per sicurezza
             $modello = htmlspecialchars($row['modello']);
             echo "<option value=\"$modello\">$modello</option>";
         }

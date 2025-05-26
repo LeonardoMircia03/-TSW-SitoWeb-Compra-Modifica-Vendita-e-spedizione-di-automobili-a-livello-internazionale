@@ -196,11 +196,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
 
-<!-- Bottone submit -->
+
 <button type="submit" class="submit-btn">💾 Salva Modifiche</button>
 <a href="carrello.php" class="back-link">⬅ Torna al Carrello</a>
 </form>
-<!-- Riepilogo totale -->
+
 <div id="total-container">
     Totale modifiche: <span id="total-price">€0</span>
 </div>
@@ -239,7 +239,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             input.addEventListener('change', updateTotal);
         });
 
-        // Calcola il totale iniziale se ce ne sono già selezionati
+
         updateTotal();
     });
 </script>

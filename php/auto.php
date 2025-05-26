@@ -140,7 +140,7 @@ $totale_carrello = isset($_SESSION['carrello']) ? count($_SESSION['carrello']) :
     <title>AutoMarket - Ricerca Auto</title>
     <link rel="stylesheet" href="../stilicss/index.css">
     <link rel="stylesheet" href="../stilicss/areaprivata.css">
-    <link rel="stylesheet" href="../stilicss/auto.css"><!-- solo per regole aggiuntive specifiche -->
+    <link rel="stylesheet" href="../stilicss/auto.css">
 </head>
 <body>
     <video class="video" id="video" autoplay muted loop><source src="../stilicss/Immagini/video3.mp4" type="video/mp4"></video>

@@ -51,7 +51,7 @@ header h1 {
     font-size: 3rem;
 }
 
-/* Inline styles from carrello.php */
+
 header p {
     font-size: 1.2rem;
     margin-top: 10px;
@@ -476,7 +476,7 @@ body {
   min-width: 100%;
   min-height: 100%;
   object-fit: cover; /* Copre l'intera area senza deformare il video */
-  filter: brightness(0.7); /* Opzionale: riduce la luminosità per migliorare la leggibilità */
+  filter: brightness(0.7); 
 }
 
 .logo {
@@ -485,7 +485,7 @@ body {
     font-size: 30rem;
 }
 
-/* invito acquisto prova*/
+
 .cliente {
     color: #fff;
     text-align: center;

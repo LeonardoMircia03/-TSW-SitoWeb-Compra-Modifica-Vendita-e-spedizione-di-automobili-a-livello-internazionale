@@ -76,16 +76,11 @@ if (!$result || pg_num_rows($result) == 0) {
         <header>
             <h1>Il tuo carrello</h1>
         </header>
-
         <div class="empty-cart">
-            <!-- Icona -->
             <img src="https://cdn-icons-png.flaticon.com/512/1163/1163661.png" alt="Carrello vuoto">
 
-            <!-- Messaggio -->
             <h2>Il carrello è vuoto 😕</h2>
             <p>Sembra che non hai ancora aggiunto nessuna auto al carrello.</p>
-
-            <!-- Bottone per tornare alle auto -->
             <a href="auto.php" class="go-back-btn">⬅ Torna alla ricerca</a>
         </div>
     </body>
@@ -107,12 +102,10 @@ if ($result && pg_num_rows($result) > 0) {
     while ($row = pg_fetch_assoc($result)) {
         $rows[] = $row;
         $totale_auto += $row['prezzo'];
-        
-        // Gestione sia del formato CSV che JSON
+
         $estetiche = $row['modifiche_estetiche'];
         $tecniche = $row['modifiche_tecniche'];
-        
-        // Se è JSON, decodifica
+
         if (is_string($estetiche) && strpos($estetiche, '[') === 0) {
             $estetiche = json_decode($estetiche, true) ?? [];
         } else {
@@ -124,7 +117,7 @@ if ($result && pg_num_rows($result) > 0) {
         } else {
             $tecniche = explode(',', $tecniche);
         }
-        
+
         // Calcolo totale modifiche estetiche
         foreach ($estetiche as $modifica) {
             $modifica = trim($modifica);
